@@ -64,14 +64,20 @@ const Page = () => {
         <h1>{working_projects}</h1>
         <div className='grid-half-columns'>
           <div className='asus-container'>
-            <Article data={asusData} mode={true} children={<Image src={AsusImage} alt={'Article Asus Image'} priority layout={'fill'} objectFit={'contain'} />} />
+            <Article data={asusData} mode={true} >
+              <Image src={AsusImage} alt={'Article Asus Image'} priority fill objectFit={'contain'} />
+            </Article>
           </div>
           <div className='advantech-container'>
-            <Article data={advantechData} mode={false} children={<Image src={AdvantechImage} alt={'Article Advantech Image'} priority layout={'fill'} objectFit={'contain'} />} />
+            <Article data={advantechData} mode={false}>
+              <Image src={AdvantechImage} alt={'Article Advantech Image'} priority fill objectFit={'contain'} />
+            </Article>
           </div>
         </div>
         <div className='creatop-container'>
-          <Article data={creatopData} mode={false} children={<Carousel data={imageList} />} />
+          <Article data={creatopData} mode={false}>
+            <Carousel data={imageList} />
+          </Article>
         </div>
       </div>
       <div className='full-wrapper'>
@@ -80,8 +86,10 @@ const Page = () => {
           {
             personalProjects.map((project, index) => {
               return (
-                <div className={`grid-container bg--${bgColorArray[index]}`}>
-                  <Article data={project} mode={bgColorArray[index] == "dark-blue"} children={<Image src={imagesArray[index].imageUrl} alt={imagesArray[index].alt} priority layout={'fill'} objectFit={'contain'} />} />
+                <div key={project.name} className={`grid-container bg--${bgColorArray[index]}`}>
+                  <Article data={project} mode={bgColorArray[index] == "dark-blue"}>
+                    <Image src={imagesArray[index].imageUrl} alt={imagesArray[index].alt} priority fill objectFit={'contain'} />
+                  </Article>
                 </div>
               )
             })
