@@ -1,91 +1,97 @@
+
+'use client';
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+import ProfileImage from '../../public/profile-image.png'
+import ArrowDown from '../../public/arrow-down.svg'
+import Layout from '@/components/Layout'
+import { GlobalAssets, LandingPage } from '@/constants'
+import { useState } from 'react'
+import "./page.scss"
+import Article from '@/components/Article';
+import AsusImage from "../../public/asus-demo.png";
+import AdvantechImage from "../../public/advantech-demo.png";
+import Carousel from '@/components/Carousel';
 
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
+const Page = () => {
+  const { fullname, subtitle, content, working_projects, personal_projects, asusData, advantechData, creatopData, imageList, personalProjects } = LandingPage
+  const [active, setEffect] = useState(0)
+  const bgColorArray = [
+    "pink",
+    "dark-blue",
+    "light-blue",
+    "orange"
+  ]
+  const imagesArray = [
+    {
+      imageUrl: "/travel-cover.png",
+      alt: "Taiwan Travel Guide"
+    },
+    {
+      imageUrl: "/bike-cover.png",
+      alt: "Taiwan Bike Guide"
+    },
+    {
+      imageUrl: "/bus-cover.png",
+      alt: "Taiwan Bus Guide"
+    },
+    {
+      imageUrl: "/english4tw-cover.png",
+      alt: "English for Taiwanese"
+    }
+  ]
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <Layout navList={GlobalAssets.navList_LandingPage} currentState={active}>
+      <div className="wrapper">
+        <div className="left-wrapper">
+          <div className='title'>
+            <span>Hi I am</span><h1>{fullname}</h1>
+          </div>
+          <div className='subtitle'>
+            <span>An</span><h2>{subtitle}</h2>
+          </div>
+          <div className='content'>
+            <span>Passionate about </span><h2>{content}</h2>
+          </div>
+        </div>
+        <div className="right-wrapper">
+          <div className='image-border' >
+            <Image className='image-container' src={ProfileImage} width={325} height={579} alt={'Profile Image'} priority />
+          </div>
+        </div>
+        <Image className='arrow-down' src={ArrowDown} width={31} height={18} alt={'Scroll Down'} />
+      </div>
+      <div className='full-wrapper'>
+        <h1>{working_projects}</h1>
+        <div className='grid-half-columns'>
+          <div className='asus-container'>
+            <Article data={asusData} mode={true} children={<Image src={AsusImage} alt={'Article Asus Image'} priority layout={'fill'} objectFit={'contain'} />} />
+          </div>
+          <div className='advantech-container'>
+            <Article data={advantechData} mode={false} children={<Image src={AdvantechImage} alt={'Article Advantech Image'} priority layout={'fill'} objectFit={'contain'} />} />
+          </div>
+        </div>
+        <div className='creatop-container'>
+          <Article data={creatopData} mode={false} children={<Carousel data={imageList} />} />
+        </div>
+      </div>
+      <div className='full-wrapper'>
+        <h1>{personal_projects}</h1>
+        <div className="full-grid-wrapper">
+          {
+            personalProjects.map((project, index) => {
+              return (
+                <div className={`grid-container bg--${bgColorArray[index]}`}>
+                  <Article data={project} mode={bgColorArray[index] == "dark-blue"} children={<Image src={imagesArray[index].imageUrl} alt={imagesArray[index].alt} priority layout={'fill'} objectFit={'contain'} />} />
+                </div>
+              )
+            })
+          }
         </div>
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
+    </Layout>
 
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
   )
 }
+
+export default Page

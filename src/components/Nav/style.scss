@@ -1,0 +1,60 @@
+@import "../../styles/style.scss";
+
+@mixin dot-decorated($size) {
+    width: $size;
+    height: $size;
+    content: "";
+    right: -28px;
+}
+
+@mixin dash-decorated($right) {
+    width: 6px;
+    height: 1px;
+    content: "";
+    right: $right;
+}
+
+.side-nav {
+    right: 60px;
+    text-align: right;
+    @include position-vertical--center(fixed);
+
+    li {
+        list-style-type: none;
+        margin-block: 13px;
+        position: relative;
+
+        &.active {
+            color: $black;
+            padding-right: 13px;
+
+            &::after {
+                background: url(../../../public/nav_dot__active.svg) no-repeat;
+                @include dot-decorated(16px);
+                @include position-vertical--center(absolute);
+            }
+
+            &::before {
+                background: url(../../../public/nav_dash__active.svg) no-repeat;
+                @include dash-decorated(-3px);
+                @include position-vertical--center(absolute);
+            }
+        }
+
+        &.non-active {
+            color: $gray500;
+
+            &::after {
+                background: url(../../../public/nav_dot__non-active.svg) no-repeat;
+                @include dot-decorated(10px);
+                @include position-vertical--center(absolute);
+            }
+
+            &::before {
+                background: url(../../../public/nav_dash__non-active.svg) no-repeat;
+                @include dash-decorated(-12px);
+                @include position-vertical--center(absolute);
+            }
+        }
+    }
+}

@@ -1,0 +1,73 @@
+@import 'variables.module';
+
+/// RWD
+/// @type RWD Device Size
+@mixin mobile {
+    @media (min-width: #{$BREAKPOINT_MOBILE}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: #{$BREAKPOINT_TABLET}) {
+        @content;
+    }
+}
+
+@mixin desktop-regular {
+    @media (min-width: #{$BREAKPOINT_DESKTOP}) {
+        @content;
+    }
+}
+
+@mixin onlytablet {
+    @media (min-width: #{$BREAKPOINT_TABLET}) and (max-width: #{$BREAKPOINT_DESKTOP - 1px}) {
+        @content;
+    }
+}
+
+/// Flex
+/// @type Flex
+@mixin flex($direction, $align: flex-start, $justify: flex-start) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+
+@mixin flex-center($direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-align($direction, $align) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+}
+
+@mixin flex-justify($direction, $justify) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+}
+
+/// Grid
+/// @type 
+@mixin grid-rows($gap, $rows) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: $rows $rows;
+    gap: $gap;
+}
+
+/// Position
+/// @type Position
+@mixin position-vertical--center($position) {
+    position: $position;
+    top: 50%;
+    transform: translateY(-50%);
+}

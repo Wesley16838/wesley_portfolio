@@ -1,0 +1,33 @@
+/* variables.module.scss */
+
+/// Color
+/// @type Color
+$primary-color: #64ff00;
+$white: #FFFFFF;
+$black: #000000;
+$gray700: #444444;
+$gray600: #888888;
+$gray500: #D5D5D5;
+$gray400: #EEEEEE;
+$gray300: #F5F6F6;
+$theme-color--asus: #1D2124;
+
+/// Size
+/// @type Size
+$text-h1: 40px;
+$text-h2: 32px;
+$text-h3: 26px;
+$text-h4: 22px;
+$text-h5: 20px;
+$text-p: 13px;
+
+/// Weight
+/// @type Weight
+$bold: 700;
+$normal: 500;
+
+/// Break-Point
+/// @type Length
+$BREAKPOINT_DESKTOP: 1920px;
+$BREAKPOINT_TABLET: 768px;
+$BREAKPOINT_MOBILE: 375px;

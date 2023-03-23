@@ -1,0 +1,80 @@
+@import "../../styles/style.scss";
+
+.article-wrapper {
+    &__dark {
+        color: $white;
+
+        h2 {
+            &::before {
+                background: url("../../../public/label-prefix-line.svg");
+            }
+        }
+
+        .label {
+            border: 1px solid $white;
+        }
+    }
+
+    &__light {
+        color: $black;
+
+        h2 {
+            &::before {
+                background: url("../../../public/label-prefix-line-b.svg");
+            }
+        }
+
+        .label {
+            border: 1px solid $black;
+        }
+    }
+
+    &__dark,
+    &__light {
+        height: 100%;
+
+        h2 {
+            position: relative;
+
+            &::before {
+                content: "";
+                width: 50px;
+                height: 6px;
+                position: absolute;
+                bottom: -22.5px
+            }
+        }
+
+        p {
+            white-space: pre-line;
+            font-size: $text-p;
+        }
+    }
+}
+
+.label-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 14px;
+    position: relative;
+    margin-top: 8px;
+    margin-bottom: 17px;
+    padding-left: 68px;
+}
+
+.article-subtitle-wrapper {
+    @include flex(row, center);
+    gap: 15px;
+    margin-bottom: 12px;
+
+    h5 {
+        font-size: $text-h5;
+    }
+}
+
+.article-image-wrapper {
+    flex-grow: 1;
+    position: relative;
+    @include flex-center;
+}
