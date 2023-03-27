@@ -24,6 +24,7 @@
         list-style-type: none;
         margin-block: 13px;
         position: relative;
+        transition: .5s ease;
 
         &.active {
             color: $black;

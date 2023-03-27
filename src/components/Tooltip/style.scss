@@ -1,0 +1,62 @@
+@import "../../styles/style.scss";
+
+.tooltip-wrapper {
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.2s ease;
+    @include flex(column);
+    padding: 25px;
+    background-color: hsla(0, 0%, 0%, 0.85);
+    border-radius: 10px;
+    position: absolute;
+    top: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    z-index: 10;
+    color: $white;
+
+    &::before {
+        content: "";
+        position: absolute;
+        background: url("../../../public/tooltip-header.svg");
+        background-repeat: no-repeat;
+        width: 26px;
+        height: 20px;
+        left: 50%;
+        top: -14.5px;
+        transform: translateX(-50%);
+        z-index: 11;
+    }
+
+    .tooltip-subtitle {
+        margin-top: 3px;
+        @include flex(row);
+
+        p {
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 21px;
+
+            &:nth-child(2) {
+                margin-inline: 12px;
+            }
+        }
+    }
+
+    .tooltip-body {
+        padding-left: 17px;
+        margin-top: 5px;
+
+        li {
+            font-size: 14px;
+            line-height: 17px;
+        }
+    }
+
+    h3 {
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 28px;
+    }
+}

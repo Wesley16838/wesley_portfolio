@@ -11,6 +11,23 @@
     flex-direction: column;
 }
 
+/* warning: this is generally a bad idea */
+@for $i from 1 through 20 {
+    $gap: 5 * $i;
+
+    .gap-#{$gap} {
+        gap: #{$gap}px;
+    }
+}
+
+@for $i from 1 through 100 {
+    $length: 1 * $i;
+
+    .space-top-#{$length} {
+        margin-top: #{$length}px;
+    }
+}
+
 .grid-half-columns {
     width: 100%;
     display: grid;
