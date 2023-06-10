@@ -1,3 +1,5 @@
+import { Category } from "./enums"
+
 export const LandingPage = {
     fullname: "Wei-Hsuan Wong",
     subtitle: "UI Design Engineer",
@@ -5,6 +7,13 @@ export const LandingPage = {
     working_projects: "Working Projects",
     personal_projects: "Personal Projects",
     about_me: "About Me",
+    visaData: {
+        name: "VISA",
+        list: ["HTML", "CSS", "SCSS", "JavaScript", "TypeScript", "jQuery", "Websocket", "React.js", "Hooks", "Context API", "Angular", "Flutter", "Kotlin", "Express.js", "MongoDB", "Mongoose"],
+        title: "DESIGN ENGINEER",
+        date: "AUG 2021 - PRESENT",
+        content: "Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
+    },
     asusData: {
         name: "ASUS",
         list: ["JavaScript", "React.js", "Hooks", "Redux", "Redux-Thunk", "SASS", "RWD"],
@@ -188,7 +197,134 @@ export const LandingPage = {
                 date: "11/2021",
             }
         ]
-    }
+    },
+    aboutMe: [
+        {
+            title: "National Kaohsiung University",
+            subtitle: "BS in Mathematics",
+            time: "2012 - 2016",
+            location: "Kaohsiung, Taiwan",
+            category: "education",
+            position: "right"
+        },
+        {
+            title: "Highline College",
+            subtitle: "Cert in Back-End & Front-End Web Dev",
+            time: "2017 - 2018",
+            location: "Des Moines, WA",
+            category: "education",
+            position: "right"
+        },
+        {
+            title: "Creatop",
+            subtitle: "Front-End Intern",
+            time: "2018",
+            location: "Taichung, Taiwan",
+            category: "internship",
+            position: "left",
+            list: [{
+                content: "Redesigned the  furniture website to improve the issue of unorganized layout and enhance website design."
+            }]
+        },
+        {
+            title: "Stevens Institute of Technology",
+            subtitle: "MS in CS",
+            time: "2018 - 2020",
+            location: " Hoboken, NJ",
+            category: "education",
+            position: "right",
+            list: [
+                {
+                    title: "Pricov",
+                    content: "Set up a platform to visualize price comparison for saving users' time and money using React.js, D3.js, and Apollo."
+                },
+                {
+                    title: "Bookstore",
+                    content: "Built a responsive bookstore app with Handlebars.js and JWT authorization, and created a CRUD RESTful API with Express, MongoDB ."
+                }
+            ]
+        },
+        {
+            title: "Advantech",
+            subtitle: "Front-End Intern",
+            time: "2019",
+            location: "Taipei, Taiwan",
+            category: "internship",
+            position: "left",
+            list: [
+                {
+                    content: "Leveraged Grafana’s visualization platform with AngularJS in an Agile-Driven environment to create an user-friendly panels for water treatment management dashboard"
+                }
+            ]
+        },
+        {
+            title: "DEVPOST - COVID-19 Global Hackathon 1.0",
+            subtitle: "Hackathon Project",
+            time: "2020",
+            location: "Remote",
+            category: "projects",
+            position: "right",
+            list: [
+                {
+                    content: "A platform increases efficiency of trading daily necessities with users near around current location"
+                }
+            ]
+        },
+        {
+
+            title: "ASUS",
+            subtitle: "Front-End Developer",
+            time: "2020 - 2021",
+            location: "Taipei, Taiwan",
+            category: "fulltime",
+            position: "left",
+            list: [
+                {
+                    content: "Collaborated closely with different design teams on digital payment demo projects"
+                }
+            ]
+        },
+        {
+            title: "The F2E 3rd",
+            subtitle: "Hackathon Projects",
+            time: "2021",
+            location: "Remote",
+            category: "projects",
+            position: "right",
+            list: [
+                {
+                    content: "Created platforms to assist visitors to collect information about restaurants, transportation and top attractions."
+                }
+            ]
+        },
+        {
+            title: "English4TW",
+            subtitle: "Freelancer Project",
+            time: "2021 - Present",
+            location: "Remote",
+            category: "projects",
+            position: "right",
+            list: [
+                {
+                    content: "Launched an English Learning Expo React Native app using TypeScript, Redux, Redux-Saga, and React Query"
+                }
+            ]
+        },
+        {
+
+            title: "VISA",
+            subtitle: "UI Design Engineer",
+            time: "2021 - Present",
+            location: "Austin, TX",
+            category: "fulltime",
+            position: "left",
+            list: [
+                {
+                    content: "Collaborated closely with different design teams on digital payment demo projects"
+                }
+            ]
+        }
+    ]
 }
 
 export const FooterAssets = {

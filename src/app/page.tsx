@@ -1,6 +1,8 @@
 
 'use client';
 import Image from 'next/image'
+import "animate.css/animate.min.css";
+import { AnimationOnScroll } from 'react-animation-on-scroll';
 import ProfileImage from '../../public/profile-image.png'
 import ArrowDown from '../../public/arrow-down.svg'
 import Layout from '@/components/Layout'
@@ -10,10 +12,9 @@ import "./page.scss"
 import Article from '@/components/Article';
 import AsusImage from "../../public/asus-demo.png";
 import AdvantechImage from "../../public/advantech-demo.png";
+import VISAImage from "../../public/visa_image.png";
 import Carousel from '@/components/Carousel';
-import Timeline from '@/components/Timeline';
-import Footer from '@/components/Footer';
-import { getScrollHeight } from '@/utils/helper';
+import NewTimeline from '@/components/Timeline/Timeline';
 
 const Page = () => {
   const {
@@ -22,6 +23,7 @@ const Page = () => {
     content,
     working_projects,
     personal_projects,
+    visaData,
     asusData,
     advantechData,
     creatopData,
@@ -102,6 +104,12 @@ const Page = () => {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+    setActive(0)
+    activeElement.current = 0
+  }, [])
+
+  useEffect(() => {
     window.addEventListener("scroll", handleOnScroll, {
       passive: true
     });
@@ -111,26 +119,35 @@ const Page = () => {
   return (
     <Layout navList={GlobalAssets.navList_LandingPage} currentState={active}>
       <div className="wrapper" ref={homeElement}>
-        <div className="left-wrapper">
-          <div className='title'>
-            <span>Hi I am</span><h1>{fullname}</h1>
+        <AnimationOnScroll animateIn="animate__fadeInLeft" animateOnce={true}>
+          <div className="left-wrapper">
+            <div className='title'>
+              <span>Hi I am</span><h1>{fullname}</h1>
+            </div>
+            <div className='subtitle'>
+              <span>An</span><h2>{subtitle}</h2>
+            </div>
+            <div className='content'>
+              <span>Passionate about </span><h2>{content}</h2>
+            </div>
           </div>
-          <div className='subtitle'>
-            <span>An</span><h2>{subtitle}</h2>
+        </AnimationOnScroll>
+        <AnimationOnScroll animateIn="animate__fadeInRight" animateOnce={true}>
+          <div className="right-wrapper">
+            <div className='image-border' >
+              <Image className='image-container' src={ProfileImage} width={325} height={579} alt={'Profile Image'} priority />
+            </div>
           </div>
-          <div className='content'>
-            <span>Passionate about </span><h2>{content}</h2>
-          </div>
-        </div>
-        <div className="right-wrapper">
-          <div className='image-border' >
-            <Image className='image-container' src={ProfileImage} width={325} height={579} alt={'Profile Image'} priority />
-          </div>
-        </div>
+        </AnimationOnScroll>
         <Image className='arrow-down' src={ArrowDown} width={31} height={18} alt={'Scroll Down'} />
       </div>
       <div className='full-wrapper' ref={workProjectElement}>
         <h1>{working_projects}</h1>
+        <div className='visa-container'>
+          <Article data={visaData} mode={false} type="visa">
+            <Image src={VISAImage} alt={'Article VISA Image'} priority width={612} />
+          </Article>
+        </div>
         <div className='grid-half-columns'>
           <div className='asus-container'>
             <Article data={asusData} mode={true} >
@@ -167,7 +184,7 @@ const Page = () => {
       </div>
       <div className='full-wrapper space-top-40' ref={aboutMeElement}>
         <h1>{about_me}</h1>
-        <Timeline />
+        <NewTimeline />
       </div>
     </Layout>
 
