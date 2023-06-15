@@ -20,9 +20,9 @@ const NewTimeline = () => {
                                 <h4 className='about-me-subtitle'>{item.subtitle}</h4>
                                 <h4 className='about-me-subtitle bold'>{item.time} {item.location}</h4>
                                 {
-                                    item?.list && item.list.map(el => {
+                                    item?.list && item.list.map((el: any, index: number) => {
                                         return (
-                                            <div className='content-container'>
+                                            <div className='content-container' key={`${index}-master`}>
                                                 {'title' in el && <h5 className='content-title'>{el.title}</h5>}
                                                 <p className='content-subtitle'>{el.content}</p>
                                             </div>
