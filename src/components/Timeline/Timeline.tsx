@@ -14,7 +14,7 @@ const NewTimeline = () => {
                 aboutMe.map(item => {
                     const className = `about-me-container ${item.position} ${item.category}`
                     return (
-                        <AnimationOnScroll animateIn="animate__fadeIn" animateOnce={true}>
+                        <AnimationOnScroll animateIn="animate__fadeIn" animateOnce={true} key={`${item.title}-master`}>
                             <div className={className}>
                                 <h3 className='about-me-title'>{item.title}</h3>
                                 <h4 className='about-me-subtitle'>{item.subtitle}</h4>
