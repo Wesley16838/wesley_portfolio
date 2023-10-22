@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Props from "@/types/components/carousel";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import "./style.scss";
 
 const Carousel = ({ data }: Props) => {

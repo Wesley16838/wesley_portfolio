@@ -28,7 +28,6 @@ const Page = () => {
     asusData,
     advantechData,
     creatopData,
-    imageList,
     personalProjects,
     about_me
   } = LandingPage
@@ -45,12 +44,6 @@ const Page = () => {
   const personalProjectElement = useRef<HTMLInputElement>(null);
   const aboutMeElement = useRef<HTMLInputElement>(null);
 
-  const bgColorArray = [
-    "pink",
-    "dark-blue",
-    "light-blue",
-    "orange"
-  ]
   const imagesArray = [
     {
       imageUrl: "/travel-cover.png",
@@ -92,13 +85,6 @@ const Page = () => {
     activeElement.current = 0
   }, [])
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleOnScroll, {
-      passive: true
-    });
-    return () => window.removeEventListener("scroll", handleOnScroll);
-  }, [position])
-
   const handleOnScroll = (e: Event) => {
     const window = e.currentTarget as Window;
     const currentPosition = window.scrollY;
@@ -116,6 +102,14 @@ const Page = () => {
       activeElement.current = 3
     }
   }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleOnScroll, {
+      passive: true
+    });
+    return () => window.removeEventListener("scroll", handleOnScroll);
+  }, [position, handleOnScroll])
+
 
   return (
     <Layout navList={GlobalAssets.nav_LandingPage} currentState={active}>
@@ -162,7 +156,7 @@ const Page = () => {
             personalProjects.map((project, index) => {
               const imageClassName = `${project.type}-image`
               return (
-                <Article data={project} type={project.type}>
+                <Article data={project} type={project.type} key={project.name}>
                   <Image src={imagesArray[index].imageUrl} alt={imagesArray[index].alt} priority className={`article-image ${imageClassName}`} width={400} height={300} />
                 </Article>
               )
