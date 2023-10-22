@@ -1,68 +1,81 @@
-import { Category } from "./enums"
-
 export const LandingPage = {
     fullname: "Wei-Hsuan Wong",
-    subtitle: "UI Design Engineer",
-    content: "Minimalism Design",
-    working_projects: "Working Projects",
-    personal_projects: "Personal Projects",
+    subtitle: "Design Engineer",
+    company: "VISA",
+    content: "Data Visualization & Accessibility",
+    working_projects: "Experience",
+    personal_projects: "Projects",
     about_me: "About Me",
     visaData: {
         name: "VISA",
-        list: ["HTML", "CSS", "SCSS", "JavaScript", "TypeScript", "jQuery", "Websocket", "React.js", "Hooks", "Context API", "Angular", "Flutter", "Kotlin", "Express.js", "MongoDB", "Mongoose"],
-        title: "DESIGN ENGINEER",
-        date: "AUG 2021 - PRESENT",
-        content: "Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
+        list: ["Crypto", "Point of Sale", "Tap to Pay", "Accessibility", "RWD"],
+        title: "Design Engineer",
+        date: "Aug 2021 - PRESENT",
+        description: "Collaborated with cross-functional teams to built next generaion of Visa digital demo products.",
+        content: ["Collaborated with cross-functional teams, including those focused on accessibility research and cryptocurrency, to create diverse demo apps across various platforms, including mobile, web, and point-of-sale (POS) systems."],
     },
     asusData: {
         name: "ASUS",
-        list: ["JavaScript", "React.js", "Hooks", "Redux", "Redux-Thunk", "SASS", "RWD"],
-        title: "FRONT-END DEVELOPER",
-        date: "JULY 2020 - JUNE 2021",
-        content: "Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
+        list: ["Gaming Gear", "RWD"],
+        title: "Front-End Developer",
+        date: "July 2020 - June 2021",
+        description: "Contributed to keyboard development for Armoury Crate, providing centralized control for TUF and ROG gaming products.",
+        content: [
+            "Are you planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
+        ],
     },
     advantechData: {
         name: "ADVANTECH",
-        list: ["AngularJS", "JavaScript", "SVG", "CSS"],
+        list: ["Data Visualization", "IoT", "RWD"],
         title: "FRONT-END DEVELOPER INTERN",
         date: "JUL - AUG 2019",
-        content: "Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
+        description: "Aided in the construction of the WISE-PaaS platform for sewage treatment plants, enabling integrated real-time monitoring and control.",
+        content: ["Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!"],
     },
     creatopData: {
         name: "CREATOP",
-        list: ["JavaScript", "HTML", "SASS", "RWD"],
+        list: ["Brand Website", "RWD"],
         title: "FRONT-END DEVELOPER INTERN",
         date: "JUNE - JUL 2018",
-        content: "Are you planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
+        description: "Made contributions to redevelop a brand website to enhance its responsive web design.",
+        content: ["Are you planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!"],
     },
     personalProjects: [
         {
             name: "Taiwan Travel Guide",
-            list: ["TypeScript", "Next.js", "Hooks", "Context API", "SASS", "RWD"],
+            list: ["RWD"],
             title: "The F2E 3RD - WEEK.1",
             date: "NOV 2021",
-            content: "Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
+            description: "A platform which offers information, tips, and insights to assist travelers in exploring Taiwan and typically includes details about tourist attractions, cuisine, transportation, and more to enhance the travel experience.",
+            content: ["Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!"],
+            type: 'travel'
         },
         {
             name: "Taiwan Bike Guide",
-            list: ["TypeScript", "Next.js", "Hooks", "Context API", "SASS", "RWD", "MapBox"],
+            list: ["RWD", "Map"],
             title: "The F2E 3RD - WEEK.2",
             date: "NOV 2021",
-            content: "Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
+            description: "A website that consolidates and provides information about bicycle paths and routes, helping cyclists plan their journeys and access relevant maps and details.",
+            content: ["A website that consolidates and provides information about bicycle paths and routes, helping cyclists plan their journeys and access relevant maps and details."],
+            type: 'bike'
         },
         {
             name: "Taiwan Bus Guide",
-            list: ["TypeScript", "Next.js", "Hooks", "Context API", "SASS", "RWD", "MapBox"],
+            list: ["RWD", "Map"],
             title: "The F2E 3RD - WEEK.3",
             date: "NOV 2021",
-            content: "Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
+            description: "The service allows users to check real-time schedules and information for public buses across Taiwan, helping them plan their journeys and stay updated on bus arrivals and departures.",
+            content: ["Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!"],
+            type: 'bus'
         },
         {
             name: "ENGLISH4TW",
-            list: ["TypeScript", "React Native", "Hooks", "Redux", "React Query", "Reduc Saga", "SASS"],
+            list: ["Mobile App"],
             title: "FREELANCE PROJECT",
             date: "MAY 2021 - PRESENT",
-            content: "Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
+            description: "The platform provides resources and tools to help individuals learn and improve their English language skills by offering dictionary features, word definitions, pronunciation guides, and more.",
+            content: ["Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!"],
+            type: 'englishtw'
         }
     ],
     imageList: [
@@ -333,7 +346,13 @@ export const FooterAssets = {
 }
 
 export const GlobalAssets = {
-    navList_LandingPage: ["Top", "Work Project", "Personal Project", "About Me"]
+    navList_LandingPage: ["Home", "Work Project", "Personal Project", "About Me"],
+    nav_LandingPage: [
+        { title: "Home", shortTitle: "Top" },
+        { title: "Work Project", shortTitle: "Works" },
+        { title: "Personal Project", shortTitle: "Projects" },
+        { title: "About Me", shortTitle: "About" }
+    ]
 }
 
 export enum Experience {

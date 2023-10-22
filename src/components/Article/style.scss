@@ -1,53 +1,31 @@
 @import "../../styles/style.scss";
 
+
+
+.creatop-container {
+    .article-content-body {
+        padding-inline: 60px;
+    }
+}
+
 .article-wrapper {
-    &__dark {
-        color: $white;
+    width: 100%;
 
-        h2 {
-            &::before {
-                background: url("../../../public/label-prefix-line.svg");
-            }
+    .article-content-body {
+        @include flex($direction: column, $align: flex-start, $gap: 10px);
+
+        ul {
+            list-style-type: none;
         }
-
-        .label {
-            border: 1px solid $white;
-        }
-    }
-
-    &__light {
-        color: $black;
-
-        h2 {
-            &::before {
-                background: url("../../../public/label-prefix-line-b.svg");
-            }
-        }
-
-        &.visa {
-            h2 {
-                color: #1434CB;
-
-                &::before {
-                    background: url("../../../public/visa_icon.svg");
-                    height: 20px;
-                    bottom: -30px;
-                }
-            }
-        }
-
-        .label {
-            border: 1px solid $black;
-        }
-    }
-
-    &__dark,
-    &__light {
-        height: 100%;
 
         h2 {
             font-size: $text-h2;
+            font-weight: 500;
             position: relative;
+
+            @include devices(mobile) {
+                font-size: $text-h3;
+            }
 
             &::before {
                 content: "";
@@ -63,6 +41,8 @@
             font-size: $text-p;
         }
     }
+
+
 }
 
 .label-wrapper {
@@ -71,23 +51,98 @@
     flex-wrap: wrap;
     gap: 14px;
     position: relative;
-    margin-top: 8px;
-    margin-bottom: 17px;
-    padding-left: 68px;
+    margin-top: 10px;
+
+    @include devices(mobile) {
+        gap: 6px;
+        padding-left: 0px;
+        margin-bottom: 10px;
+    }
 }
 
 .article-subtitle-wrapper {
-    @include flex(row, center);
-    gap: 15px;
+    @include flex($gap: 15px);
     margin-bottom: 12px;
+
+    @include devices(mobile) {
+        @include flex($direction: column, $align: flex-start);
+    }
 
     h5 {
         font-size: $text-h5;
+
+        @include devices(mobile) {
+            font-size: $text-p;
+        }
     }
 }
 
 .article-image-wrapper {
     flex-grow: 1;
     position: relative;
-    @include flex-center;
+}
+
+.article-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 400px;
+    max-width: none;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
+    transition: all .3s cubic-bezier(0, 0, .5, 1);
+    margin-bottom: 10px;
+
+    &:hover {
+        box-shadow: 2px 4px 16px rgb(0 0 0 / 16%);
+        transform: scale3d(1.01, 1.01, 1.01);
+    }
+
+    &.visa {
+        background-color: #e0ebff;
+    }
+
+    &.asus {
+        background-color: rgb(255, 237, 237);
+    }
+
+    &.advantech {
+        background-color: #f1f1f1;
+    }
+
+    &.creatop {
+        background-color: #e9e4ff;
+    }
+
+    &.travel {
+        background-color: #FFF0F5;
+    }
+
+    &.bike {
+        background-color: #DEF5E5;
+    }
+
+    &.bus {
+        background-color: #E3F6FF;
+    }
+
+    &.englishtw {
+        background-color: #EEE0C9;
+    }
+}
+
+.article-description {
+    color: #000000;
+    font-weight: $thin;
+}
+
+.article-title {
+    color: #000000;
+}
+
+.article-subtitle {
+    color: #6f6f6f;
+    @include flex($align: flex-start, $justify: flex-start, $gap: 5px)
 }

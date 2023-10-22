@@ -6,35 +6,41 @@ import VerticalDashWhite from "../../../public/vertical-dash.svg";
 import VerticalDashBlack from "../../../public/vertical-dash-b.svg";
 import { AnimationOnScroll } from 'react-animation-on-scroll';
 
-const Article = ({ data, mode, children, type }: Props) => {
-    const { name, list, title, date, content } = data
-    const theme = mode ? "article-wrapper__dark" : "article-wrapper__light"
+const Article = ({ data, children, type }: Props) => {
+    const { name, list, title, date, content, description } = data;
     return (
-        <div className={`${theme} ${type} flex-column`}>
+        <div className='article-wrapper'>
             <AnimationOnScroll animateIn="animate__fadeIn" animateOnce={true}>
-                <h2>{name}</h2>
+                <div className='article-content-body'>
+                    <div className={`article-image-container ${type}`}>
+                        {children}
+                    </div>
 
-                <div className="label-wrapper">
-                    {
-                        list.map((item: string) => {
-                            return <Label name={item} key={item} />
-                        })
-                    }
+                    <h2 className="article-title">{name}</h2>
+                    <div className="article-subtitle">
+                        <p>{title}</p>
+                        <Image src={VerticalDashBlack} alt={'Vertical Dash'} width={6} height={20} />
+                        <p>{date}</p>
+                    </div>
+                    <div className="article-description">
+                        <p>{description}</p>
+                    </div>
+                    <div className="label-wrapper">
+                        {
+                            list.map((item: string) => {
+                                return <Label name={item} key={item} />
+                            })
+                        }
+                    </div>
+                    {/* <ul>
+                        {
+                            content.map(ele => {
+                                return <li className='article-content'>{ele}</li>
+                            })
+                        }
+                    </ul> */}
                 </div>
-
-                <div className="article-subtitle-wrapper">
-                    <h5>{title}</h5>
-                    <Image src={mode ? VerticalDashWhite : VerticalDashBlack} alt={'Vertical Dash'} width={6} height={20} />
-                    <h5>{date}</h5>
-                </div>
-                <p className="article-content">{content}</p>
             </AnimationOnScroll>
-
-            <AnimationOnScroll animateIn="animate__fadeIn" animateOnce={true} className="article-image-wrapper">
-                {children}
-            </AnimationOnScroll>
-
-
         </div >
     )
 }

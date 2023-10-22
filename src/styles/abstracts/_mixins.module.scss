@@ -2,57 +2,60 @@
 
 /// RWD
 /// @type RWD Device Size
-@mixin mobile {
-    @media (min-width: #{$BREAKPOINT_MOBILE}) {
-        @content;
-    }
-}
 
-@mixin tablet {
-    @media (min-width: #{$BREAKPOINT_TABLET}) {
-        @content;
-    }
-}
+@mixin devices ($breakpoint) {
+    //the name of the mixin is devices
 
-@mixin desktop-regular {
-    @media (min-width: #{$BREAKPOINT_DESKTOP}) {
-        @content;
+    @if $breakpoint ==doubleextralargedesktop {
+        @media only screen and (max-width: #{$BREAKPOINT_EXTRA_EXTRA_LARGE}) {
+            @content;
+        }
     }
-}
 
-@mixin onlytablet {
-    @media (min-width: #{$BREAKPOINT_TABLET}) and (max-width: #{$BREAKPOINT_DESKTOP - 1px}) {
-        @content;
+    @if $breakpoint ==extralargedesktop {
+        @media only screen and (max-width: #{$BREAKPOINT_EXTRA_LARGE}) {
+            @content;
+        }
+    }
+
+    @if $breakpoint ==largelaptop {
+        @media only screen and (max-width: #{$BREAKPOINT_LARGE}) {
+            @content;
+        }
+    }
+
+    @if $breakpoint ==tablet {
+        @media only screen and (max-width: #{$BREAKPOINT_MEDIUM}) {
+            @content;
+        }
+    }
+
+    @if $breakpoint ==mobile {
+        @media only screen and (max-width: #{$BREAKPOINT_SMALL}) {
+            @content;
+        }
     }
 }
 
 /// Flex
 /// @type Flex
-@mixin flex($direction, $align: flex-start, $justify: flex-start) {
+@mixin flex($direction: row, $align: center, $justify: center, $gap: 0px) {
     display: flex;
     flex-direction: $direction;
     align-items: $align;
     justify-content: $justify;
+    gap: $gap;
+    flex-wrap: wrap;
 }
 
+/// Grid
+/// @type 
+@mixin grid-container($columns: 3, $gap: 20px) {
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+    gap: $gap;
 
-@mixin flex-center($direction: row) {
-    display: flex;
-    flex-direction: $direction;
-    align-items: center;
-    justify-content: center;
-}
-
-@mixin flex-align($direction, $align) {
-    display: flex;
-    flex-direction: $direction;
-    align-items: $align;
-}
-
-@mixin flex-justify($direction, $justify) {
-    display: flex;
-    flex-direction: $direction;
-    justify-content: $justify;
+    // Additional grid properties can be added here
 }
 
 /// Grid

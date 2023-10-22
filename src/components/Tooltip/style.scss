@@ -4,7 +4,7 @@
     visibility: hidden;
     opacity: 0;
     transition: 0.2s ease;
-    @include flex(column);
+    @include flex($direction: column);
     padding: 25px;
     background-color: hsla(0, 0%, 0%, 0.85);
     border-radius: 10px;
@@ -31,7 +31,7 @@
 
     .tooltip-subtitle {
         margin-top: 3px;
-        @include flex(row);
+        @include flex();
 
         p {
             font-size: 18px;

@@ -2,7 +2,6 @@ import { StaticImageData } from "next/image"
 
 type Props = {
     data: dataType,
-    mode: Boolean,
     type?: string,
     children: React.ReactNode
 }
@@ -12,7 +11,8 @@ type dataType = {
     list: string[],
     title: String,
     date: String,
-    content: String,
+    description: String,
+    content: String[],
 }
 
 export default Props

@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import "animate.css/animate.min.css";
 import { AnimationOnScroll } from 'react-animation-on-scroll';
-import ProfileImage from '../../public/profile-image.png'
+import ProfileImage from '../../public/profileImage.png'
 import ArrowDown from '../../public/arrow-down.svg'
 import Layout from '@/components/Layout'
 import { GlobalAssets, LandingPage } from '@/constants'
@@ -13,13 +13,14 @@ import Article from '@/components/Article';
 import AsusImage from "../../public/asus-demo.png";
 import AdvantechImage from "../../public/advantech-demo.png";
 import VISAImage from "../../public/visa_image.png";
-import Carousel from '@/components/Carousel';
+import CreattopImage from '../../public/hsuanfu6.png';
 import NewTimeline from '@/components/Timeline/Timeline';
 
 const Page = () => {
   const {
     fullname,
     subtitle,
+    company,
     content,
     working_projects,
     personal_projects,
@@ -75,7 +76,7 @@ const Page = () => {
     const personalPro = personalProjectElement.current?.getBoundingClientRect();
     const aboutMe = aboutMeElement.current?.getBoundingClientRect();
     if (home && workPro && personalPro && aboutMe) {
-      const carry = 0 - home.top;
+      const carry = window.scrollY;
       setPosition({
         home: home.top + carry,
         work: workPro.top + carry,
@@ -84,6 +85,19 @@ const Page = () => {
       })
     }
   }, [])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    setActive(0)
+    activeElement.current = 0
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleOnScroll, {
+      passive: true
+    });
+    return () => window.removeEventListener("scroll", handleOnScroll);
+  }, [position])
 
   const handleOnScroll = (e: Event) => {
     const window = e.currentTarget as Window;
@@ -103,80 +117,54 @@ const Page = () => {
     }
   }
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-    setActive(0)
-    activeElement.current = 0
-  }, [])
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleOnScroll, {
-      passive: true
-    });
-    return () => window.removeEventListener("scroll", handleOnScroll);
-  }, [position])
-
   return (
-    <Layout navList={GlobalAssets.navList_LandingPage} currentState={active}>
+    <Layout navList={GlobalAssets.nav_LandingPage} currentState={active}>
       <div className="wrapper" ref={homeElement}>
-        <AnimationOnScroll animateIn="animate__fadeInLeft" animateOnce={true}>
-          <div className="left-wrapper">
-            <div className='title'>
-              <span>Hi I am</span><h1>{fullname}</h1>
-            </div>
-            <div className='subtitle'>
-              <span>An</span><h2>{subtitle}</h2>
-            </div>
-            <div className='content'>
-              <span>Passionate about </span><h2>{content}</h2>
-            </div>
-          </div>
-        </AnimationOnScroll>
         <AnimationOnScroll animateIn="animate__fadeInRight" animateOnce={true}>
-          <div className="right-wrapper">
-            <div className='image-border' >
-              <Image className='image-container' src={ProfileImage} width={325} height={579} alt={'Profile Image'} priority />
-            </div>
-          </div>
+          <div className='image-wrapper'><Image className='image-container' src={ProfileImage} alt={'Profile Image'} priority /></div>
         </AnimationOnScroll>
+        <AnimationOnScroll animateIn="animate__fadeInLeft" animateOnce={true}>
+          <div className='title'>
+            <p>Hi I am</p><h1>{fullname}</h1>
+          </div>
+          <div className='subtitle'>
+            <h2>A {subtitle} at </h2><h2 className='company-name'>{company}</h2>
+          </div>
+          <div className='content'>
+            <span>Passionate about </span><h2>{content}</h2>
+          </div>
+          <button><a href='/resume.pdf' target="_blank" rel="noopener noreferrer">Resume</a></button>
+        </AnimationOnScroll>
+
         <Image className='arrow-down' src={ArrowDown} width={31} height={18} alt={'Scroll Down'} />
       </div>
       <div className='full-wrapper' ref={workProjectElement}>
         <h1>{working_projects}</h1>
-        <div className='visa-container'>
-          <Article data={visaData} mode={false} type="visa">
-            <Image src={VISAImage} alt={'Article VISA Image'} priority width={612} />
+        <div className="experience-wrapper">
+          <Article data={visaData} type="visa">
+            <Image src={VISAImage} alt={'Article VISA Image'} priority className="article-image visa-image" />
           </Article>
-        </div>
-        <div className='grid-half-columns'>
-          <div className='asus-container'>
-            <Article data={asusData} mode={true} >
-              <Image src={AsusImage} alt={'Article Asus Image'} priority fill objectFit={'contain'} />
-            </Article>
-          </div>
-          <div className='advantech-container'>
-            <Article data={advantechData} mode={false}>
-              <Image src={AdvantechImage} alt={'Article Advantech Image'} priority fill objectFit={'contain'} />
-            </Article>
-          </div>
-        </div>
-        <div className='creatop-container'>
-          <Article data={creatopData} mode={false}>
-            <Carousel data={imageList} />
+          <Article data={asusData} type="asus">
+            <Image src={AsusImage} alt={'Article Asus Image'} priority className="article-image asus-image" />
+          </Article>
+          <Article data={advantechData} type="advantech">
+            <Image src={AdvantechImage} alt={'Article Advantech Image'} priority className="article-image advantech-image" />
+          </Article>
+          <Article data={creatopData} type="creatop">
+            <Image src={CreattopImage} alt={'Article Advantech Image'} priority className="article-image creatop-image" />
           </Article>
         </div>
       </div>
       <div className='full-wrapper' ref={personalProjectElement}>
         <h1>{personal_projects}</h1>
-        <div className="full-grid-wrapper">
+        <div className="experience-wrapper">
           {
             personalProjects.map((project, index) => {
+              const imageClassName = `${project.type}-image`
               return (
-                <div key={project.name} className={`grid-container bg--${bgColorArray[index]}`}>
-                  <Article data={project} mode={bgColorArray[index] == "dark-blue"}>
-                    <Image src={imagesArray[index].imageUrl} alt={imagesArray[index].alt} priority fill objectFit={'contain'} />
-                  </Article>
-                </div>
+                <Article data={project} type={project.type}>
+                  <Image src={imagesArray[index].imageUrl} alt={imagesArray[index].alt} priority className={`article-image ${imageClassName}`} width={400} height={300} />
+                </Article>
               )
             })
           }

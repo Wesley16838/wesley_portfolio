@@ -1,5 +1,5 @@
 type Props = {
-    listItems: String[],
+    listItems: any[],
     currentState: Number
 }
 

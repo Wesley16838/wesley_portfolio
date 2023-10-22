@@ -1,17 +1,62 @@
 @import "../../styles/style.scss";
 
+.about-me-part {
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    margin-top: 30px;
+
+    .about-me-dots-wrapper {
+        @include flex($gap: 48px);
+
+        .about-me-dots {
+            @include flex($gap: 12px);
+
+            p {
+                color: $black;
+            }
+        }
+
+        @include devices(mobile) {
+            gap: 15px;
+            padding-inline: 20px;
+        }
+    }
+
+    @include devices(mobile) {
+        margin-top: 0px;
+        gap: 50px;
+    }
+}
+
 .about-me-wrapper {
-    height: 1880px;
+    height: auto;
     width: calc(100% - 120px);
     display: flex;
     flex-direction: column;
     position: relative;
     margin-bottom: 40px;
+    margin-inline: auto;
+
+    @include devices(mobile) {
+        width: calc(100% - 40px);
+    }
 
     .about-me-bgimage {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+        width: 2.5px;
+
+        @include devices(tablet) {
+            width: 2.75px;
+        }
+
+        @include devices(mobile) {
+
+            left: 0px;
+            transform: none;
+        }
     }
 
     .about-me-container {
@@ -72,6 +117,56 @@
                 transform: translate(58.5px, 5px);
             }
         }
+
+        @include devices(extralargedesktop) {
+            width: 365px;
+            margin-bottom: 35px;
+
+            &.left {
+                transform: translateX(-412px);
+            }
+        }
+
+        @include devices(largelaptop) {
+            width: 280px;
+            margin-bottom: 10px;
+
+            &.left {
+                transform: translateX(-327.5px);
+            }
+        }
+
+        @include devices(tablet) {
+            width: 200px;
+
+            &.left {
+                transform: translateX(-247.5px);
+            }
+        }
+
+        @include devices(mobile) {
+            width: 90%;
+            left: 0px;
+
+            &.left {
+                transform: translateX(-151.5px);
+            }
+
+            &.right {
+                transform: translateX(33.5px);
+            }
+
+            &.education,
+            &.internship,
+            &.projects,
+            &.fulltime {
+                &::before {
+                    transform: translate(-42.5px, 5px);
+                }
+            }
+        }
+
+
     }
 
 
@@ -80,6 +175,10 @@
         font-size: $text-h3;
         font-weight: $bold;
         color: $black;
+
+        @include devices(tablet) {
+            font-size: 22px;
+        }
     }
 
     .about-me-subtitle {
@@ -88,6 +187,10 @@
 
         &.bold {
             font-weight: $bold;
+        }
+
+        @include devices(tablet) {
+            font-size: 18px;
         }
     }
 
@@ -101,160 +204,11 @@
         }
 
         .content-subtitle {}
+
+        @include devices(tablet) {
+            font-size: 16px;
+            margin-top: 4px;
+        }
     }
 
 }
-
-
-// .about-me-container {
-//     width: 1320px;
-//     position: relative;
-//     box-sizing: content-box;
-//     padding-inline: 60px;
-//     margin-bottom: 60px;
-//     gap: 75px;
-//     @include flex(column);
-
-//     .about-me-title-wrapper {
-//         position: relative;
-
-//         #master {
-//             z-index: 12;
-//         }
-
-//         #work {
-//             z-index: 10;
-//         }
-
-//         #education {
-//             z-index: 8;
-//         }
-
-//         #projects {
-//             z-index: 6;
-//         }
-
-//         .about-me-button {
-//             width: 50px;
-//             height: 50px;
-//             top: 50%;
-//             transform: translateY(-50%);
-//             border: 5px solid $white;
-//             border-radius: 50%;
-//             box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-//             position: absolute;
-//             z-index: 2;
-
-//             &:hover {
-//                 .tooltip-wrapper {
-//                     visibility: visible;
-//                     opacity: 1;
-//                 }
-//             }
-//         }
-
-//         &:nth-child(1) {
-//             .about-me-title-container {
-//                 background-color: #F1966F;
-//             }
-
-//             .about-me-button {
-//                 background-color: #F1966F;
-
-//                 &:nth-child(1) {
-//                     left: 259px;
-//                 }
-
-//                 &:nth-child(2) {
-//                     left: 687px;
-//                 }
-//             }
-//         }
-
-//         &:nth-child(2) {
-//             .about-me-title-container {
-//                 background-color: #EBCC2C;
-//             }
-
-//             .about-me-button {
-//                 background-color: #EBCC2C;
-
-//                 &:nth-child(1) {
-//                     left: 404px;
-//                 }
-
-//                 &:nth-child(2) {
-//                     left: 543px;
-//                 }
-
-//                 &:nth-child(3) {
-//                     left: 764px;
-//                 }
-
-//                 &:nth-child(4) {
-//                     left: 1006px;
-//                 }
-//             }
-//         }
-
-//         &:nth-child(3) {
-//             .about-me-title-container {
-//                 background-color: #4EBDFC;
-//             }
-
-//             .about-me-button {
-//                 background-color: #4EBDFC;
-
-//                 &:nth-child(1) {
-//                     left: 340px;
-//                 }
-
-//                 &:nth-child(2) {
-//                     left: 475px;
-//                 }
-//             }
-//         }
-
-//         &:nth-child(4) {
-//             .about-me-title-container {
-//                 background-color: #39C660;
-//             }
-
-//             .about-me-button {
-//                 background-color: #39C660;
-
-//                 &:nth-child(1) {
-//                     left: 545px;
-//                 }
-
-//                 &:nth-child(2) {
-//                     left: 1073px;
-//                 }
-//             }
-//         }
-
-//         .about-me-title-container {
-//             width: 200px;
-//             height: 75px;
-//             border-radius: 15px;
-//             box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-
-//             p {
-//                 line-height: 75px;
-//                 text-align: center;
-//                 font-size: 24px;
-//                 color: $white;
-//             }
-//         }
-
-//     }
-
-//     .about-me-timeline {
-//         position: absolute;
-//         width: 1120 px;
-//         left: 260px;
-//         z-index: 1;
-//         top: 25px;
-//     }
-
-// }

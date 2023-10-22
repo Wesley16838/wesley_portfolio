@@ -15,6 +15,8 @@ $theme-color--asus: #1D2124;
 
 /// Size
 /// @type Size
+$text-extra-large: 80px;
+$text-large: 50px;
 $text-h1: 40px;
 $text-h2: 32px;
 $text-h3: 26px;
@@ -26,9 +28,12 @@ $text-p: 16px;
 /// @type Weight
 $bold: 700;
 $normal: 500;
+$thin: 300;
 
-/// Break-Point
+/// Break-Point max-1400, 1400-1200, 1200-992, 992-768, 768-576, 576-min
 /// @type Length
-$BREAKPOINT_DESKTOP: 1920px;
-$BREAKPOINT_TABLET: 768px;
-$BREAKPOINT_MOBILE: 375px;
+$BREAKPOINT_EXTRA_EXTRA_LARGE: 1400px;
+$BREAKPOINT_EXTRA_LARGE: 1200px;
+$BREAKPOINT_LARGE: 992px;
+$BREAKPOINT_MEDIUM: 768px;
+$BREAKPOINT_SMALL: 568px;

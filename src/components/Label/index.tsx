@@ -3,7 +3,7 @@ import "./style.scss";
 
 const Label = ({ name }: Props) => {
     return (
-        <div className="label">{name}</div>
+        <div className="label"><p># {name}</p></div>
     )
 }
 

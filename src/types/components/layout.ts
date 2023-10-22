@@ -1,5 +1,5 @@
 type Props = {
-  navList: String[],
+  navList: any[],
   currentState: Number,
   children: React.ReactNode,
 }

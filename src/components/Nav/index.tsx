@@ -1,5 +1,5 @@
 import Props from "@/types/components/nav";
-import { useEffect, useState } from "react";
+import Image from 'next/image'
 import "./style.scss";
 
 const Nav = ({ listItems, currentState }: Props) => {
@@ -8,8 +8,8 @@ const Nav = ({ listItems, currentState }: Props) => {
             {
                 listItems.map((item, index) => {
                     return (
-                        <li key={`${item}${index}`} className={index === currentState ? "active" : "non-active"}>
-                            {item}
+                        <li key={`${item.title}${index}`} className={index === currentState ? "active" : "non-active"}>
+                            <div className="shortTitle">{item.shortTitle}</div>
                         </li>
                     )
                 })
