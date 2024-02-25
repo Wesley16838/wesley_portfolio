@@ -4,10 +4,11 @@ import VisaImage from "../../../public/visa_work_image.png";
 import VisaIcon from "../../../public/visa_icon.svg";
 import "./style.scss";
 import Label from "@/components/Label";
+import { GlobalAssets } from "@/constants";
 
 const WorkPage = () => {
   return (
-    <Layout>
+    <Layout navList={GlobalAssets.nav_LandingPage} currentState={0}>
       <div className="workpage-wrapper">
         <div className="work-wrapper">
           <div className="topic-wrapper visa-wrapper">
