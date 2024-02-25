@@ -1,0 +1,59 @@
+@import "../../styles/style.scss";
+
+.workpage-wrapper {
+    @include flex($direction: column);
+
+    .work-wrapper {
+        width: 1200px;
+        height: 100vh;
+        @include grid-container($columns: 2, $gap: 80px);
+
+        .topic-wrapper {
+            @include flex($direction: column, $align: flex-start, $gap: 10px);
+
+            .overview-wrapper {
+                margin-top: 10px;
+            }
+
+            li {
+                font-size: 16px;
+                margin-block: 15px;
+                list-style-type: none;
+            }
+
+            h2 {
+                font-size: 32px;
+
+            }
+
+            h3 {
+                color: #4a4a4a;
+                font-size: 20px;
+            }
+        }
+
+        .visa-wrapper {
+            h2 {
+                color: #1434CB;
+            }
+        }
+
+        .topic-image-wrapper {
+            @include flex($justify: flex-end);
+
+            .visa-image {
+                width: 550px;
+                height: auto;
+            }
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    li {
+        color: black;
+    }
+}

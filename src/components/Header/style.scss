@@ -206,3 +206,7 @@ nav {
 #menuToggle input:checked~ul {
     transform: translate(-100%, 0);
 }
+
+.disable {
+    pointer-events: none
+}

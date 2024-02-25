@@ -1,6 +1,6 @@
 type Props = {
-  navList: any[],
-  currentState: Number,
+  navList?: any[],
+  currentState?: Number,
   children: React.ReactNode,
 }
 

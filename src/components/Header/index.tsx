@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
@@ -17,18 +19,18 @@ const Header = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/about">
+                    <Link className="disable" href="/about" aria-disabled="true" tabIndex={-1}>
                         <p className={`${isActive('/about')}`}>About</p>
                     </Link>
                 </li>
                 <li>
-                    <Link href="/services">
-                        <p className={`${isActive('/services')}`}>Works</p>
+                    <Link className="disable" href="/works" aria-disabled="true" tabIndex={-1}>
+                        <p className={`${isActive('/works')}`}>Works</p>
                     </Link>
                 </li>
                 <li>
-                    <Link href="/services">
-                        <p className={`${isActive('/services')}`}>Projects</p>
+                    <Link className="disable" href="/projects" aria-disabled="true" tabIndex={-1}>
+                        <p className={`${isActive('/projects')}`}>Projects</p>
                     </Link>
                 </li>
             </ul>
@@ -39,10 +41,26 @@ const Header = () => {
                     <span></span>
                     <span></span>
                     <ul id="menu">
-                        <a href="#"><li>Home</li></a>
-                        <a href="#"><li>About</li></a>
-                        <a href="#"><li>Works</li></a>
-                        <a href="#"><li>Projects</li></a>
+                        <li>
+                            <Link href="/">
+                                <p className={`${isActive('/')}`}>Home</p>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="disable" href="/about" aria-disabled="true" tabIndex={-1}>
+                                <p className={`${isActive('/about')}`}>About</p>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="disable" href="/works" aria-disabled="true" tabIndex={-1}>
+                                <p className={`${isActive('/works')}`}>Works</p>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="disable" href="/projects" aria-disabled="true" tabIndex={-1}>
+                                <p className={`${isActive('/projects')}`}>Projects</p>
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </nav>
