@@ -218,7 +218,7 @@ const Page = () => {
                   alt={imagesArray[index].alt}
                   priority
                   className={`article-image ${imageClassName}`}
-                  width={380}
+                  width={374}
                   height={300}
                 />
               </Article>

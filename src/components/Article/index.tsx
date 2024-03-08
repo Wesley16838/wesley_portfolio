@@ -4,14 +4,23 @@ import Label from "../Label";
 import "./style.scss";
 import VerticalDashBlack from "../../../public/vertical-dash-b.svg";
 import { AnimationOnScroll } from "react-animation-on-scroll";
+import Link from "next/link";
 
 const Article = ({ data, children, type }: Props) => {
-  const { name, list, title, date, content, description } = data;
+  const { name, list, title, date, link, description } = data;
   return (
     <div className="article-wrapper">
       <AnimationOnScroll animateIn="animate__fadeIn" animateOnce={true}>
         <div className="article-content-body">
-          <div className={`article-image-container ${type}`}>{children}</div>
+          {data?.link ? (
+            <div className={`article-image-container ${type}`}>
+              <a href={data.link} target="_blank">
+                {children}
+              </a>
+            </div>
+          ) : (
+            <div className={`article-image-container ${type}`}>{children}</div>
+          )}
 
           <h2 className="article-title">{name}</h2>
           <div className="article-subtitle">

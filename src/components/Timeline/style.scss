@@ -1,214 +1,210 @@
 @import "../../styles/style.scss";
 
 .about-me-part {
-    display: flex;
-    flex-direction: column;
-    gap: 70px;
-    margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  margin-top: 30px;
 
-    .about-me-dots-wrapper {
-        @include flex($gap: 48px);
+  .about-me-dots-wrapper {
+    @include flex($gap: 48px);
 
-        .about-me-dots {
-            @include flex($gap: 12px);
+    .about-me-dots {
+      @include flex($gap: 12px);
 
-            p {
-                color: $black;
-            }
-        }
-
-        @include devices(mobile) {
-            gap: 15px;
-            padding-inline: 20px;
-        }
+      p {
+        color: $black;
+      }
     }
 
     @include devices(mobile) {
-        margin-top: 0px;
-        gap: 50px;
+      gap: 15px;
+      padding-inline: 20px;
     }
+  }
+
+  @include devices(mobile) {
+    margin-top: 0px;
+    gap: 50px;
+  }
 }
 
 .about-me-wrapper {
-    height: auto;
-    width: calc(100% - 120px);
+  height: auto;
+  width: calc(100% - 120px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 40px;
+  margin-inline: auto;
+
+  @include devices(mobile) {
+    width: calc(100% - 40px);
+  }
+
+  .about-me-bgimage {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2.5px;
+
+    @include devices(tablet) {
+      width: 2.75px;
+    }
+
+    @include devices(mobile) {
+      left: 0px;
+      transform: none;
+    }
+  }
+
+  .about-me-container {
     display: flex;
     flex-direction: column;
     position: relative;
-    margin-bottom: 40px;
-    margin-inline: auto;
+    left: 50%;
+    width: 500px;
+    margin-bottom: 50px;
+
+    &.left {
+      transform: translateX(-547.5px);
+      align-items: flex-end;
+      text-align: end;
+    }
+
+    &.right {
+      transform: translateX(47.5px);
+      align-items: flex-start;
+    }
+
+    &.education,
+    &.internship,
+    &.projects,
+    &.fulltime {
+      &::before {
+        position: absolute;
+        content: "";
+        width: 22px;
+        height: 20px;
+      }
+    }
+
+    &.education {
+      &::before {
+        background-image: url("./../../../public/education_dot.png");
+        transform: translate(-58.5px, 5px);
+      }
+    }
+
+    &.internship {
+      &::before {
+        background-image: url("./../../../public/internship_dot.png");
+        transform: translate(58.5px, 5px);
+      }
+    }
+
+    &.projects {
+      &::before {
+        background-image: url("./../../../public/project_dot.png");
+        transform: translate(-58.5px, 5px);
+      }
+    }
+
+    &.fulltime {
+      &::before {
+        background-image: url("./../../../public/fulltime_dot.png");
+        transform: translate(58.5px, 5px);
+      }
+    }
+
+    @include devices(extralargedesktop) {
+      width: 365px;
+      margin-bottom: 35px;
+
+      &.left {
+        transform: translateX(-412px);
+      }
+    }
+
+    @include devices(largelaptop) {
+      width: 280px;
+      margin-bottom: 10px;
+
+      &.left {
+        transform: translateX(-327.5px);
+      }
+    }
+
+    @include devices(tablet) {
+      width: 200px;
+
+      &.left {
+        transform: translateX(-247.5px);
+      }
+    }
 
     @include devices(mobile) {
-        width: calc(100% - 40px);
+      width: 90%;
+      left: 0px;
+      margin-bottom: 30px;
+
+      &.left {
+        transform: translateX(-151.5px);
+      }
+
+      &.right {
+        transform: translateX(33.5px);
+      }
+
+      &.education,
+      &.internship,
+      &.projects,
+      &.fulltime {
+        &::before {
+          transform: translate(-42.5px, 5px);
+        }
+      }
+    }
+  }
+
+  .about-me-title {
+    font-size: $text-h3;
+    font-weight: $bold;
+    color: $black;
+
+    @include devices(tablet) {
+      font-size: 22px;
+    }
+  }
+
+  .about-me-subtitle {
+    font-size: $text-h5;
+    color: $gray;
+
+    &.bold {
+      font-weight: $bold;
     }
 
-    .about-me-bgimage {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 2.5px;
+    @include devices(tablet) {
+      font-size: 18px;
+    }
+  }
 
-        @include devices(tablet) {
-            width: 2.75px;
-        }
+  .content-container {
+    font-size: 18px;
+    color: $gray;
+    margin-top: 12px;
 
-        @include devices(mobile) {
-
-            left: 0px;
-            transform: none;
-        }
+    .content-title {
+      font-weight: $bold;
     }
 
-    .about-me-container {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        left: 50%;
-        width: 500px;
-        margin-bottom: 50px;
-
-        &.left {
-            transform: translateX(-547.5px);
-            align-items: flex-end;
-            text-align: end;
-        }
-
-        &.right {
-            transform: translateX(47.5px);
-            align-items: flex-start;
-        }
-
-        &.education,
-        &.internship,
-        &.projects,
-        &.fulltime {
-            &::before {
-                position: absolute;
-                content: "";
-                width: 22px;
-                height: 20px;
-            }
-        }
-
-        &.education {
-            &::before {
-                background-image: url("./../../../public/education_dot.png");
-                transform: translate(-58.5px, 5px);
-            }
-        }
-
-        &.internship {
-            &::before {
-                background-image: url("./../../../public/internship_dot.png");
-                transform: translate(58.5px, 5px);
-            }
-        }
-
-        &.projects {
-            &::before {
-                background-image: url("./../../../public/project_dot.png");
-                transform: translate(-58.5px, 5px);
-            }
-        }
-
-        &.fulltime {
-            &::before {
-                background-image: url("./../../../public/fulltime_dot.png");
-                transform: translate(58.5px, 5px);
-            }
-        }
-
-        @include devices(extralargedesktop) {
-            width: 365px;
-            margin-bottom: 35px;
-
-            &.left {
-                transform: translateX(-412px);
-            }
-        }
-
-        @include devices(largelaptop) {
-            width: 280px;
-            margin-bottom: 10px;
-
-            &.left {
-                transform: translateX(-327.5px);
-            }
-        }
-
-        @include devices(tablet) {
-            width: 200px;
-
-            &.left {
-                transform: translateX(-247.5px);
-            }
-        }
-
-        @include devices(mobile) {
-            width: 90%;
-            left: 0px;
-
-            &.left {
-                transform: translateX(-151.5px);
-            }
-
-            &.right {
-                transform: translateX(33.5px);
-            }
-
-            &.education,
-            &.internship,
-            &.projects,
-            &.fulltime {
-                &::before {
-                    transform: translate(-42.5px, 5px);
-                }
-            }
-        }
-
-
+    .content-subtitle {
     }
 
-
-
-    .about-me-title {
-        font-size: $text-h3;
-        font-weight: $bold;
-        color: $black;
-
-        @include devices(tablet) {
-            font-size: 22px;
-        }
+    @include devices(tablet) {
+      font-size: 16px;
+      margin-top: 4px;
     }
-
-    .about-me-subtitle {
-        font-size: $text-h5;
-        color: $gray;
-
-        &.bold {
-            font-weight: $bold;
-        }
-
-        @include devices(tablet) {
-            font-size: 18px;
-        }
-    }
-
-    .content-container {
-        font-size: 18px;
-        color: $gray;
-        margin-top: 12px;
-
-        .content-title {
-            font-weight: $bold;
-        }
-
-        .content-subtitle {}
-
-        @include devices(tablet) {
-            font-size: 16px;
-            margin-top: 4px;
-        }
-    }
-
+  }
 }

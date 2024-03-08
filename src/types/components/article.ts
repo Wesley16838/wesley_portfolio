@@ -1,18 +1,19 @@
-import { StaticImageData } from "next/image"
+import { StaticImageData } from "next/image";
 
 type Props = {
-    data: dataType,
-    type?: string,
-    children: React.ReactNode
-}
+  data: dataType;
+  type?: string;
+  children: React.ReactNode;
+};
 
 type dataType = {
-    name: String,
-    list: string[],
-    title: String,
-    date: String,
-    description: String,
-    content: String[],
-}
+  name: String;
+  list: string[];
+  title: String;
+  date: String;
+  description: String;
+  content: String[];
+  link?: string;
+};
 
-export default Props
+export default Props;

@@ -8,7 +8,7 @@ export const LandingPage = {
   about_me: "About Me",
   visaData: {
     name: "VISA",
-    list: ["Crypto", "Point of Sale", "Tap to Pay", "Accessibility", "RWD"],
+    list: ["Crypto", "POS Systems", "Tap to Phone", "A11y", "RWD"],
     title: "Design Engineer",
     date: "Aug 2021 - PRESENT",
     description:
@@ -27,6 +27,7 @@ export const LandingPage = {
     content: [
       "Are you planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
     ],
+    link: "https://rog.asus.com/us/armoury-crate/",
   },
   advantechData: {
     name: "ADVANTECH",
@@ -49,6 +50,7 @@ export const LandingPage = {
     content: [
       "Are you planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
     ],
+    link: "http://www.hsuanfu.com.tw/en/",
   },
   personalProjects: [
     {
@@ -62,6 +64,7 @@ export const LandingPage = {
         "A candidate campaign website with accessibility, multilingual support, and responsive design using Next.js, ContextAPI, and TypeScript.",
       ],
       type: "legislator",
+      link: "https://2023-f2e-week1.vercel.app/en-US",
     },
     {
       name: "Taiwan Travel Guide",
@@ -74,6 +77,7 @@ export const LandingPage = {
         "Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
       ],
       type: "travel",
+      link: "https://taiwan-travel-guide.vercel.app/scenicspot-and-activity",
     },
     {
       name: "Taiwan Bike Guide",
@@ -86,6 +90,7 @@ export const LandingPage = {
         "A website that consolidates and provides information about bicycle paths and routes, helping cyclists plan their journeys and access relevant maps and details.",
       ],
       type: "bike",
+      link: "https://taiwan-bike-guide.vercel.app/bikes",
     },
     {
       name: "Taiwan Bus Guide",
@@ -98,6 +103,7 @@ export const LandingPage = {
         "Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
       ],
       type: "bus",
+      link: "https://taiwan-bus-guide.vercel.app/",
     },
     {
       name: "ENGLISH4TW",
@@ -110,6 +116,7 @@ export const LandingPage = {
         "Are you  planning  a trip to Taiwan and looking for a detailed guide?\nHere’s an app with place to eat, stay, activites and bus in each city!",
       ],
       type: "englishtw",
+      link: "https://github.com/Wesley16838/English4TW_Main",
     },
   ],
   imageList: [
@@ -336,7 +343,7 @@ export const LandingPage = {
       list: [
         {
           content:
-            "Collaborated closely with different design teams on digital payment demo projects",
+            "Developed a million-user app for managing gaming accessories with the Gaming Gear & Accessory team.",
         },
       ],
     },
@@ -391,7 +398,6 @@ export const FooterAssets = {
 };
 
 export const GlobalAssets = {
-  navList_LandingPage: ["Home", "Work Project", "Personal Project", "About Me"],
   nav_LandingPage: [
     { title: "Home", shortTitle: "Top" },
     { title: "Work Project", shortTitle: "Works" },
