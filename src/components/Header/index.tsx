@@ -15,10 +15,10 @@ const Header = () => {
   const [isMenuOpened, setMenuOpened] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpened ? "hidden" : "scroll";
+    document.body.style.overflowY = isMenuOpened ? "hidden" : "scroll";
     document.body.classList.add("no-scroll");
     return () => {
-      document.body.style.overflow = "scroll";
+      document.body.style.overflowY = "scroll";
     };
   }, [isMenuOpened]);
 
