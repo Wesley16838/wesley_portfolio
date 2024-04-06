@@ -91,6 +91,7 @@ nav {
   color: #232323;
   transition: color 0.3s ease;
   &.disable {
+    pointer-events: none;
     p {
       color: #d3d3d3;
     }
