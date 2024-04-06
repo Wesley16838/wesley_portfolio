@@ -32,32 +32,17 @@ const Header = () => {
           </Link>
         </li>
         <li>
-          <Link
-            className="disable"
-            href="/about"
-            aria-disabled="true"
-            tabIndex={-1}
-          >
+          <Link className="disable" href="/" aria-disabled="true" tabIndex={-1}>
             <p className={`${isActive("/about")}`}>About</p>
           </Link>
         </li>
         <li>
-          <Link
-            className="disable"
-            href="/works"
-            aria-disabled="true"
-            tabIndex={-1}
-          >
+          <Link className="disable" href="/" aria-disabled="true" tabIndex={-1}>
             <p className={`${isActive("/works")}`}>Works</p>
           </Link>
         </li>
         <li>
-          <Link
-            className="disable"
-            href="/projects"
-            aria-disabled="true"
-            tabIndex={-1}
-          >
+          <Link className="disable" href="/" aria-disabled="true" tabIndex={-1}>
             <p className={`${isActive("/projects")}`}>Projects</p>
           </Link>
         </li>
@@ -83,7 +68,7 @@ const Header = () => {
             <li>
               <Link
                 className="disable"
-                href="/about"
+                href="/"
                 aria-disabled="true"
                 tabIndex={-1}
               >
@@ -93,7 +78,7 @@ const Header = () => {
             <li>
               <Link
                 className="disable"
-                href="/works"
+                href="/"
                 aria-disabled="true"
                 tabIndex={-1}
               >
@@ -103,7 +88,7 @@ const Header = () => {
             <li>
               <Link
                 className="disable"
-                href="/projects"
+                href="/"
                 aria-disabled="true"
                 tabIndex={-1}
               >
