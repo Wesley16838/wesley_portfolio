@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logo from "@/components/Logo";
 import { site } from "@/content/site";
 
 const anchors = [
@@ -12,11 +13,8 @@ export default function Header() {
   return (
     <header className="header-blend fixed inset-x-0 top-0 z-50">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link
-          href="/"
-          className="font-mono text-sm tracking-tight transition-opacity hover:opacity-60"
-        >
-          wesley.systems
+        <Link href="/" aria-label="Wesley Wong — home">
+          <Logo className="h-8 w-8" />
         </Link>
         <nav className="flex items-center gap-7">
           <div className="hidden items-center gap-7 md:flex">
