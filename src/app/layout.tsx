@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Fraunces } from "next/font/google";
 import Header from "@/components/Header";
+import BackToTop from "@/components/BackToTop";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -16,12 +17,12 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Wesley Wong — Staff Software Engineer",
-    template: "%s — Wesley Wong",
+    default: "Wesley Wong - Staff Software Engineer",
+    template: "%s - Wesley Wong",
   },
   description: site.description,
   openGraph: {
-    title: "Wesley Wong — Staff Software Engineer",
+    title: "Wesley Wong - Staff Software Engineer",
     description: site.description,
     url: site.url,
     siteName: "Wesley Wong",
@@ -46,9 +47,10 @@ export default function RootLayout({
       <body className="bg-bg font-sans text-fg">
         <div
           aria-hidden="true"
-          className="scroll-progress fixed inset-x-0 top-0 z-[60] h-px bg-accent"
+          className="scroll-progress fixed inset-x-0 top-0 z-[60] h-[3px] bg-accent"
         />
         <Header />
+        <BackToTop />
         {children}
       </body>
     </html>

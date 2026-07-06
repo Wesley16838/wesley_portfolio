@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Wesley Wong — Staff Software Engineer";
+export const alt = "Wesley Wong - Staff Software Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -59,7 +59,7 @@ export default function OpenGraphImage() {
             lineHeight: 1.4,
           }}
         >
-          Wesley Wong — Staff Software Engineer at Visa · Founding Engineer
+          Wesley Wong - Staff Software Engineer at Visa · Founding Engineer
         </div>
         <div
           style={{
