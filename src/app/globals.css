@@ -137,22 +137,50 @@ body {
   outline-offset: 3px;
 }
 
-/* ---------- header blend (progressive) ---------- */
+/* ---------- header (blend at top, frosted bar on scroll) ---------- */
 
-.header-blend {
-  color: var(--color-fg);
+/* the fading background bar — sits behind the header content */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  border-bottom: 1px solid transparent;
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  transition: opacity 0.4s ease, background-color 0.4s ease,
+    border-color 0.4s ease;
 }
-@supports (mix-blend-mode: difference) {
-  .header-blend {
-    color: #ffffff;
-    mix-blend-mode: difference;
-  }
+.site-header[data-scrolled="true"]::before {
+  opacity: 1;
+}
+.site-header[data-theme="dark"]::before {
+  background-color: rgba(18, 17, 16, 0.72);
+  border-bottom-color: rgba(236, 233, 226, 0.08);
+}
+.site-header[data-theme="light"]::before {
+  background-color: rgba(244, 241, 234, 0.78);
+  border-bottom-color: rgba(22, 19, 15, 0.1);
+}
+
+/* header content: explicit color matched to the zone under the bar */
+.header-inner {
+  color: var(--color-fg);
+  transition: color 0.4s ease;
+}
+.site-header[data-theme="dark"] .header-inner {
+  color: #ece9e2;
+}
+.site-header[data-theme="light"] .header-inner {
+  color: #16130f;
 }
 
 /* ---------- scroll progress hairline (zero JS, progressive) ---------- */
 
 .scroll-progress {
   display: none;
+  box-shadow: 0 0 10px 1px var(--color-accent);
 }
 @supports (animation-timeline: scroll()) {
   .scroll-progress {

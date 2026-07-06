@@ -11,7 +11,7 @@ export const site = {
   location: "Austin, TX",
   url: "https://wesley-portfolio.vercel.app",
   description:
-    "Wesley Wong — Staff Software Engineer at Visa and Founding Engineer building AI-native product systems at the intersection of GenAI, UX, and frontend architecture.",
+    "Wesley Wong - Staff Software Engineer at Visa and Founding Engineer building AI-native product systems at the intersection of GenAI, UX, and frontend architecture.",
   links: {
     email: "wesleywong16838@gmail.com",
     linkedin: "https://www.linkedin.com/in/wesley16838",
