@@ -26,20 +26,22 @@ export default function EarlyExperiments() {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group grid gap-1 py-5 transition-transform duration-200 hover:translate-x-1 md:grid-cols-[1.2fr_1.6fr_auto] md:items-baseline md:gap-6"
+                className="group flex items-start justify-between gap-6 py-5 transition-transform duration-200 hover:translate-x-1"
               >
-                <span className="flex items-baseline justify-between gap-3 font-medium text-fg">
-                  {project.name}
-                  <ArrowUpRightIcon className="h-4 w-4 shrink-0 self-center text-fg-muted transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 md:hidden" />
-                </span>
-                <span className="text-sm leading-relaxed text-fg-secondary">
-                  {project.description}
-                </span>
-                <span className="flex items-center gap-4">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-fg-muted">
+                <span className="min-w-0">
+                  <span className="font-medium text-fg">{project.name}</span>
+                  <span className="mt-1 block text-sm leading-relaxed text-fg-secondary">
+                    {project.description}
+                  </span>
+                  <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.2em] text-fg-muted md:hidden">
                     {project.context}
                   </span>
-                  <ArrowUpRightIcon className="hidden h-4 w-4 shrink-0 text-fg-muted transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 md:block" />
+                </span>
+                <span className="flex shrink-0 items-center gap-4">
+                  <span className="hidden font-mono text-[11px] uppercase tracking-[0.2em] text-fg-muted md:inline">
+                    {project.context}
+                  </span>
+                  <ArrowUpRightIcon className="h-4 w-4 shrink-0 text-fg-muted transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </span>
               </a>
             </li>
