@@ -1,10 +1,18 @@
 import { ImageResponse } from "next/og";
+import { avatar, site } from "@/content/site";
+import { OG_COLORS, OG_SIZE, ogFonts, publicImage } from "@/lib/og";
 
 export const alt = "Wesley Wong - Staff Software Engineer";
-export const size = { width: 1200, height: 630 };
+export const size = OG_SIZE;
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+/** Home-page social preview: the hero, as a card. */
+export default async function OpenGraphImage() {
+  const [fonts, face] = await Promise.all([
+    ogFonts(),
+    publicImage(avatar.poster),
+  ]);
+
   return new ImageResponse(
     (
       <div
@@ -13,7 +21,8 @@ export default function OpenGraphImage() {
           height: "100%",
           display: "flex",
           padding: 40,
-          backgroundColor: "#f6f5f2",
+          backgroundColor: OG_COLORS.page,
+          fontFamily: "Geist",
         }}
       >
         <div
@@ -22,65 +31,72 @@ export default function OpenGraphImage() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            padding: 64,
+            padding: 60,
             borderRadius: 40,
-            border: "2px solid rgba(23, 23, 26, 0.1)",
-            backgroundColor: "#ffffff",
+            border: `2px solid ${OG_COLORS.border}`,
+            backgroundColor: OG_COLORS.card,
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 16,
-              color: "#66666f",
-              fontSize: 26,
-              fontWeight: 600,
-            }}
-          >
-            <div
+          <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+            <img
+              src={face}
+              alt=""
+              width={132}
+              height={132}
               style={{
-                width: 20,
-                height: 20,
                 borderRadius: 9999,
-                backgroundColor: "#4f46e5",
+                border: `6px solid ${OG_COLORS.sun}`,
               }}
             />
-            Wesley Wong
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div
+                style={{ color: OG_COLORS.fg, fontSize: 34, fontWeight: 700 }}
+              >
+                {site.shortName}
+              </div>
+              <div
+                style={{
+                  marginTop: 6,
+                  color: OG_COLORS.muted,
+                  fontSize: 24,
+                  fontWeight: 500,
+                }}
+              >
+                {/* one string: the renderer rejects mixed text and expressions */}
+                {`Staff Software Engineer at Visa · ${site.location}`}
+              </div>
+            </div>
           </div>
+
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div
               style={{
-                color: "#17171a",
-                fontSize: 76,
+                color: OG_COLORS.fg,
+                fontSize: 72,
                 fontWeight: 700,
-                lineHeight: 1.05,
-                letterSpacing: "-0.03em",
+                lineHeight: 1.06,
+                letterSpacing: "-0.035em",
               }}
             >
-              Hi, I&rsquo;m Wesley.
+              {site.greeting}
             </div>
             <div
               style={{
-                marginTop: 8,
-                color: "#66666f",
-                fontSize: 76,
+                marginTop: 6,
+                color: OG_COLORS.muted,
+                fontSize: 72,
                 fontWeight: 700,
-                lineHeight: 1.05,
-                letterSpacing: "-0.03em",
-                maxWidth: 980,
+                lineHeight: 1.06,
+                letterSpacing: "-0.035em",
+                maxWidth: 1000,
               }}
             >
-              I engineer AI-native systems with a designer&rsquo;s eye.
+              {site.heroTitle}
             </div>
-          </div>
-          <div style={{ color: "#55555e", fontSize: 28 }}>
-            Staff Software Engineer at Visa · AI Developer Experience &amp; UX
-            Engineering
           </div>
         </div>
       </div>
     ),
-    { ...size },
+    { ...size, fonts },
   );
 }
