@@ -46,7 +46,9 @@ export default async function CaseStudyPage({
   const next = caseStudies[index + 1];
   const galleryImages = study.images ?? [];
   // image-rich studies get an extra magazine-grid spread after the sections
-  const gridImages = galleryImages.length > 3 ? galleryImages.slice(1) : [];
+  // (phone screenshots stay in the rail: the grid crops everything to wide)
+  const gridCandidates = galleryImages.filter((img) => img.aspect !== "phone");
+  const gridImages = gridCandidates.length > 3 ? gridCandidates.slice(1) : [];
 
   return (
     <div

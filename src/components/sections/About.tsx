@@ -1,4 +1,5 @@
-import { about, education, site } from "@/content/site";
+import Image from "next/image";
+import { about, careerPhotos, education, site } from "@/content/site";
 import Reveal from "@/components/Reveal";
 import Section from "@/components/Section";
 
@@ -52,6 +53,37 @@ export default function About() {
             </ul>
           </Reveal>
         </div>
+
+        {/* career snapshots — a fixed-height filmstrip, no JS */}
+        <Reveal delay={120}>
+          <h3 className="mt-20 font-mono text-[11px] uppercase tracking-[0.25em] text-fg-muted">
+            Along the way
+          </h3>
+          <div className="gallery-rail -mx-6 mt-6 snap-x overflow-x-auto px-6">
+            <ul className="flex w-max items-start gap-4 pb-2">
+              {careerPhotos.map((photo) => (
+                <li key={photo.src} className="shrink-0 snap-start">
+                  {/* w-min keeps a long caption from widening a narrow portrait */}
+                  <figure className="w-min">
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      width={photo.width}
+                      height={photo.height}
+                      sizes="(min-width: 768px) 520px, 400px"
+                      className="h-56 w-auto max-w-none rounded-xl border border-border md:h-72"
+                    />
+                    {photo.caption && (
+                      <figcaption className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-fg-muted">
+                        {photo.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </Section>
 
       <section className="border-t border-border">

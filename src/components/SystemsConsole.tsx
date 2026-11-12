@@ -5,7 +5,7 @@ import { ArrowUpRightIcon } from "@/components/icons";
 const dotColor: Record<ConsoleSystem["color"], string> = {
   "visa-blue": "bg-visa-blue",
   "visa-gold": "bg-visa-gold",
-  "youmi-teal": "bg-youmi-teal",
+  "avori-teal": "bg-avori-teal",
   accent: "bg-accent",
 };
 

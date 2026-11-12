@@ -59,7 +59,7 @@ export default function OpenGraphImage() {
             lineHeight: 1.4,
           }}
         >
-          Wesley Wong - Staff Software Engineer at Visa · Founding Engineer
+          Wesley Wong - Staff Software Engineer at Visa · AI Developer Experience &amp; UX Engineering
         </div>
         <div
           style={{

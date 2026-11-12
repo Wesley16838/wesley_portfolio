@@ -5,6 +5,7 @@ const railWidth: Record<NonNullable<WorkImage["aspect"]>, string> = {
   wide: "w-[80vw] md:w-[560px]",
   square: "w-[70vw] md:w-[400px]",
   portrait: "w-[60vw] md:w-[320px]",
+  phone: "w-[56vw] md:w-[260px]",
 };
 
 type GalleryProps = {

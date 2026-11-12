@@ -4,9 +4,9 @@ type TickerEntry = {
 };
 
 const entries: TickerEntry[] = [
-  { system: "Blitz Code", stat: "6K+ employees" },
+  { system: "Blitz Code", stat: "5K+ employees" },
   { system: "Tap NFC", stat: "global stages" },
-  { system: "Youmi", stat: "0→1 AI pipeline" },
+  { system: "Avori", stat: "verified AI itineraries" },
   { system: "VPDS", stat: "4 frameworks, one system" },
   { system: "Armoury Crate", stat: "millions of users" },
   { system: "Patent", stat: "inclusive design" },
@@ -40,8 +40,8 @@ export default function SystemTicker() {
   return (
     <div className="overflow-hidden border-b border-border py-3.5">
       <span className="sr-only">
-        Blitz Code: 6K+ employees. Tap NFC: global stages. Youmi: zero-to-one
-        AI pipeline. VPDS: four frameworks, one system. Armoury Crate:
+        Blitz Code: 5K+ employees. Tap NFC: global stages. Avori: verified
+        AI itineraries. VPDS: four frameworks, one system. Armoury Crate:
         millions of users. Patent: inclusive design.
       </span>
       <div aria-hidden="true" className="flex w-max animate-[marquee_70s_linear_infinite]">

@@ -5,6 +5,16 @@ const aspectClass: Record<NonNullable<WorkImage["aspect"]>, string> = {
   wide: "aspect-[16/10]",
   square: "aspect-square",
   portrait: "aspect-[3/4]",
+  // full-height phone screenshot (1290×2796)
+  phone: "aspect-[1290/2796]",
+};
+
+/** phone shots ship with rounded transparent corners — match that radius */
+const radiusClass: Record<NonNullable<WorkImage["aspect"]>, string> = {
+  wide: "rounded-2xl",
+  square: "rounded-2xl",
+  portrait: "rounded-2xl",
+  phone: "rounded-[8.5%/3.93%]",
 };
 
 type ImageFrameProps = {
@@ -29,12 +39,28 @@ export default function ImageFrame({
   showCaption = true,
 }: ImageFrameProps) {
   const aspect = aspectClass[image.aspect ?? "wide"];
+  const radius = radiusClass[image.aspect ?? "wide"];
+  // intrinsic size wins over the aspect preset, so screenshots are never cropped
+  const exactRatio =
+    image.width && image.height
+      ? { aspectRatio: `${image.width} / ${image.height}` }
+      : undefined;
+  const background = !image.src
+    ? gradient
+    : image.backdrop === "light"
+      ? "linear-gradient(160deg, #f4f1ea 0%, #dcd6c8 100%)"
+      : image.backdrop
+        ? gradient
+        : undefined;
 
   return (
     <figure className={className}>
       <div
-        className={`relative overflow-hidden rounded-2xl border border-border ${aspect}`}
-        style={image.src ? undefined : { background: gradient }}
+        className={`relative overflow-hidden border border-border ${radius} ${exactRatio ? "" : aspect}`}
+        style={{
+          ...(background ? { background } : {}),
+          ...exactRatio,
+        }}
       >
         {image.src ? (
           <Image
@@ -42,7 +68,7 @@ export default function ImageFrame({
             alt={image.alt}
             fill
             sizes={sizes ?? "(min-width: 768px) 50vw, 100vw"}
-            className="object-cover"
+            className={image.backdrop ? "object-contain p-[6%]" : "object-cover"}
           />
         ) : (
           <div className="absolute inset-0 flex flex-col justify-between p-4">

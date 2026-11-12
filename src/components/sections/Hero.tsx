@@ -12,7 +12,7 @@ export default function Hero() {
   return (
     <section className="relative mx-auto max-w-6xl px-6 pb-20 pt-36 md:pb-28 md:pt-48">
       <p className="animate-fade-up font-mono text-[11px] uppercase tracking-[0.25em] text-fg-secondary">
-        {site.name} — Staff Software Engineer · Founding Engineer · Austin, TX
+        {site.name} — Staff Software Engineer · AI Developer Experience &amp; UX Engineering · Austin, TX
       </p>
       <h1 className="animate-fade-up mt-8 max-w-5xl font-display text-5xl leading-[1.02] tracking-tight text-fg [animation-delay:120ms] md:text-8xl">
         Engineering AI-native systems <em>with a designer&rsquo;s eye.</em>
