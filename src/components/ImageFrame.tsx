@@ -17,7 +17,7 @@ const aspectClass: Record<NonNullable<WorkImage["aspect"]>, string> = {
 };
 
 /** phone shots ship with rounded transparent corners — match that radius */
-const PHONE_RADIUS = "rounded-[8.5%/3.93%]";
+const PHONE_RADIUS = "8.5% / 3.93%";
 
 const LIGHT_BACKDROP = "linear-gradient(160deg, #f4f1ea 0%, #dcd6c8 100%)";
 
@@ -67,24 +67,29 @@ export default function ImageFrame({
       : undefined;
   const aspectRatio = ratio ?? intrinsic;
   const background = peek ? gradient : backdropFor(image, gradient);
-  const radius = isPhone && !ratio ? PHONE_RADIUS : "rounded-2xl";
+  const phoneRadius = image.cornerRadius ?? PHONE_RADIUS;
+  // a full phone frame follows the device corners; everything else is a card
+  const borderRadius = isPhone && !ratio ? phoneRadius : undefined;
 
   return (
     <div
-      className={`relative overflow-hidden border border-border ${radius} ${
-        aspectRatio ? "" : aspectClass[image.aspect ?? "wide"]
-      } ${className ?? ""}`}
-      style={{ aspectRatio, background }}
+      className={`relative overflow-hidden border border-border ${
+        borderRadius ? "" : "rounded-2xl"
+      } ${aspectRatio ? "" : aspectClass[image.aspect ?? "wide"]} ${
+        className ?? ""
+      }`}
+      style={{ aspectRatio, background, borderRadius }}
     >
       {peek ? (
         <Image
           src={image.src}
           alt={image.alt}
-          width={1290}
-          height={2796}
+          width={image.width ?? 1290}
+          height={image.height ?? 2796}
           sizes="220px"
           priority={priority}
-          className={`absolute left-1/2 top-[10%] w-[40%] max-w-none -translate-x-1/2 shadow-2xl ${PHONE_RADIUS}`}
+          className="absolute left-1/2 top-[10%] h-auto w-[40%] max-w-none -translate-x-1/2 shadow-2xl"
+          style={{ borderRadius: phoneRadius }}
         />
       ) : (
         <Image

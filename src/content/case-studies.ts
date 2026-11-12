@@ -25,6 +25,11 @@ export type WorkImage = {
    * `true` uses the brand gradient; "light" uses an ivory panel (for dark hardware shots).
    */
   backdrop?: boolean | "light";
+  /**
+   * CSS border-radius of the device corners in a phone screenshot, when it
+   * differs from the default 1290×2796 export (e.g. "12.6% / 5.8%").
+   */
+  cornerRadius?: string;
 };
 
 export type CaseStudy = {
@@ -235,6 +240,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     overview:
       "Avori is an AI-native travel planner I'm building end to end: a Flutter app for iOS and Android, a NestJS/TypeScript backend on PostgreSQL, Redis, and GCP, and a multi-stage LLM planning-and-repair pipeline that verifies every itinerary before it reaches the traveler. Built independently, outside my role at Visa.",
+    note: "Screens shown are design mockups — photos and the map are placeholders.",
     pipeline: [
       "Intent extraction",
       "Places & Routes retrieval",
@@ -269,33 +275,40 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     brand: {
-      accent: "#14b8a6",
-      accentDim: "rgba(20, 184, 166, 0.12)",
-      secondary: "#42777e",
+      accent: "#e8814a",
+      accentDim: "rgba(232, 129, 74, 0.12)",
+      secondary: "#1f4e5f",
       gradient:
-        "linear-gradient(135deg, rgba(37, 70, 68, 0.85) 0%, rgba(20, 184, 166, 0.18) 60%, rgba(162, 83, 36, 0.14) 100%)",
+        "linear-gradient(135deg, rgba(232, 129, 74, 0.32) 0%, rgba(245, 241, 234, 0.55) 55%, rgba(31, 78, 95, 0.24) 100%)",
     },
     externalLink: "https://www.avoritravel.com/",
     images: [
       {
-        alt: "Avori itinerary streaming in the app",
-        caption: "Itinerary streams in live — skeleton, then day previews",
-        aspect: "portrait",
+        src: "/work/avori/01-explore.png",
+        alt: "Avori Explore feed for Tokyo with seasonal picks",
+        caption: "Explore — timely picks, and places not in the trip yet",
+        aspect: "phone",
+        width: 1206,
+        height: 2622,
+        cornerRadius: "12.6% / 5.8%",
       },
       {
-        alt: "Map-based itinerary editor",
-        caption: "Map-based itinerary editor",
-        aspect: "wide",
+        src: "/work/avori/02-day-plan.png",
+        alt: "Avori day plan with a route map and a timed list of stops",
+        caption: "Day plan — route map, timed stops, and travel time between them",
+        aspect: "phone",
+        width: 1206,
+        height: 2622,
+        cornerRadius: "12.6% / 5.8%",
       },
       {
-        alt: "Editing an itinerary with locked stops",
-        caption: "Locked and booked stops survive every AI edit",
-        aspect: "portrait",
-      },
-      {
-        alt: "Planning and repair pipeline",
-        caption: "Planning, verification, and repair stages",
-        aspect: "square",
+        src: "/work/avori/03-trips.png",
+        alt: "Avori profile showing an active trip and upcoming trips",
+        caption: "Trips — the active trip, with today's plan one tap away",
+        aspect: "phone",
+        width: 1206,
+        height: 2622,
+        cornerRadius: "12.6% / 5.8%",
       },
     ],
   },

@@ -21,9 +21,10 @@ export const site = {
   },
 } as const;
 
-/** hero avatar — set `video` to an mp4 path (e.g. "/avatar/wesley.mp4") once it exists */
+/** hero avatar — silent looping mp4 (512×512, no audio) over a PNG poster */
 export const avatar: { poster: string; video?: string; alt: string } = {
-  poster: "/avatar/wesley.png",
+  poster: "/avatar/wesley-poster.png",
+  video: "/avatar/wesley.mp4",
   alt: "Memoji-style avatar of Wesley: short black hair and round glasses",
 };
 

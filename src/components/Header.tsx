@@ -26,7 +26,7 @@ export default function Header() {
               alt=""
               width={72}
               height={72}
-              className="h-full w-full object-contain pt-[6%]"
+              className="h-full w-full object-cover"
             />
           </span>
           {site.shortName}

@@ -54,11 +54,11 @@ export default function Avatar({ className }: { className?: string }) {
           <Image
             src={avatar.poster}
             alt=""
-            width={513}
-            height={588}
+            width={512}
+            height={512}
             priority
             sizes="160px"
-            className="h-full w-full object-contain pt-[6%]"
+            className="h-full w-full object-cover"
           />
         )}
       </div>
