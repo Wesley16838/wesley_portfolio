@@ -4,7 +4,8 @@ export const site = {
   domainLabel: "wesley.systems",
   headline:
     "Staff Software Engineer at Visa · AI Developer Experience & UX Engineering",
-  heroTitle: "Engineering AI-native systems with a designer's eye.",
+  greeting: "Hi, I'm Wesley.",
+  heroTitle: "I engineer AI-native systems with a designer's eye.",
   heroBody:
     "I build AI-powered developer tools, frontend platforms, and accessible product experiences — from an AI prototyping platform adopted by 5,000+ Visa employees, to NFC payment demos on global stages, to an AI travel agent built end to end.",
   heroLocation: "Currently building in Austin, TX.",
@@ -20,48 +21,22 @@ export const site = {
   },
 } as const;
 
-export type ConsoleSystem = {
-  number: string;
-  label: string;
-  name: string;
-  detail: string;
-  color: "visa-blue" | "visa-gold" | "avori-teal" | "accent";
-  href?: string;
+/** hero avatar — set `video` to an mp4 path (e.g. "/avatar/wesley.mp4") once it exists */
+export const avatar: { poster: string; video?: string; alt: string } = {
+  poster: "/avatar/wesley.png",
+  alt: "Memoji-style avatar of Wesley: short black hair and round glasses",
 };
 
-export const consoleSystems: ConsoleSystem[] = [
-  {
-    number: "01",
-    label: "AI Platform",
-    name: "Visa Blitz Code",
-    detail: "5K+ employees · 6K+ prototypes · 10M+ lines",
-    color: "visa-blue",
-    href: "/work/visa-blitz-code",
-  },
-  {
-    number: "02",
-    label: "Payment Experience",
-    name: "Tap NFC",
-    detail: "VPF · Stripe Sessions · Investor Day",
-    color: "visa-gold",
-    href: "/work/visa-tap-nfc",
-  },
-  {
-    number: "03",
-    label: "AI Travel Agent",
-    name: "Avori",
-    detail: "Flutter · NestJS · WebSocket · Redis",
-    color: "avori-teal",
-    href: "/work/avori",
-  },
-  {
-    number: "04",
-    label: "Current Mode",
-    name: "Staff SWE · AI developer experience",
-    detail: "Backoffice 2.0 · Cosmos Code",
-    color: "accent",
-  },
-];
+export const now = {
+  role: "Staff Software Engineer",
+  org: "Visa · Currencycloud",
+  focus: [
+    "Frontend platform architecture for Backoffice 2.0",
+    "Cosmos Code, an internal VS Code AI assistant",
+    "Avori, an AI travel agent, outside of work",
+  ],
+  location: "Austin, TX",
+} as const;
 
 export const impactMetrics = [
   { value: "5K+", label: "employees on Blitz Code" },

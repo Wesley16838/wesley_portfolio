@@ -1,38 +1,32 @@
-import Hero from "@/components/sections/Hero";
-import SystemTicker from "@/components/SystemTicker";
-import ImpactMetrics from "@/components/sections/ImpactMetrics";
-import SelectedWork from "@/components/sections/SelectedWork";
-import WorkingNotes from "@/components/sections/WorkingNotes";
-import Experience from "@/components/sections/Experience";
-import TechnicalStack from "@/components/sections/TechnicalStack";
-import EarlyExperiments from "@/components/sections/EarlyExperiments";
-import About from "@/components/sections/About";
 import Footer from "@/components/Footer";
+import About from "@/components/sections/About";
+import Contact from "@/components/sections/Contact";
+import EarlyExperiments from "@/components/sections/EarlyExperiments";
+import Experience from "@/components/sections/Experience";
+import Hero from "@/components/sections/Hero";
+import Photos from "@/components/sections/Photos";
+import SelectedWork from "@/components/sections/SelectedWork";
+import TechnicalStack from "@/components/sections/TechnicalStack";
+import WorkingNotes from "@/components/sections/WorkingNotes";
 
 export default function Home() {
   return (
-    <main>
-      {/* ivory opening spread */}
-      <div className="zone-light zone-grain">
+    <>
+      <main
+        id="main"
+        className="mx-auto max-w-6xl px-4 pb-20 pt-6 md:px-6 md:pb-28 md:pt-10"
+      >
         <Hero />
-      </div>
-
-      {/* charcoal gallery — opens with the system ticker seam */}
-      <div className="zone-dark zone-grain">
-        <SystemTicker />
-        <ImpactMetrics />
         <SelectedWork />
         <WorkingNotes />
         <Experience />
         <TechnicalStack />
-        <EarlyExperiments />
-      </div>
-
-      {/* ivory closing spread */}
-      <div className="zone-light zone-grain">
+        <Photos />
         <About />
-        <Footer />
-      </div>
-    </main>
+        <EarlyExperiments />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   );
 }

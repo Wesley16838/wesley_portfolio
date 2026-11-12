@@ -1,69 +1,51 @@
-import Link from "next/link";
 import { caseStudies } from "@/content/case-studies";
-import CaseStudyCard from "@/components/CaseStudyCard";
-import Reveal from "@/components/Reveal";
+import { impactMetrics } from "@/content/site";
 import Section from "@/components/Section";
-import { ArrowRightIcon } from "@/components/icons";
+import WorkTile from "@/components/WorkTile";
 
-const flagship = caseStudies.slice(0, 3);
-const more = caseStudies.slice(3);
+const [lead, ...rest] = caseStudies;
+const featured = rest.slice(0, 2);
+const more = rest.slice(2);
 
 export default function SelectedWork() {
   return (
-    <Section
-      id="work"
-      eyebrow="(01) — Selected Work"
-      heading={
-        <>
-          Shipped <em>systems</em>
-        </>
-      }
-    >
-      {/* sticky stacking deck — cards pile up as you scroll (md+) */}
-      <div className="flex flex-col gap-8">
-        {flagship.map((study, i) => (
+    <Section id="work" eyebrow="Work" title="Selected work">
+      {/* lead tile spans two rows; the next two stack beside it */}
+      <ul className="grid gap-4 md:gap-5 lg:grid-cols-12 lg:grid-rows-2">
+        <li className="lg:col-span-8 lg:row-span-2">
+          <WorkTile study={lead} variant="feature" />
+        </li>
+        {featured.map((study) => (
+          <li key={study.slug} className="lg:col-span-4">
+            <WorkTile study={study} />
+          </li>
+        ))}
+      </ul>
+
+      <dl className="mt-4 grid grid-cols-2 gap-4 md:mt-5 md:gap-5 lg:grid-cols-4">
+        {impactMetrics.map((metric) => (
           <div
-            key={study.slug}
-            className="md:sticky"
-            style={{ top: `${88 + i * 16}px` }}
+            key={metric.label}
+            className="tile flex flex-col-reverse justify-end p-6"
           >
-            <Reveal>
-              <CaseStudyCard study={study} index={i} />
-            </Reveal>
+            <dt className="mt-2 text-sm leading-snug text-fg-secondary">
+              {metric.label}
+            </dt>
+            <dd className="text-3xl font-semibold tracking-tight text-fg md:text-4xl">
+              {metric.value}
+            </dd>
           </div>
         ))}
-      </div>
+      </dl>
 
-      <Reveal>
-        <div className="mt-20">
-          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-fg-muted">
-            More systems
-          </p>
-          <ul className="mt-6 border-t border-border">
-            {more.map((study, i) => (
-              <li key={study.slug} className="border-b border-border">
-                <Link
-                  href={`/work/${study.slug}`}
-                  className="group flex items-baseline justify-between gap-6 py-6 transition-transform duration-200 hover:translate-x-1"
-                >
-                  <span className="flex min-w-0 flex-wrap items-baseline gap-x-5 gap-y-1">
-                    <span className="font-display text-lg italic text-fg-muted">
-                      {String(i + 4).padStart(2, "0")}
-                    </span>
-                    <span className="font-display text-2xl tracking-tight text-fg md:text-3xl">
-                      {study.title}
-                    </span>
-                    <span className="hidden font-mono text-[11px] uppercase tracking-[0.2em] text-fg-muted md:inline">
-                      {study.company} · {study.timeline}
-                    </span>
-                  </span>
-                  <ArrowRightIcon className="h-5 w-5 shrink-0 self-center text-fg-muted transition-transform duration-200 group-hover:translate-x-1" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Reveal>
+      <h3 className="label mt-14">More work</h3>
+      <ul className="mt-5 grid gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4">
+        {more.map((study) => (
+          <li key={study.slug}>
+            <WorkTile study={study} as="h4" />
+          </li>
+        ))}
+      </ul>
     </Section>
   );
 }

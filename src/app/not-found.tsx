@@ -1,27 +1,29 @@
 import Link from "next/link";
 import Footer from "@/components/Footer";
+import { ArrowRightIcon } from "@/components/icons";
 
 export default function NotFound() {
   return (
-    <div className="zone-dark zone-grain">
-      <main className="mx-auto flex max-w-6xl flex-col items-start px-6 pb-24 pt-40 md:pt-48">
-        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-fg-muted">
-          404 — Not found
-        </p>
-        <h1 className="mt-6 font-display text-4xl tracking-tight text-fg md:text-6xl">
-          This page isn&rsquo;t <em>running.</em>
-        </h1>
-        <p className="mt-6 max-w-md leading-relaxed text-fg-secondary">
-          The page you&rsquo;re looking for doesn&rsquo;t exist or was moved.
-        </p>
-        <Link
-          href="/"
-          className="mt-10 border-b border-border pb-1 font-mono text-xs uppercase tracking-[0.2em] text-fg transition-colors duration-200 hover:border-accent"
-        >
-          Back to home
-        </Link>
+    <>
+      <main
+        id="main"
+        className="mx-auto max-w-6xl px-4 pb-20 pt-6 md:px-6 md:pb-28 md:pt-10"
+      >
+        <div className="tile flex flex-col items-start p-8 md:p-14">
+          <p className="label">404 · Not found</p>
+          <h1 className="mt-4 text-4xl font-semibold tracking-tight text-fg md:text-6xl">
+            This page isn&rsquo;t here.
+          </h1>
+          <p className="mt-5 max-w-md text-lg leading-relaxed text-fg-secondary">
+            The page you&rsquo;re looking for doesn&rsquo;t exist or was moved.
+          </p>
+          <Link href="/" className="btn btn-primary mt-8">
+            Back to home
+            <ArrowRightIcon className="h-4 w-4" />
+          </Link>
+        </div>
       </main>
       <Footer />
-    </div>
+    </>
   );
 }

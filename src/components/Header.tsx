@@ -1,80 +1,65 @@
-"use client";
-
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import Logo from "@/components/Logo";
-import { site } from "@/content/site";
+import MobileNav from "@/components/MobileNav";
+import NewTab from "@/components/NewTab";
+import ThemeToggle from "@/components/ThemeToggle";
+import { avatar, site } from "@/content/site";
 
-const anchors = [
+const nav = [
   { href: "/#work", label: "Work" },
-  { href: "/#notes", label: "Notes" },
   { href: "/#experience", label: "Experience" },
   { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-
-  useEffect(() => {
-    // probe just below the header to find which zone sits under the bar
-    const probeY = 32;
-
-    const update = () => {
-      setScrolled(window.scrollY > 8);
-
-      const zones = document.querySelectorAll<HTMLElement>(
-        ".zone-light, .zone-dark"
-      );
-      for (const zone of zones) {
-        const rect = zone.getBoundingClientRect();
-        if (rect.top <= probeY && rect.bottom > probeY) {
-          setTheme(zone.classList.contains("zone-dark") ? "dark" : "light");
-          break;
-        }
-      }
-    };
-
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
-
   return (
-    <header
-      className="site-header fixed inset-x-0 top-0 z-50"
-      data-scrolled={scrolled}
-      data-theme={theme}
-    >
-      <div className="header-inner mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link href="/" aria-label="Wesley Wong - home">
-          <Logo className="h-8 w-8" />
+    <header className="sticky top-0 z-40 border-b border-border bg-bg/85 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 md:px-6">
+        <Link
+          href="/"
+          className="flex min-h-11 items-center gap-3 rounded-full pr-3 font-semibold tracking-tight text-fg"
+        >
+          <span className="avatar-disc block h-9 w-9 shrink-0 shadow-[0_0_0_2px_var(--color-sun)]">
+            <Image
+              src={avatar.poster}
+              alt=""
+              width={72}
+              height={72}
+              className="h-full w-full object-contain pt-[6%]"
+            />
+          </span>
+          {site.shortName}
         </Link>
-        <nav className="flex items-center gap-7">
-          <div className="hidden items-center gap-7 md:flex">
-            {anchors.map((a) => (
-              <Link
-                key={a.href}
-                href={a.href}
-                className="font-mono text-[11px] uppercase tracking-[0.2em] transition-opacity hover:opacity-60"
-              >
-                {a.label}
-              </Link>
+
+        <nav aria-label="Primary" className="hidden md:block">
+          <ul className="flex items-center gap-1">
+            {nav.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="flex min-h-11 items-center rounded-full px-4 text-sm font-medium text-fg-secondary transition-colors hover:bg-surface-2 hover:text-fg"
+                >
+                  {item.label}
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
+        </nav>
+
+        <div className="flex items-center gap-1 sm:gap-2">
+          <ThemeToggle />
           <a
             href={site.links.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-current px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] transition-opacity hover:opacity-60"
+            className="btn btn-secondary hidden sm:inline-flex"
           >
-            Resume
+            Résumé
+            <NewTab />
           </a>
-        </nav>
+          <MobileNav items={nav} resume={site.links.resume} />
+        </div>
       </div>
     </header>
   );

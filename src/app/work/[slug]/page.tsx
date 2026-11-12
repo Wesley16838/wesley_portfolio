@@ -2,10 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { caseStudies, getCaseStudy } from "@/content/case-studies";
-import Gallery, { ImageGrid } from "@/components/Gallery";
-import PipelineDiagram from "@/components/PipelineDiagram";
+import type { CaseStudy } from "@/content/case-studies";
+import Carousel from "@/components/Carousel";
 import Footer from "@/components/Footer";
-import Reveal from "@/components/Reveal";
+import ImageFrame, { backdropFor, hasSrc } from "@/components/ImageFrame";
+import Lang from "@/components/Lang";
+import { LightboxProvider, ZoomButton } from "@/components/Lightbox";
+import NewTab from "@/components/NewTab";
+import PipelineDiagram from "@/components/PipelineDiagram";
+import SectionNav from "@/components/SectionNav";
+import Tag from "@/components/Tag";
+import { brandTint } from "@/components/WorkTile";
 import { ArrowRightIcon, ArrowUpRightIcon } from "@/components/icons";
 
 type Params = { slug: string };
@@ -32,6 +39,55 @@ export async function generateMetadata({
   };
 }
 
+const toId = (heading: string) =>
+  heading
+    .toLowerCase()
+    .replace(/['’]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+const sectionLabel = "label";
+const prose = "max-w-2xl text-lg leading-relaxed text-fg-secondary";
+
+function NeighbourLink({
+  study,
+  direction,
+}: {
+  study: CaseStudy;
+  direction: "Previous" | "Next";
+}) {
+  const cover = study.images?.find(hasSrc);
+  const next = direction === "Next";
+  return (
+    <Link
+      href={`/work/${study.slug}`}
+      className={`tile tile-link flex items-center gap-4 p-4 ${
+        next ? "flex-row-reverse text-right md:col-start-2" : ""
+      }`}
+      style={cover ? undefined : { backgroundColor: brandTint(study) }}
+    >
+      {cover && (
+        <ImageFrame
+          image={{ ...cover, alt: "" }}
+          gradient={study.brand.gradient}
+          ratio="4 / 3"
+          sizes="112px"
+          className="w-28 shrink-0"
+        />
+      )}
+      <span className="min-w-0 flex-1 px-2">
+        <span className="label block text-fg-secondary">{direction}</span>
+        <span className="mt-1 block text-xl font-semibold tracking-tight text-fg">
+          {study.title}
+        </span>
+      </span>
+      <ArrowRightIcon
+        className={`h-5 w-5 shrink-0 text-fg-muted ${next ? "" : "rotate-180"}`}
+      />
+    </Link>
+  );
+}
+
 export default async function CaseStudyPage({
   params,
 }: {
@@ -44,205 +100,275 @@ export default async function CaseStudyPage({
   const index = caseStudies.findIndex((cs) => cs.slug === study.slug);
   const prev = caseStudies[index - 1];
   const next = caseStudies[index + 1];
-  const galleryImages = study.images ?? [];
-  // image-rich studies get an extra magazine-grid spread after the sections
-  // (phone screenshots stay in the rail: the grid crops everything to wide)
-  const gridCandidates = galleryImages.filter((img) => img.aspect !== "phone");
-  const gridImages = gridCandidates.length > 3 ? gridCandidates.slice(1) : [];
+
+  // only images with a real file — placeholders never render
+  const shots = (study.images ?? []).filter(hasSrc);
+  const phones = shots.length > 0 && shots.every((s) => s.aspect === "phone");
+  // desktop shots: the first is the hero, the rest fill the Screens grid
+  const gridShots = phones ? [] : shots.slice(1);
+  const showScreens = phones || gridShots.length > 0;
+  const gradient = study.brand.gradient;
+
+  const navItems = [
+    { id: "overview", label: "Overview" },
+    ...(study.pipeline ? [{ id: "architecture", label: "Architecture" }] : []),
+    ...study.sections.map((s) => ({ id: toId(s.heading), label: s.heading })),
+    ...(showScreens ? [{ id: "screens", label: "Screens" }] : []),
+  ];
 
   return (
-    <div
-      className="zone-dark zone-grain brand-scope"
-      style={
-        {
-          "--brand-accent": study.brand.accent,
-          "--brand-accent-dim": study.brand.accentDim,
-        } as React.CSSProperties
-      }
-    >
-      <main>
-        <article className="mx-auto max-w-6xl px-6 pb-20 pt-32 md:pb-28 md:pt-40">
-          <Link
-            href="/#work"
-            className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-fg-muted transition-colors hover:text-fg"
-          >
-            <ArrowRightIcon className="h-3.5 w-3.5 rotate-180" />
-            Work
-          </Link>
+    <>
+      <main
+        id="main"
+        className="mx-auto max-w-6xl px-4 pb-20 pt-6 md:px-6 md:pb-28 md:pt-10"
+      >
+        <LightboxProvider
+          images={shots.map((shot) => ({
+            src: shot.src,
+            alt: shot.alt,
+            caption: shot.caption,
+            panel: backdropFor(shot, gradient),
+          }))}
+        >
+          <article>
+            <Link
+              href="/#work"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-fg-secondary transition-colors hover:text-fg"
+            >
+              <ArrowRightIcon className="h-4 w-4 rotate-180" />
+              All work
+            </Link>
 
-          <header className="mt-12">
-            <p className="animate-fade-up font-mono text-[11px] uppercase tracking-[0.25em] text-fg-muted">
-              ({String(index + 1).padStart(2, "0")}) — Case Study ·{" "}
-              {study.company}
-            </p>
-            <h1 className="animate-fade-up mt-6 max-w-4xl font-display text-5xl leading-[1.02] tracking-tight text-fg [animation-delay:120ms] md:text-7xl">
-              {study.title}
-            </h1>
-            <p className="animate-fade-up mt-6 max-w-2xl text-lg leading-relaxed text-fg-secondary [animation-delay:240ms]">
-              {study.tagline}
-            </p>
-            {study.externalLink && (
-              <a
-                href={study.externalLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="animate-fade-up mt-8 inline-flex items-center gap-2 border-b border-border pb-1 font-mono text-xs uppercase tracking-[0.2em] text-fg transition-colors duration-200 [animation-delay:320ms] hover:border-accent"
-              >
-                Visit
-                <ArrowUpRightIcon className="h-3.5 w-3.5" />
-              </a>
-            )}
-          </header>
-
-          <div className="animate-fade-up mt-14 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-border pt-10 [animation-delay:360ms] md:grid-cols-4">
-            {[
-              { label: "Role", value: study.role },
-              { label: "Company", value: study.company },
-              { label: "Timeline", value: study.timeline },
-              { label: "Focus", value: study.tags.join(" · ") },
-            ].map((item) => (
-              <div key={item.label}>
-                <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-fg-muted">
-                  {item.label}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-fg">
-                  {item.value}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-16 grid grid-cols-1 gap-y-10 border-y border-border py-12 sm:grid-cols-3 sm:divide-x sm:divide-border">
-            {study.metrics.map((metric, i) => (
-              <Reveal
-                key={metric.label}
-                delay={i * 90}
-                className="sm:px-8 sm:first:pl-0 sm:last:pr-0"
-              >
-                <p className="font-display text-4xl italic tracking-tight text-accent md:text-5xl">
-                  {metric.value}
-                </p>
-                <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-fg-muted">
-                  {metric.label}
-                </p>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal>
-            <section className="mt-20 max-w-3xl">
-              <h2 className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent">
-                Overview
-              </h2>
-              <p className="mt-6 font-display text-2xl leading-snug tracking-tight text-fg md:text-3xl">
-                {study.overview}
+            <header className="mt-4 max-w-4xl">
+              <p className="label flex items-center gap-2">
+                <span
+                  aria-hidden="true"
+                  className="h-2.5 w-2.5 rounded-full"
+                  style={{ backgroundColor: study.brand.accent }}
+                />
+                <span>
+                  Case study · <Lang>{study.company}</Lang>
+                </span>
               </p>
-              {study.note && (
-                <p className="mt-6 font-mono text-xs text-fg-muted">
-                  {study.note}
-                </p>
+              <h1 className="mt-4 text-4xl font-semibold leading-[1.05] tracking-tight text-fg md:text-6xl">
+                {study.title}
+              </h1>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-secondary md:text-xl">
+                {study.tagline}
+              </p>
+              <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm">
+                <div>
+                  <dt className="label">Role</dt>
+                  <dd className="mt-1 font-medium text-fg">{study.role}</dd>
+                </div>
+                <div>
+                  <dt className="label">Timeline</dt>
+                  <dd className="mt-1 font-medium text-fg">{study.timeline}</dd>
+                </div>
+              </dl>
+              <ul className="mt-5 flex flex-wrap gap-2" aria-label="Focus areas">
+                {study.tags.map((tag) => (
+                  <li key={tag}>
+                    <Tag>{tag}</Tag>
+                  </li>
+                ))}
+              </ul>
+              {study.externalLink && (
+                <a
+                  href={study.externalLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary mt-6"
+                >
+                  Visit live site
+                  <ArrowUpRightIcon className="h-4 w-4" />
+                  <NewTab />
+                </a>
               )}
-            </section>
-          </Reveal>
+            </header>
 
-          {galleryImages.length > 0 && (
-            <Reveal>
-              <section className="mt-20">
-                <h2 className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent">
-                  Gallery
-                </h2>
-                <div className="mt-8">
-                  <Gallery
-                    images={galleryImages}
-                    gradient={study.brand.gradient}
-                  />
-                </div>
-              </section>
-            </Reveal>
-          )}
-
-          {study.pipeline && (
-            <Reveal>
-              <section className="mt-20">
-                <h2 className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent">
-                  Architecture
-                </h2>
-                <div className="mt-8">
-                  <PipelineDiagram
-                    stages={study.pipeline}
-                    accent={study.brand.accent}
-                  />
-                </div>
-              </section>
-            </Reveal>
-          )}
-
-          {study.sections.map((section) => (
-            <Reveal key={section.heading}>
-              <section className="mt-20 max-w-3xl">
-                <h2 className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent">
-                  {section.heading}
-                </h2>
-                <div className="mt-6 flex flex-col gap-5">
-                  {section.body.map((paragraph) => (
-                    <p
-                      key={paragraph}
-                      className="leading-relaxed text-fg-secondary"
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </section>
-            </Reveal>
-          ))}
-
-          {gridImages.length > 0 && (
-            <Reveal>
-              <section className="mt-20">
-                <h2 className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent">
-                  In detail
-                </h2>
-                <div className="mt-8">
-                  <ImageGrid
-                    images={gridImages}
-                    gradient={study.brand.gradient}
-                  />
-                </div>
-              </section>
-            </Reveal>
-          )}
-
-          <nav className="mt-24 grid gap-px border-t border-border pt-10 md:grid-cols-2">
-            {prev ? (
-              <Link href={`/work/${prev.slug}`} className="group py-4 md:pr-8">
-                <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-fg-muted">
-                  ← Previous
-                </p>
-                <p className="mt-3 font-display text-2xl tracking-tight text-fg transition-colors duration-200 group-hover:text-accent md:text-3xl">
-                  {prev.title}
-                </p>
-              </Link>
-            ) : (
-              <span aria-hidden="true" />
-            )}
-            {next && (
-              <Link
-                href={`/work/${next.slug}`}
-                className="group py-4 text-right md:pl-8"
+            {/* hero visual: three phones for app flows, one wide shot otherwise */}
+            {phones && (
+              <ul
+                className="tile mt-10 flex items-start justify-center gap-3 overflow-hidden px-4 py-8 sm:gap-6 md:gap-10 md:py-12"
+                style={{ backgroundColor: brandTint(study) }}
               >
-                <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-fg-muted">
-                  Next →
-                </p>
-                <p className="mt-3 font-display text-2xl tracking-tight text-fg transition-colors duration-200 group-hover:text-accent md:text-3xl">
-                  {next.title}
-                </p>
-              </Link>
+                {shots.slice(0, 3).map((shot, i) => (
+                  <li key={shot.src} className="w-[30%] max-w-56">
+                    <ZoomButton index={i} label={shot.alt}>
+                      <ImageFrame
+                        image={shot}
+                        sizes="(min-width: 768px) 224px, 30vw"
+                        priority
+                      />
+                    </ZoomButton>
+                  </li>
+                ))}
+              </ul>
             )}
+            {!phones && shots[0] && (
+              <div className="mt-10">
+                <ZoomButton index={0} label={shots[0].alt}>
+                  <ImageFrame
+                    image={shots[0]}
+                    gradient={gradient}
+                    ratio="16 / 9"
+                    sizes="(min-width: 1152px) 1104px, 100vw"
+                    priority
+                  />
+                </ZoomButton>
+              </div>
+            )}
+
+            {/* one compact row per metric on phones, three tiles from sm up */}
+            <dl
+              className={`grid gap-3 sm:grid-cols-3 md:gap-5 ${
+                shots.length > 0 ? "mt-4 md:mt-5" : "mt-10"
+              }`}
+            >
+              {study.metrics.map((metric) => (
+                <div
+                  key={metric.label}
+                  className="tile flex flex-row-reverse items-baseline justify-end gap-4 px-6 py-4 sm:flex-col-reverse sm:items-stretch sm:gap-0 sm:p-6"
+                >
+                  <dt className="text-sm leading-snug text-fg-secondary sm:mt-2">
+                    {metric.label}
+                  </dt>
+                  <dd className="shrink-0 text-3xl font-semibold tracking-tight text-fg md:text-4xl">
+                    {metric.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <div className="mt-14 grid gap-10 lg:mt-20 lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-16">
+              <SectionNav items={navItems} />
+
+              <div className="flex min-w-0 flex-col gap-16">
+                <section id="overview" aria-labelledby="overview-heading">
+                  <h2 id="overview-heading" className={sectionLabel}>
+                    Overview
+                  </h2>
+                  <p className="mt-4 max-w-3xl text-2xl font-medium leading-snug tracking-tight text-fg md:text-3xl">
+                    <Lang>{study.overview}</Lang>
+                  </p>
+                  {study.note && (
+                    <p className="mt-5 text-sm text-fg-muted">{study.note}</p>
+                  )}
+                </section>
+
+                {study.pipeline && (
+                  <section
+                    id="architecture"
+                    aria-labelledby="architecture-heading"
+                  >
+                    <h2 id="architecture-heading" className={sectionLabel}>
+                      Architecture
+                    </h2>
+                    <div className="mt-4">
+                      <PipelineDiagram stages={study.pipeline} />
+                    </div>
+                  </section>
+                )}
+
+                {study.sections.map((section) => {
+                  const id = toId(section.heading);
+                  return (
+                    <section key={id} id={id} aria-labelledby={`${id}-heading`}>
+                      <h2 id={`${id}-heading`} className={sectionLabel}>
+                        {section.heading}
+                      </h2>
+                      <div className="mt-4 flex flex-col gap-5">
+                        {section.body.map((paragraph) => (
+                          <p key={paragraph} className={prose}>
+                            {paragraph}
+                          </p>
+                        ))}
+                      </div>
+                    </section>
+                  );
+                })}
+
+                {showScreens && (
+                  <section id="screens" aria-labelledby="screens-heading">
+                    <h2 id="screens-heading" className={sectionLabel}>
+                      Screens
+                    </h2>
+                    <p className="mt-2 text-sm text-fg-secondary">
+                      Select any image to view it larger.
+                    </p>
+
+                    {phones ? (
+                      <div className="mt-4">
+                        <Carousel label={`${study.title} screens`}>
+                          {shots.map((shot, i) => (
+                            <li
+                              key={shot.src}
+                              className="w-[58vw] max-w-60 shrink-0 snap-start"
+                            >
+                              <figure>
+                                <ZoomButton index={i} label={shot.alt}>
+                                  <ImageFrame
+                                    image={shot}
+                                    sizes="(min-width: 768px) 240px, 58vw"
+                                  />
+                                </ZoomButton>
+                                {shot.caption && (
+                                  <figcaption className="mt-3 text-sm leading-snug text-fg-secondary">
+                                    {shot.caption}
+                                  </figcaption>
+                                )}
+                              </figure>
+                            </li>
+                          ))}
+                        </Carousel>
+                      </div>
+                    ) : (
+                      <ul className="mt-6 grid gap-5 md:grid-cols-2">
+                        {gridShots.map((shot, i) => (
+                          <li
+                            key={shot.src}
+                            // an odd count leads with one full-width image
+                            className={
+                              gridShots.length % 2 === 1 && i === 0
+                                ? "md:col-span-2"
+                                : undefined
+                            }
+                          >
+                            <figure>
+                              <ZoomButton index={i + 1} label={shot.alt}>
+                                <ImageFrame
+                                  image={shot}
+                                  gradient={gradient}
+                                  sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"
+                                />
+                              </ZoomButton>
+                              {shot.caption && (
+                                <figcaption className="mt-3 text-sm leading-snug text-fg-secondary">
+                                  {shot.caption}
+                                </figcaption>
+                              )}
+                            </figure>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </section>
+                )}
+              </div>
+            </div>
+          </article>
+
+          <nav
+            aria-label="More case studies"
+            className="mt-20 grid gap-4 md:mt-28 md:grid-cols-2 md:gap-5"
+          >
+            {prev && <NeighbourLink study={prev} direction="Previous" />}
+            {next && <NeighbourLink study={next} direction="Next" />}
           </nav>
-        </article>
+        </LightboxProvider>
       </main>
       <Footer />
-    </div>
+    </>
   );
 }
