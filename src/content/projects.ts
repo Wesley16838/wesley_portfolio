@@ -37,7 +37,7 @@ export const archiveProjects: ArchiveProject[] = [
   {
     name: "English4TW",
     description:
-      "English-learning platform side project — full-stack build.",
+      "English-learning platform side project - full-stack build.",
     context: "Side project",
     link: "https://github.com/Wesley16838/English4TW_Main",
   },

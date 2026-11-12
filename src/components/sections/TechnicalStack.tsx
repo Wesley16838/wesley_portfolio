@@ -1,31 +1,24 @@
 import { stackGroups } from "@/content/site";
-import Reveal from "@/components/Reveal";
 import Section from "@/components/Section";
 import Tag from "@/components/Tag";
 
 export default function TechnicalStack() {
   return (
-    <Section
-      id="stack"
-      eyebrow="(04) — Stack"
-      heading={
-        <>
-          Tools I <em>reach for</em>
-        </>
-      }
-    >
-      <div className="grid gap-x-12 gap-y-12 md:grid-cols-2">
-        {stackGroups.map((group, i) => (
-          <Reveal key={group.name} delay={i * 70}>
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.25em] text-fg-muted">
+    <Section id="stack" eyebrow="Stack" title="Tools I reach for">
+      <div className="grid gap-4 md:grid-cols-2 md:gap-5">
+        {stackGroups.map((group) => (
+          <div key={group.name} className="tile p-6 md:p-8">
+            <h3 className="text-lg font-semibold tracking-tight text-fg">
               {group.name}
             </h3>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <ul className="mt-5 flex flex-wrap gap-2">
               {group.items.map((item) => (
-                <Tag key={item}>{item}</Tag>
+                <li key={item}>
+                  <Tag>{item}</Tag>
+                </li>
               ))}
-            </div>
-          </Reveal>
+            </ul>
+          </div>
         ))}
       </div>
     </Section>

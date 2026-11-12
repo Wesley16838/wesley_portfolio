@@ -1,36 +1,25 @@
 type SectionProps = {
-  id?: string;
+  /** anchor target; also labels the region for assistive tech */
+  id: string;
   eyebrow?: string;
-  heading?: React.ReactNode;
+  title: string;
   children: React.ReactNode;
-  className?: string;
 };
 
-export default function Section({
-  id,
-  eyebrow,
-  heading,
-  children,
-  className,
-}: SectionProps) {
+export default function Section({ id, eyebrow, title, children }: SectionProps) {
+  const headingId = `${id}-heading`;
   return (
-    <section
-      id={id}
-      className={`scroll-mt-24 py-20 md:py-28 ${className ?? ""}`}
-    >
-      <div className="mx-auto max-w-6xl px-6">
-        {eyebrow && (
-          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-fg-muted">
-            {eyebrow}
-          </p>
-        )}
-        {heading && (
-          <h2 className="mt-4 font-display text-4xl tracking-tight text-fg md:text-5xl">
-            {heading}
-          </h2>
-        )}
-        <div className={eyebrow || heading ? "mt-12" : ""}>{children}</div>
-      </div>
+    <section id={id} aria-labelledby={headingId} className="mt-20 md:mt-28">
+      <header className="mb-8 md:mb-10">
+        {eyebrow && <p className="label">{eyebrow}</p>}
+        <h2
+          id={headingId}
+          className="mt-2 text-3xl font-semibold tracking-tight text-fg md:text-4xl"
+        >
+          {title}
+        </h2>
+      </header>
+      {children}
     </section>
   );
 }

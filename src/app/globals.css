@@ -1,25 +1,26 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Every text/background pair below is checked for WCAG AA (>= 4.5:1). */
 @theme {
   --color-*: initial;
 
-  /* default zone: warm charcoal (the gallery) */
-  --color-bg: #121110;
-  --color-surface: #1a1816;
-  --color-surface-2: #232019;
-  --color-border: rgba(236, 233, 226, 0.08);
-  --color-border-strong: rgba(236, 233, 226, 0.16);
-  --color-fg: #ece9e2;
-  --color-fg-secondary: #a8a29a;
-  --color-fg-muted: #7d786f;
+  --color-bg: #f6f5f2;
+  --color-surface: #ffffff;
+  --color-surface-2: #efeee9;
+  --color-border: rgba(23, 23, 26, 0.1);
+  --color-border-strong: rgba(23, 23, 26, 0.24);
+  --color-fg: #17171a;
+  --color-fg-secondary: #55555e;
+  --color-fg-muted: #66666f;
 
-  /* the single signature color — Claude terracotta */
-  --color-accent: #d97757;
-  --color-accent-dim: rgba(217, 119, 87, 0.12);
+  --color-accent: #4f46e5;
+  --color-on-accent: #ffffff;
+  --color-accent-soft: #ecebfd;
 
-  --color-visa-blue: #4d6bff;
-  --color-visa-gold: #f7b600;
-  --color-youmi-teal: #17c3ae;
+  /* decorative only - never used for text */
+  --color-sun: #ffcf33;
 
   --color-white: #ffffff;
   --color-black: #000000;
@@ -27,30 +28,8 @@
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
-  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
 
-  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-  --animate-marquee: marquee 36s linear infinite;
   --animate-pulse-dot: pulse-dot 2.6s ease-in-out infinite;
-
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(24px);
-      filter: blur(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
-  }
-
-  @keyframes marquee {
-    to {
-      transform: translateX(-50%);
-    }
-  }
 
   @keyframes pulse-dot {
     0%,
@@ -58,14 +37,52 @@
       opacity: 1;
     }
     50% {
-      opacity: 0.45;
+      opacity: 0.4;
     }
   }
 }
 
-html {
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
   color-scheme: dark;
+  --color-bg: #0f0f12;
+  --color-surface: #18181d;
+  --color-surface-2: #212128;
+  --color-border: rgba(242, 242, 245, 0.1);
+  --color-border-strong: rgba(242, 242, 245, 0.26);
+  --color-fg: #f2f2f5;
+  --color-fg-secondary: #b4b4c0;
+  --color-fg-muted: #9494a2;
+  --color-accent: #9aa1ff;
+  --color-on-accent: #0f0f12;
+  --color-accent-soft: #26274d;
+}
+
+/* no-JS fallback: the inline script in layout.tsx normally sets data-theme */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --color-bg: #0f0f12;
+    --color-surface: #18181d;
+    --color-surface-2: #212128;
+    --color-border: rgba(242, 242, 245, 0.1);
+    --color-border-strong: rgba(242, 242, 245, 0.26);
+    --color-fg: #f2f2f5;
+    --color-fg-secondary: #b4b4c0;
+    --color-fg-muted: #9494a2;
+    --color-accent: #9aa1ff;
+    --color-on-accent: #0f0f12;
+    --color-accent-soft: #26274d;
+  }
+}
+
+html {
   scroll-behavior: smooth;
+  /* keep anchored headings clear of the sticky header */
+  scroll-padding-top: 5.5rem;
 }
 
 body {
@@ -75,61 +92,9 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* ---------- zones ---------- */
-
-/* ivory editorial zone — overrides the token set locally */
-.zone-light {
-  --color-bg: #f4f1ea;
-  --color-surface: #ece8df;
-  --color-surface-2: #e3ded1;
-  --color-border: rgba(22, 19, 15, 0.1);
-  --color-border-strong: rgba(22, 19, 15, 0.2);
-  --color-fg: #16130f;
-  --color-fg-secondary: #57524a;
-  --color-fg-muted: #8a8478;
-  --color-accent-dim: rgba(217, 119, 87, 0.09);
-  --grain-opacity: 0.02;
-  background-color: var(--color-bg);
-  color: var(--color-fg);
-  color-scheme: light;
-}
-
-.zone-dark {
-  --grain-opacity: 0.035;
-  background-color: var(--color-bg);
-  color: var(--color-fg);
-}
-
-/* film grain, per zone — the texture that kills the template feel */
-.zone-grain {
-  position: relative;
-}
-.zone-grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-  opacity: var(--grain-opacity, 0.03);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* ---------- typography ---------- */
-
-/* Fraunces reads bookish-thin at 400 — give display type real weight */
-.font-display {
-  font-weight: 500;
-}
-
-/* italic serif signature inside display headings */
-.font-display em {
-  font-style: italic;
-  color: var(--color-accent);
-}
-
 ::selection {
   background-color: var(--color-accent);
-  color: #f4f1ea;
+  color: var(--color-on-accent);
 }
 
 :focus-visible {
@@ -137,81 +102,185 @@ body {
   outline-offset: 3px;
 }
 
-/* ---------- header (blend at top, frosted bar on scroll) ---------- */
+/* ---------- skip link ---------- */
 
-/* the fading background bar — sits behind the header content */
-.site-header::before {
-  content: "";
+.skip-link {
   position: absolute;
-  inset: 0;
-  z-index: -1;
-  opacity: 0;
-  border-bottom: 1px solid transparent;
-  backdrop-filter: blur(12px) saturate(1.4);
-  -webkit-backdrop-filter: blur(12px) saturate(1.4);
-  transition: opacity 0.4s ease, background-color 0.4s ease,
-    border-color 0.4s ease;
+  left: 1rem;
+  top: -5rem;
+  z-index: 100;
+  border-radius: 9999px;
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
 }
-.site-header[data-scrolled="true"]::before {
-  opacity: 1;
-}
-.site-header[data-theme="dark"]::before {
-  background-color: rgba(18, 17, 16, 0.72);
-  border-bottom-color: rgba(236, 233, 226, 0.08);
-}
-.site-header[data-theme="light"]::before {
-  background-color: rgba(244, 241, 234, 0.78);
-  border-bottom-color: rgba(22, 19, 15, 0.1);
+.skip-link:focus {
+  top: 1rem;
+  outline-color: var(--color-fg);
 }
 
-/* header content: explicit color matched to the zone under the bar */
-.header-inner {
-  color: var(--color-fg);
-  transition: color 0.4s ease;
-}
-.site-header[data-theme="dark"] .header-inner {
-  color: #ece9e2;
-}
-.site-header[data-theme="light"] .header-inner {
-  color: #16130f;
-}
+/* Component classes live in the components layer so utilities can override them. */
+@layer components {
+  /* ---------- bento tile ---------- */
 
-/* ---------- scroll progress hairline (zero JS, progressive) ---------- */
-
-.scroll-progress {
-  display: none;
-  box-shadow: 0 0 10px 1px var(--color-accent);
-}
-@supports (animation-timeline: scroll()) {
-  .scroll-progress {
-    display: block;
-    transform-origin: left;
-    animation: grow-x linear both;
-    animation-timeline: scroll(root);
+  .tile {
+    border-radius: 1.5rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    box-shadow:
+      0 1px 2px rgba(23, 23, 26, 0.04),
+      0 12px 28px -20px rgba(23, 23, 26, 0.18);
   }
-  @keyframes grow-x {
-    from {
-      transform: scaleX(0);
-    }
-    to {
-      transform: scaleX(1);
-    }
+
+  .tile-link {
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .tile-link:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-border-strong);
+    box-shadow:
+      0 1px 2px rgba(23, 23, 26, 0.04),
+      0 20px 36px -22px rgba(23, 23, 26, 0.32);
+  }
+
+  /* accent-filled tile: focus rings and selection must flip to stay visible */
+  .tile-accent {
+    border-color: transparent;
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+  .tile-accent :focus-visible {
+    outline-color: var(--color-on-accent);
+  }
+  .tile-accent ::selection {
+    background-color: var(--color-on-accent);
+    color: var(--color-accent);
+  }
+
+  /* ---------- small label ---------- */
+
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+  }
+
+  /* ---------- buttons (44px minimum target) ---------- */
+
+  .btn {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    padding: 0 1.25rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }
+  .btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+  .btn-primary:hover {
+    background-color: color-mix(in srgb, var(--color-accent) 88%, var(--color-fg));
+  }
+  .btn-secondary {
+    border-color: var(--color-border-strong);
+    background-color: var(--color-surface);
+    color: var(--color-fg);
+  }
+  .btn-secondary:hover {
+    border-color: var(--color-fg);
+  }
+
+  /* square icon button, same 44px target */
+  .icon-btn {
+    display: inline-flex;
+    height: 2.75rem;
+    width: 2.75rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    color: var(--color-fg-secondary);
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+  .icon-btn:hover {
+    background-color: var(--color-surface-2);
+    color: var(--color-fg);
+  }
+  .icon-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  /* ---------- avatar ---------- */
+
+  /* white disc with a warm ring, identical in both themes - the avatar art
+     (and later the video) carries its own light background */
+  .avatar-disc {
+    overflow: hidden;
+    border-radius: 9999px;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px var(--color-sun);
   }
 }
 
-/* hide horizontal scrollbar on the gallery rail, keep it scrollable */
-.gallery-rail {
+/* ---------- horizontal rails ---------- */
+
+.no-scrollbar {
   scrollbar-width: none;
 }
-.gallery-rail::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
-/* Case-study pages override the accent via an inline style on their root
-   element, retinting eyebrows/metrics/links per company brand. */
-.brand-scope {
-  --color-accent: var(--brand-accent, #d97757);
-  --color-accent-dim: var(--brand-accent-dim, rgba(217, 119, 87, 0.12));
+/* ---------- lightbox (native <dialog>) ---------- */
+
+dialog.lightbox {
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  height: 100dvh;
+  max-height: none;
+  width: 100vw;
+  max-width: none;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #f2f2f5;
+}
+dialog.lightbox::backdrop {
+  background: rgba(10, 10, 12, 0.92);
+}
+/* always on a dark scrim, whatever the page theme */
+dialog.lightbox :focus-visible {
+  outline-color: #ffffff;
+}
+html:has(dialog.lightbox[open]) {
+  overflow: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -224,5 +293,8 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  .tile-link:hover {
+    transform: none;
   }
 }

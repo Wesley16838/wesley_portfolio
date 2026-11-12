@@ -1,18 +1,10 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Fraunces } from "next/font/google";
 import Header from "@/components/Header";
 import BackToTop from "@/components/BackToTop";
 import { site } from "@/content/site";
 import "./globals.css";
-
-const fraunces = Fraunces({
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  axes: ["opsz"],
-  variable: "--font-fraunces",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -34,6 +26,12 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Runs before first paint so the saved (or system) theme never flashes.
+ * ThemeToggle writes the same `theme` key.
+ */
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`;
+
 export default function RootLayout({
   children,
 }: {
@@ -42,16 +40,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable} ${fraunces.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="bg-bg font-sans text-fg">
-        <div
-          aria-hidden="true"
-          className="scroll-progress fixed inset-x-0 top-0 z-[60] h-[3px] bg-accent"
-        />
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <Header />
-        <BackToTop />
         {children}
+        <BackToTop />
       </body>
     </html>
   );

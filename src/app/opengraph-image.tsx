@@ -12,66 +12,73 @@ export default function OpenGraphImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "88px",
-          backgroundColor: "#f4f1ea",
+          padding: 40,
+          backgroundColor: "#f6f5f2",
         }}
       >
         <div
           style={{
+            flex: 1,
             display: "flex",
-            alignItems: "center",
-            gap: "14px",
-            color: "#8a8478",
-            fontSize: 22,
-            letterSpacing: "0.25em",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: 64,
+            borderRadius: 40,
+            border: "2px solid rgba(23, 23, 26, 0.1)",
+            backgroundColor: "#ffffff",
           }}
         >
           <div
             style={{
-              width: 12,
-              height: 12,
-              borderRadius: 9999,
-              backgroundColor: "#d97757",
+              display: "flex",
+              alignItems: "center",
+              gap: 16,
+              color: "#66666f",
+              fontSize: 26,
+              fontWeight: 600,
             }}
-          />
-          WESLEY.SYSTEMS
+          >
+            <div
+              style={{
+                width: 20,
+                height: 20,
+                borderRadius: 9999,
+                backgroundColor: "#4f46e5",
+              }}
+            />
+            Wesley Wong
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{
+                color: "#17171a",
+                fontSize: 76,
+                fontWeight: 700,
+                lineHeight: 1.05,
+                letterSpacing: "-0.03em",
+              }}
+            >
+              Hi, I&rsquo;m Wesley.
+            </div>
+            <div
+              style={{
+                marginTop: 8,
+                color: "#66666f",
+                fontSize: 76,
+                fontWeight: 700,
+                lineHeight: 1.05,
+                letterSpacing: "-0.03em",
+                maxWidth: 980,
+              }}
+            >
+              I engineer AI-native systems with a designer&rsquo;s eye.
+            </div>
+          </div>
+          <div style={{ color: "#55555e", fontSize: 28 }}>
+            Staff Software Engineer at Visa · AI Developer Experience &amp; UX
+            Engineering
+          </div>
         </div>
-        <div
-          style={{
-            marginTop: 44,
-            color: "#16130f",
-            fontSize: 72,
-            fontWeight: 500,
-            lineHeight: 1.1,
-            maxWidth: 980,
-            fontFamily: "Georgia, serif",
-          }}
-        >
-          Engineering AI-native systems with a designer&rsquo;s eye.
-        </div>
-        <div
-          style={{
-            marginTop: 32,
-            color: "#57524a",
-            fontSize: 28,
-            lineHeight: 1.4,
-          }}
-        >
-          Wesley Wong - Staff Software Engineer at Visa · Founding Engineer
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: 16,
-            backgroundColor: "#d97757",
-            display: "flex",
-          }}
-        />
       </div>
     ),
     { ...size },
