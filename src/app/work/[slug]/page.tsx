@@ -33,9 +33,16 @@ export async function generateMetadata({
   return {
     title: study.title,
     description: study.tagline,
+    alternates: { canonical: `/work/${study.slug}` },
+    // setting openGraph here replaces the root layout's, so repeat the shared
+    // fields; the image comes from this folder's opengraph-image.tsx
     openGraph: {
       title: `${study.title} - Wesley Wong`,
       description: study.tagline,
+      url: `/work/${study.slug}`,
+      siteName: "Wesley Wong",
+      locale: "en_US",
+      type: "article",
     },
   };
 }
