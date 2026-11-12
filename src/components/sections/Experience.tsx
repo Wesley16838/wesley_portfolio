@@ -82,7 +82,7 @@ export default function Experience() {
     <Section id="experience" eyebrow="Experience" title="Where I've built">
       <div className="flex flex-col gap-10">
         {groups.map((group) => (
-          <div key={group.title}>
+          <div key={group.title} data-reveal>
             <h3 className="label mb-4">{group.title}</h3>
             <ol className="tile divide-y divide-border px-6 md:px-8">
               {group.items.map((exp) => (

@@ -83,7 +83,9 @@ function NeighbourLink({
         </span>
       </span>
       <ArrowRightIcon
-        className={`h-5 w-5 shrink-0 text-fg-muted ${next ? "" : "rotate-180"}`}
+        className={`h-5 w-5 shrink-0 text-fg-muted ${
+          next ? "arrow-nudge" : "arrow-nudge-back rotate-180"
+        }`}
       />
     </Link>
   );
@@ -140,14 +142,14 @@ export default async function CaseStudyPage({
           <article>
             <Link
               href="/#work"
-              className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-fg-secondary transition-colors hover:text-fg"
+              className="enter inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-fg-secondary transition-colors hover:text-fg"
             >
               <ArrowRightIcon className="h-4 w-4 rotate-180" />
               All work
             </Link>
 
             <header className="mt-4 max-w-4xl">
-              <p className="label flex items-center gap-2">
+              <p className="label enter flex items-center gap-2 [--enter-delay:60ms]">
                 <span
                   aria-hidden="true"
                   className="h-2.5 w-2.5 rounded-full"
@@ -157,13 +159,13 @@ export default async function CaseStudyPage({
                   Case study · <Lang>{study.company}</Lang>
                 </span>
               </p>
-              <h1 className="mt-4 text-4xl font-semibold leading-[1.05] tracking-tight text-fg md:text-6xl">
+              <h1 className="enter-rise mt-4 text-4xl font-semibold leading-[1.05] tracking-tight text-fg md:text-6xl">
                 {study.title}
               </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-secondary md:text-xl">
+              <p className="enter mt-5 max-w-2xl text-lg leading-relaxed text-fg-secondary [--enter-delay:200ms] md:text-xl">
                 {study.tagline}
               </p>
-              <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm">
+              <dl className="enter mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm [--enter-delay:270ms]">
                 <div>
                   <dt className="label">Role</dt>
                   <dd className="mt-1 font-medium text-fg">{study.role}</dd>
@@ -173,7 +175,10 @@ export default async function CaseStudyPage({
                   <dd className="mt-1 font-medium text-fg">{study.timeline}</dd>
                 </div>
               </dl>
-              <ul className="mt-5 flex flex-wrap gap-2" aria-label="Focus areas">
+              <ul
+                className="enter mt-5 flex flex-wrap gap-2 [--enter-delay:330ms]"
+                aria-label="Focus areas"
+              >
                 {study.tags.map((tag) => (
                   <li key={tag}>
                     <Tag>{tag}</Tag>
@@ -185,10 +190,10 @@ export default async function CaseStudyPage({
                   href={study.externalLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-secondary mt-6"
+                  className="btn btn-secondary enter mt-6 [--enter-delay:390ms]"
                 >
                   {study.externalLabel ?? "Visit live site"}
-                  <ArrowUpRightIcon className="h-4 w-4" />
+                  <ArrowUpRightIcon className="arrow-diag h-4 w-4" />
                   <NewTab />
                 </a>
               )}
@@ -197,7 +202,7 @@ export default async function CaseStudyPage({
             {/* hero visual: three phones for app flows, one wide shot otherwise */}
             {phones && (
               <ul
-                className="tile mt-10 flex items-start justify-center gap-3 overflow-hidden px-4 py-8 sm:gap-6 md:gap-10 md:py-12"
+                className="tile enter-rise mt-10 flex items-start justify-center gap-3 overflow-hidden px-4 py-8 sm:gap-6 md:gap-10 md:py-12"
                 style={{ backgroundColor: brandTint(study) }}
               >
                 {shots.slice(0, 3).map((shot, i) => (
@@ -214,7 +219,7 @@ export default async function CaseStudyPage({
               </ul>
             )}
             {!phones && shots[0] && (
-              <div className="mt-10">
+              <div className="enter-rise mt-10">
                 <ZoomButton index={0} label={shots[0].alt}>
                   <ImageFrame
                     image={shots[0]}
@@ -233,10 +238,14 @@ export default async function CaseStudyPage({
                 shots.length > 0 ? "mt-4 md:mt-5" : "mt-10"
               }`}
             >
-              {study.metrics.map((metric) => (
+              {study.metrics.map((metric, i) => (
                 <div
                   key={metric.label}
-                  className="tile flex flex-row-reverse items-baseline justify-end gap-4 px-6 py-4 sm:flex-col-reverse sm:items-stretch sm:gap-0 sm:p-6"
+                  className="tile enter flex flex-row-reverse items-baseline justify-end gap-4 px-6 py-4 sm:flex-col-reverse sm:items-stretch sm:gap-0 sm:p-6"
+                  style={
+                    { "--enter-delay": `${500 + i * 70}ms` } as React.CSSProperties
+                  }
+                  data-reveal
                 >
                   <dt className="text-sm leading-snug text-fg-secondary sm:mt-2">
                     {metric.label}
@@ -252,7 +261,11 @@ export default async function CaseStudyPage({
               <SectionNav items={navItems} />
 
               <div className="flex min-w-0 flex-col gap-16">
-                <section id="overview" aria-labelledby="overview-heading">
+                <section
+                  id="overview"
+                  aria-labelledby="overview-heading"
+                  data-reveal
+                >
                   <h2 id="overview-heading" className={sectionLabel}>
                     Overview
                   </h2>
@@ -268,6 +281,7 @@ export default async function CaseStudyPage({
                   <section
                     id="architecture"
                     aria-labelledby="architecture-heading"
+                    data-reveal
                   >
                     <h2 id="architecture-heading" className={sectionLabel}>
                       Architecture
@@ -281,7 +295,12 @@ export default async function CaseStudyPage({
                 {study.sections.map((section) => {
                   const id = toId(section.heading);
                   return (
-                    <section key={id} id={id} aria-labelledby={`${id}-heading`}>
+                    <section
+                      key={id}
+                      id={id}
+                      aria-labelledby={`${id}-heading`}
+                      data-reveal
+                    >
                       <h2 id={`${id}-heading`} className={sectionLabel}>
                         {section.heading}
                       </h2>
@@ -298,7 +317,11 @@ export default async function CaseStudyPage({
 
                 {showScreens && (
                   <section id="screens" aria-labelledby="screens-heading">
-                    <h2 id="screens-heading" className={sectionLabel}>
+                    <h2
+                      id="screens-heading"
+                      className={sectionLabel}
+                      data-reveal
+                    >
                       {galleryTitle}
                     </h2>
                     <p className="mt-2 text-sm text-fg-secondary">
@@ -333,7 +356,10 @@ export default async function CaseStudyPage({
                     ) : groups.length > 0 ? (
                       groups.map((group) => (
                         <div key={group} className="mt-8">
-                          <h3 className="mb-4 text-lg font-semibold tracking-tight text-fg">
+                          <h3
+                            className="mb-4 text-lg font-semibold tracking-tight text-fg"
+                            data-reveal
+                          >
                             {group}
                           </h3>
                           <PhotoMasonry
@@ -370,6 +396,7 @@ export default async function CaseStudyPage({
                                 ? "md:col-span-2"
                                 : undefined
                             }
+                            data-reveal
                           >
                             <figure>
                               <ZoomButton index={i + 1} label={shot.alt}>
@@ -398,6 +425,7 @@ export default async function CaseStudyPage({
           <nav
             aria-label="More case studies"
             className="mt-20 grid gap-4 md:mt-28 md:grid-cols-2 md:gap-5"
+            data-reveal
           >
             {prev && <NeighbourLink study={prev} direction="Previous" />}
             {next && <NeighbourLink study={next} direction="Next" />}

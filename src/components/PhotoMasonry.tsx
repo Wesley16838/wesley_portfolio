@@ -1,4 +1,4 @@
-import Image from "next/image";
+import FadeImage from "@/components/FadeImage";
 import { ZoomButton } from "@/components/Lightbox";
 
 export type MasonryPhoto = {
@@ -30,17 +30,24 @@ export default function PhotoMasonry({
   return (
     <ul className={`gap-4 md:gap-5 ${columns}`}>
       {photos.map((photo) => (
-        <li key={photo.src} className="mb-4 break-inside-avoid md:mb-5">
+        <li
+          key={photo.src}
+          className="mb-4 break-inside-avoid md:mb-5"
+          data-reveal
+        >
           <figure>
             <ZoomButton index={photo.index} label={photo.alt}>
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                width={photo.width}
-                height={photo.height}
-                sizes={sizes}
-                className="h-auto w-full rounded-2xl border border-border"
-              />
+              {/* the clip keeps the hover zoom inside the rounded frame */}
+              <span className="img-skeleton block overflow-hidden rounded-2xl border border-border">
+                <FadeImage
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={photo.width}
+                  height={photo.height}
+                  sizes={sizes}
+                  className="frame-img h-auto w-full"
+                />
+              </span>
             </ZoomButton>
             {photo.caption && (
               <figcaption className="mt-2 text-sm leading-snug text-fg-secondary">

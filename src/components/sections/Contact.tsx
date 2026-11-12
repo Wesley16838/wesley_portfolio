@@ -12,6 +12,7 @@ export default function Contact() {
       id="contact"
       aria-labelledby="contact-heading"
       className="tile tile-accent mt-20 p-8 md:mt-28 md:p-14"
+      data-reveal="scale"
     >
       <p className="font-mono text-xs uppercase tracking-[0.1em]">Contact</p>
       <h2

@@ -1,14 +1,17 @@
-import Image from "next/image";
 import { about, aboutPhoto, education } from "@/content/site";
+import FadeImage from "@/components/FadeImage";
 import Section from "@/components/Section";
 
 export default function About() {
   return (
     <Section id="about" eyebrow="About" title="Behind the work">
       <div className="grid gap-4 md:gap-5 lg:grid-cols-12">
-        <figure className="tile flex flex-col overflow-hidden lg:col-span-5">
-          <div className="relative min-h-80 flex-1">
-            <Image
+        <figure
+          className="tile flex flex-col overflow-hidden lg:col-span-5"
+          data-reveal="scale"
+        >
+          <div className="img-skeleton relative min-h-80 flex-1">
+            <FadeImage
               src={aboutPhoto.src}
               alt={aboutPhoto.alt}
               fill
@@ -22,7 +25,7 @@ export default function About() {
           </figcaption>
         </figure>
 
-        <div className="tile p-6 md:p-10 lg:col-span-7">
+        <div className="tile p-6 md:p-10 lg:col-span-7" data-reveal="scale">
           <p className="text-xl font-medium leading-snug tracking-tight text-fg md:text-2xl">
             {about.identity}
           </p>
@@ -36,7 +39,7 @@ export default function About() {
           </p>
         </div>
 
-        <div className="tile p-6 md:p-8 lg:col-span-12">
+        <div className="tile p-6 md:p-8 lg:col-span-12" data-reveal>
           <h3 className="label">Education</h3>
           <ul className="mt-4 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
             {education.map((edu) => (

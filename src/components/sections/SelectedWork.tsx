@@ -20,11 +20,19 @@ export default function SelectedWork() {
     <Section id="work" eyebrow="Work" title="Selected work">
       {/* lead tile spans two rows; the next two stack beside it */}
       <ul className="grid gap-4 md:gap-5 lg:grid-cols-12 lg:grid-rows-2">
-        <li className="lg:col-span-8 lg:row-span-2">
+        <li
+          className="enter [--enter-delay:550ms] lg:col-span-8 lg:row-span-2"
+          data-reveal="scale"
+        >
           <WorkTile study={lead} variant="feature" />
         </li>
-        {featured.map((study) => (
-          <li key={study.slug} className="lg:col-span-4">
+        {featured.map((study, i) => (
+          <li
+            key={study.slug}
+            className="enter lg:col-span-4"
+            style={{ "--enter-delay": `${620 + i * 70}ms` } as React.CSSProperties}
+            data-reveal="scale"
+          >
             <WorkTile study={study} />
           </li>
         ))}
@@ -35,6 +43,7 @@ export default function SelectedWork() {
           <div
             key={metric.label}
             className="tile flex flex-col-reverse justify-end p-6"
+            data-reveal
           >
             <dt className="mt-2 text-sm leading-snug text-fg-secondary">
               {metric.label}
@@ -46,7 +55,9 @@ export default function SelectedWork() {
         ))}
       </dl>
 
-      <h3 className="label mt-14">More work</h3>
+      <h3 className="label mt-14" data-reveal>
+        More work
+      </h3>
       <ul className="mt-5 grid gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-12">
         {more.map((study, i) => (
           <li
@@ -55,6 +66,7 @@ export default function SelectedWork() {
             className={`${moreSpan(i)} ${
               more.length % 2 === 1 && i === 0 ? "sm:col-span-2" : ""
             }`}
+            data-reveal="scale"
           >
             <WorkTile study={study} as="h4" />
           </li>

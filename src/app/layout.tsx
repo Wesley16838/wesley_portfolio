@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import Header from "@/components/Header";
 import BackToTop from "@/components/BackToTop";
+import ScrollReveal from "@/components/ScrollReveal";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -53,6 +54,7 @@ export default function RootLayout({
         <Header />
         {children}
         <BackToTop />
+        <ScrollReveal />
       </body>
     </html>
   );

@@ -81,7 +81,7 @@ export default function WorkTile({
         )}
         <p className="mt-auto flex items-center gap-1.5 pt-6 text-sm font-semibold text-accent">
           Read case study
-          <ArrowRightIcon className="h-4 w-4" />
+          <ArrowRightIcon className="arrow-nudge h-4 w-4" />
         </p>
       </div>
     </Link>

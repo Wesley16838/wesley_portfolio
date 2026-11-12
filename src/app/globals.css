@@ -44,6 +44,17 @@
 
 :root {
   color-scheme: light;
+
+  /* motion tokens - every animation on the site uses these */
+  --motion-fast: 180ms;
+  --motion-normal: 300ms;
+  --motion-reveal: 550ms;
+  --motion-slow: 700ms;
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --reveal-distance: 20px;
+  --hover-lift: -4px;
+  --stagger: 70ms;
 }
 
 :root[data-theme="dark"] {
@@ -136,16 +147,23 @@ body {
 
   .tile-link {
     transition:
-      transform 0.2s ease,
-      border-color 0.2s ease,
-      box-shadow 0.2s ease;
+      transform var(--motion-fast) var(--ease-out-expo),
+      border-color var(--motion-fast) var(--ease-standard),
+      box-shadow var(--motion-fast) var(--ease-standard);
   }
-  .tile-link:hover {
-    transform: translateY(-3px);
+  /* lift only where a real pointer can hover; touch gets pressed feedback */
+  @media (hover: hover) and (pointer: fine) {
+    .tile-link:hover {
+      transform: translateY(var(--hover-lift));
+      border-color: var(--color-border-strong);
+      box-shadow:
+        0 1px 2px rgba(23, 23, 26, 0.04),
+        0 22px 40px -22px rgba(23, 23, 26, 0.34);
+    }
+  }
+  .tile-link:active {
+    transform: scale(0.99);
     border-color: var(--color-border-strong);
-    box-shadow:
-      0 1px 2px rgba(23, 23, 26, 0.04),
-      0 20px 36px -22px rgba(23, 23, 26, 0.32);
   }
 
   /* accent-filled tile: focus rings and selection must flip to stay visible */
@@ -189,10 +207,10 @@ body {
     line-height: 1;
     white-space: nowrap;
     transition:
-      background-color 0.2s ease,
-      border-color 0.2s ease,
-      color 0.2s ease,
-      transform 0.2s ease;
+      background-color var(--motion-fast) var(--ease-standard),
+      border-color var(--motion-fast) var(--ease-standard),
+      color var(--motion-fast) var(--ease-standard),
+      transform var(--motion-fast) var(--ease-out-expo);
   }
   .btn:active {
     transform: scale(0.98);
@@ -224,8 +242,8 @@ body {
     border-radius: 9999px;
     color: var(--color-fg-secondary);
     transition:
-      background-color 0.2s ease,
-      color 0.2s ease;
+      background-color var(--motion-fast) var(--ease-standard),
+      color var(--motion-fast) var(--ease-standard);
   }
   .icon-btn:hover {
     background-color: var(--color-surface-2);
@@ -283,9 +301,218 @@ html:has(dialog.lightbox[open]) {
   overflow: hidden;
 }
 
+/* ====================================================================
+   Motion
+   Everything here is progressive: content is visible by default, and each
+   effect only ever starts from a hidden state once it is safe to do so.
+   ==================================================================== */
+
+/* ---------- page-load entrance (CSS only, needs no JavaScript) ----------
+   `backwards` holds the first frame during the delay, then hands the element
+   back to its normal styles - so nothing depends on the animation finishing. */
+
+@keyframes enter-up {
+  from {
+    opacity: 0;
+    translate: 0 var(--reveal-distance);
+  }
+}
+@keyframes enter-down {
+  from {
+    opacity: 0;
+    translate: 0 -10px;
+  }
+}
+/* position only: for the largest element on screen. Starting it from
+   opacity 0 would stop the browser counting it as the contentful paint. */
+@keyframes enter-rise {
+  from {
+    translate: 0 var(--reveal-distance);
+  }
+}
+@keyframes enter-scale {
+  from {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}
+
+.enter {
+  animation: enter-up var(--motion-reveal) var(--ease-out-expo) backwards;
+  animation-delay: var(--enter-delay, 0ms);
+}
+.enter-rise {
+  animation: enter-rise var(--motion-reveal) var(--ease-out-expo) backwards;
+  animation-delay: var(--enter-delay, 0ms);
+}
+.enter-down {
+  animation: enter-down var(--motion-normal) var(--ease-out-expo) backwards;
+}
+.enter-scale {
+  animation: enter-scale 450ms var(--ease-out-expo) backwards;
+  animation-delay: var(--enter-delay, 0ms);
+}
+/* route changes: template.tsx remounts this wrapper on every navigation */
+.page-enter {
+  animation: page-enter var(--motion-normal) var(--ease-standard) backwards;
+}
+
+/* ---------- scroll reveal ----------
+   ScrollReveal.tsx only marks an element "pending" when it sits below the
+   fold, so nothing on screen is ever hidden and no-JS visitors see it all. */
+
+[data-reveal-state="pending"] {
+  opacity: 0;
+  translate: 0 var(--reveal-distance);
+}
+[data-reveal="scale"][data-reveal-state="pending"] {
+  scale: 0.98;
+}
+[data-reveal-state="in"] {
+  transition:
+    opacity var(--motion-reveal) var(--ease-out-expo) var(--reveal-delay, 0ms),
+    translate var(--motion-reveal) var(--ease-out-expo) var(--reveal-delay, 0ms),
+    scale var(--motion-reveal) var(--ease-out-expo) var(--reveal-delay, 0ms);
+}
+
+/* ---------- image loading ---------- */
+
+/* neutral placeholder behind an image; shimmers only while it is loading */
+.img-skeleton {
+  position: relative;
+  background-color: var(--color-surface-2);
+}
+.img-skeleton:has(img[data-fade="wait"])::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    color-mix(in srgb, var(--color-surface) 70%, transparent) 50%,
+    transparent 70%
+  );
+  background-size: 250% 100%;
+  animation: shimmer 1.4s var(--ease-standard) infinite;
+}
+@keyframes shimmer {
+  from {
+    background-position: 120% 0;
+  }
+  to {
+    background-position: -120% 0;
+  }
+}
+
+/* FadeImage.tsx sets data-fade once it knows the image is still loading */
+img[data-fade="wait"] {
+  opacity: 0;
+}
+img[data-fade="in"] {
+  transition: opacity 380ms var(--ease-standard);
+}
+
+/* ---------- hover micro-interactions ---------- */
+
+.frame-img {
+  transition: scale var(--motion-normal) var(--ease-out-expo);
+}
+.arrow-nudge,
+.arrow-nudge-back,
+.arrow-diag {
+  transition: translate var(--motion-fast) var(--ease-out-expo);
+}
+.avatar-tilt {
+  transition: rotate var(--motion-normal) var(--ease-out-expo);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tile-link:hover .frame-img,
+  .zoomable:hover .frame-img {
+    scale: 1.03;
+  }
+  .tile-link:hover .arrow-nudge {
+    translate: 3px 0;
+  }
+  .tile-link:hover .arrow-nudge-back {
+    translate: -3px 0;
+  }
+  .tile-link:hover .arrow-diag,
+  .btn:hover .arrow-diag {
+    translate: 2px -2px;
+  }
+  .avatar-tilt:hover {
+    rotate: -3deg;
+  }
+}
+
+/* ---------- lightbox ---------- */
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes lightbox-image-in {
+  from {
+    opacity: 0;
+    scale: 0.985;
+  }
+}
+dialog.lightbox[open] {
+  animation: lightbox-in var(--motion-fast) var(--ease-standard);
+}
+dialog.lightbox[open]::backdrop {
+  animation: lightbox-in 200ms var(--ease-standard);
+}
+/* re-keyed per image, so stepping between photos replays it */
+.lightbox-stage {
+  animation: lightbox-image-in 260ms var(--ease-out-expo);
+}
+
+@media print {
+  [data-reveal-state] {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  /* show everything immediately: no entrances, reveals, fades, or shimmer */
+  .enter,
+  .enter-rise,
+  .enter-down,
+  .enter-scale,
+  .page-enter,
+  .lightbox-stage,
+  dialog.lightbox[open],
+  dialog.lightbox[open]::backdrop {
+    animation: none !important;
+  }
+  [data-reveal-state] {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: none !important;
+  }
+  img[data-fade] {
+    opacity: 1 !important;
+  }
+  .img-skeleton::after {
+    display: none;
+  }
+  .tile-link:hover,
+  .tile-link:active {
+    transform: none;
   }
   *,
   *::before,
@@ -293,8 +520,5 @@ html:has(dialog.lightbox[open]) {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-  .tile-link:hover {
-    transform: none;
   }
 }
