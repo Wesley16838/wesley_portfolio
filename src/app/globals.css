@@ -19,7 +19,7 @@
   --color-on-accent: #ffffff;
   --color-accent-soft: #ecebfd;
 
-  /* decorative only — never used for text */
+  /* decorative only - never used for text */
   --color-sun: #ffcf33;
 
   --color-white: #ffffff;
@@ -238,7 +238,7 @@ body {
 
   /* ---------- avatar ---------- */
 
-  /* white disc with a warm ring, identical in both themes — the avatar art
+  /* white disc with a warm ring, identical in both themes - the avatar art
      (and later the video) carries its own light background */
   .avatar-disc {
     overflow: hidden;

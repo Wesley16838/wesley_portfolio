@@ -12,14 +12,14 @@ type WorkTileProps = {
   as?: "h3" | "h4";
 };
 
-/** Brand colour is decoration only — it tints the tile, text stays on tokens. */
+/** Brand colour is decoration only - it tints the tile, text stays on tokens. */
 export function brandTint(study: CaseStudy) {
   return `color-mix(in srgb, ${study.brand.accent} 12%, var(--color-surface))`;
 }
 
 /**
  * Case-study tile. With a cover image it shows the image; without one it
- * becomes a brand-tinted typographic tile with metrics — never a placeholder.
+ * becomes a brand-tinted typographic tile with metrics - never a placeholder.
  */
 export default function WorkTile({
   study,

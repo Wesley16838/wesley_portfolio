@@ -7,7 +7,7 @@ export const site = {
   greeting: "Hi, I'm Wesley.",
   heroTitle: "I engineer AI-native systems with a designer's eye.",
   heroBody:
-    "I build AI-powered developer tools, frontend platforms, and accessible product experiences — from an AI prototyping platform adopted by 5,000+ Visa employees, to NFC payment demos on global stages, to an AI travel agent built end to end.",
+    "I build AI-powered developer tools, frontend platforms, and accessible product experiences - from an AI prototyping platform adopted by 5,000+ Visa employees, to NFC payment demos on global stages, to an AI travel agent built end to end.",
   heroLocation: "Currently building in Austin, TX.",
   location: "Austin, TX",
   url: "https://wesley-portfolio.vercel.app",
@@ -21,7 +21,7 @@ export const site = {
   },
 } as const;
 
-/** hero avatar — silent looping mp4 (512×512, no audio) over a PNG poster */
+/** hero avatar - silent looping mp4 (512×512, no audio) over a PNG poster */
 export const avatar: { poster: string; video?: string; alt: string } = {
   poster: "/avatar/wesley-poster.png",
   video: "/avatar/wesley.mp4",
@@ -63,16 +63,16 @@ export const principles = [
 
 export const about = {
   identity:
-    "I started at the edge of design systems, accessibility, and interactive demos — then moved deeper into product engineering, AI workflows, and full-stack systems. My favorite work sits in the messy middle: turning ambiguous ideas into usable products that can survive real users, real events, and real business pressure.",
+    "I started at the edge of design systems, accessibility, and interactive demos - then moved deeper into product engineering, AI workflows, and full-stack systems. My favorite work sits in the messy middle: turning ambiguous ideas into usable products that can survive real users, real events, and real business pressure.",
   outside:
-    "Outside of work, I'm usually exploring restaurants around Austin, playing table tennis or badminton, working on my lawn, or taking care of my pet fancy mice and satin mice. I like products with personality — and I try to bring that same sense of craft into the systems I build.",
+    "Outside of work, I'm usually exploring restaurants around Austin, playing table tennis or badminton, working on my lawn, or taking care of my pet fancy mice and satin mice. I like products with personality - and I try to bring that same sense of craft into the systems I build.",
   languages: ["Chinese (native)", "English (professional)"],
 } as const;
 
 export type CareerPhoto = {
   src: string;
   alt: string;
-  /** optional — shown under the photo */
+  /** optional - shown under the photo */
   caption?: string;
   width: number;
   height: number;
@@ -146,20 +146,9 @@ export const careerPhotos: CareerPhoto[] = [
   {
     src: "/about/07-team-lunch.png",
     alt: "Team lunch around a long restaurant table",
+    caption: "Visa Global Design Engineering team building",
     width: 750,
     height: 418,
-  },
-  {
-    src: "/about/05-group-photo.png",
-    alt: "Large group photo in a meeting room",
-    width: 750,
-    height: 564,
-  },
-  {
-    src: "/about/08-friends.png",
-    alt: "Three people smiling in a shop",
-    width: 750,
-    height: 1163,
   },
   {
     src: "/about/04-asus-badge.png",
@@ -167,6 +156,13 @@ export const careerPhotos: CareerPhoto[] = [
     caption: "ASUS · 2020",
     width: 729,
     height: 426,
+  },
+  {
+    src: "/about/05-group-photo.png",
+    alt: "Large group photo of new hires in a meeting room",
+    caption: "ASUS new-hire class · 2020",
+    width: 750,
+    height: 564,
   },
   {
     src: "/about/01-advantech-booth.png",
@@ -188,6 +184,13 @@ export const careerPhotos: CareerPhoto[] = [
     caption: "Advantech · 2019",
     width: 750,
     height: 423,
+  },
+  {
+    src: "/about/08-friends.png",
+    alt: "Three people smiling in a shop",
+    caption: "Creatop internship · 2018",
+    width: 750,
+    height: 1163,
   },
 ];
 

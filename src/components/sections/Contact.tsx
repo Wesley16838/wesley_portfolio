@@ -5,7 +5,7 @@ import { site } from "@/content/site";
 const pill =
   "btn border-current bg-transparent text-current hover:bg-on-accent/10";
 
-/** Closing accent tile — the one place the site asks for something. */
+/** Closing accent tile - the one place the site asks for something. */
 export default function Contact() {
   return (
     <section

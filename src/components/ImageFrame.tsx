@@ -16,7 +16,7 @@ const aspectClass: Record<NonNullable<WorkImage["aspect"]>, string> = {
   phone: "aspect-[1290/2796]",
 };
 
-/** phone shots ship with rounded transparent corners — match that radius */
+/** phone shots ship with rounded transparent corners - match that radius */
 const PHONE_RADIUS = "8.5% / 3.93%";
 
 const LIGHT_BACKDROP = "linear-gradient(160deg, #f4f1ea 0%, #dcd6c8 100%)";

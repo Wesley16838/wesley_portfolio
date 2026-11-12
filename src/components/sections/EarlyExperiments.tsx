@@ -7,7 +7,7 @@ export default function EarlyExperiments() {
   return (
     <Section id="archive" eyebrow="Archive" title="Earlier experiments">
       <p className="-mt-4 mb-8 max-w-xl leading-relaxed text-fg-secondary">
-        Hackathon builds and side projects from earlier years — where the
+        Hackathon builds and side projects from earlier years - where the
         map-based, real-time product instincts started.
       </p>
       <ul className="tile divide-y divide-border overflow-hidden">

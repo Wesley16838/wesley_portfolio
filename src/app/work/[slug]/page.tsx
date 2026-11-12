@@ -102,7 +102,7 @@ export default async function CaseStudyPage({
   const prev = caseStudies[index - 1];
   const next = caseStudies[index + 1];
 
-  // only images with a real file — placeholders never render
+  // only images with a real file - placeholders never render
   const shots = (study.images ?? []).filter(hasSrc);
   const phones = shots.length > 0 && shots.every((s) => s.aspect === "phone");
   // desktop shots: the first is the hero, the rest fill the Screens grid
@@ -111,7 +111,7 @@ export default async function CaseStudyPage({
   // per event instead of a flat grid
   const groups = [...new Set(gridShots.flatMap((s) => (s.group ? [s.group] : [])))];
   const galleryTitle = study.galleryTitle ?? "Screens";
-  // the phone hero already shows up to three screens — only add the carousel
+  // the phone hero already shows up to three screens - only add the carousel
   // when there are more to see
   const showScreens = phones ? shots.length > 3 : gridShots.length > 0;
   const gradient = study.brand.gradient;

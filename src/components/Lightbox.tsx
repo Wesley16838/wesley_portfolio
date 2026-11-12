@@ -51,7 +51,7 @@ export function LightboxProvider({
   }, []);
 
   // The viewer body mounts after showModal(), so the dialog has nothing to
-  // focus yet. A stable ref callback runs once per open — not on every
+  // focus yet. A stable ref callback runs once per open - not on every
   // re-render, which would yank focus off the prev/next buttons.
   const focusOnMount = useCallback(
     (el: HTMLButtonElement | null) => el?.focus(),
@@ -156,7 +156,7 @@ export function ZoomButton({
   className,
 }: {
   index: number;
-  /** what the image shows — read out as "View larger: …" */
+  /** what the image shows - read out as "View larger: …" */
   label: string;
   children: React.ReactNode;
   className?: string;

@@ -13,7 +13,7 @@ export type MasonryPhoto = {
 
 type PhotoMasonryProps = {
   photos: MasonryPhoto[];
-  /** column classes — defaults to 2 / 3 / 4 columns as the viewport grows */
+  /** column classes - defaults to 2 / 3 / 4 columns as the viewport grows */
   columns?: string;
   sizes?: string;
 };

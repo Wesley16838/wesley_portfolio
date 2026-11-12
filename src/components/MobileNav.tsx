@@ -10,7 +10,7 @@ type MobileNavProps = {
   resume: string;
 };
 
-/** Disclosure menu for small screens — the desktop nav is hidden below md. */
+/** Disclosure menu for small screens - the desktop nav is hidden below md. */
 export default function MobileNav({ items, resume }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);

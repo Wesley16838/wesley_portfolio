@@ -3,7 +3,7 @@ import { LightboxProvider } from "@/components/Lightbox";
 import PhotoMasonry from "@/components/PhotoMasonry";
 import Section from "@/components/Section";
 
-/** Career snapshots as a masonry collage — every photo opens in the lightbox. */
+/** Career snapshots as a masonry collage - every photo opens in the lightbox. */
 export default function Photos() {
   return (
     <Section id="snapshots" eyebrow="Snapshots" title="Along the way">
