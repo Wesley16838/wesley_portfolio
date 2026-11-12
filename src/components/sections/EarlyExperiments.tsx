@@ -6,11 +6,14 @@ import { ArrowUpRightIcon } from "@/components/icons";
 export default function EarlyExperiments() {
   return (
     <Section id="archive" eyebrow="Archive" title="Earlier experiments">
-      <p className="-mt-4 mb-8 max-w-xl leading-relaxed text-fg-secondary">
+      <p
+        className="-mt-4 mb-8 max-w-xl leading-relaxed text-fg-secondary"
+        data-reveal
+      >
         Hackathon builds and side projects from earlier years - where the
         map-based, real-time product instincts started.
       </p>
-      <ul className="tile divide-y divide-border overflow-hidden">
+      <ul className="tile divide-y divide-border overflow-hidden" data-reveal>
         {archiveProjects.map((project) => (
           <li key={project.name}>
             <a
@@ -31,7 +34,7 @@ export default function EarlyExperiments() {
                   {project.context}
                 </span>
               </span>
-              <ArrowUpRightIcon className="h-5 w-5 shrink-0 text-fg-muted transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <ArrowUpRightIcon className="h-5 w-5 shrink-0 text-fg-muted transition-[translate] duration-[var(--motion-fast)] ease-[var(--ease-out-expo)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
           </li>
         ))}

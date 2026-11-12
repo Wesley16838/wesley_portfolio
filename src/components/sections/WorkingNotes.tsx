@@ -6,7 +6,11 @@ export default function WorkingNotes() {
     <Section id="notes" eyebrow="Approach" title="How I work">
       <ol className="grid gap-4 md:grid-cols-3 md:gap-5">
         {principles.map((principle, i) => (
-          <li key={principle.title} className="tile p-6 md:p-8">
+          <li
+            key={principle.title}
+            className="tile p-6 md:p-8"
+            data-reveal="scale"
+          >
             <span
               aria-hidden="true"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-soft font-mono text-sm font-semibold text-accent"

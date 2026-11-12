@@ -7,7 +7,7 @@ export default function TechnicalStack() {
     <Section id="stack" eyebrow="Stack" title="Tools I reach for">
       <div className="grid gap-4 md:grid-cols-2 md:gap-5">
         {stackGroups.map((group) => (
-          <div key={group.name} className="tile p-6 md:p-8">
+          <div key={group.name} className="tile p-6 md:p-8" data-reveal="scale">
             <h3 className="text-lg font-semibold tracking-tight text-fg">
               {group.name}
             </h3>

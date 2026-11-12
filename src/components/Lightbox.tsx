@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   createContext,
   useCallback,
@@ -8,6 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
+import FadeImage from "@/components/FadeImage";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -110,12 +110,13 @@ export function LightboxProvider({
                   <ChevronLeftIcon className="h-5 w-5" />
                 </button>
               )}
+              {/* keyed by image so stepping replays the entrance */}
               <div
-                className="relative h-full min-w-0 flex-1 overflow-hidden rounded-2xl"
+                key={current.src}
+                className="lightbox-stage relative h-full min-w-0 flex-1 overflow-hidden rounded-2xl"
                 style={{ background: current.panel }}
               >
-                <Image
-                  key={current.src}
+                <FadeImage
                   src={current.src}
                   alt={current.alt}
                   fill
@@ -167,7 +168,7 @@ export function ZoomButton({
       type="button"
       onClick={() => show(index)}
       aria-label={`View larger: ${label}`}
-      className={`group/zoom relative block w-full cursor-zoom-in rounded-2xl text-left ${className ?? ""}`}
+      className={`group/zoom zoomable relative block w-full cursor-zoom-in rounded-2xl text-left ${className ?? ""}`}
     >
       {children}
       <span

@@ -9,7 +9,7 @@ export default function NotFound() {
         id="main"
         className="mx-auto max-w-6xl px-4 pb-20 pt-6 md:px-6 md:pb-28 md:pt-10"
       >
-        <div className="tile flex flex-col items-start p-8 md:p-14">
+        <div className="tile enter flex flex-col items-start p-8 md:p-14">
           <p className="label">404 · Not found</p>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-fg md:text-6xl">
             This page isn&rsquo;t here.

@@ -18,19 +18,24 @@ export default function Hero() {
     >
       <div className="tile p-6 md:p-10 lg:col-span-8">
         <div className="flex items-center gap-5">
-          <Avatar className="h-24 w-24 shrink-0 md:h-36 md:w-36" />
-          <p className="label max-w-xs">{site.headline}</p>
+          <Avatar className="enter-scale avatar-tilt h-24 w-24 shrink-0 [--enter-delay:100ms] md:h-36 md:w-36" />
+          <p className="label enter max-w-xs [--enter-delay:120ms]">
+            {site.headline}
+          </p>
         </div>
 
-        <h1 className="mt-8 text-4xl font-semibold leading-[1.08] tracking-tight text-fg md:text-5xl">
+        {/* The headline and intro are the largest things on screen, so they only
+            rise into place - they are readable from the very first frame.
+            Everything around them fades in on a stagger. */}
+        <h1 className="enter-rise mt-8 text-4xl font-semibold leading-[1.08] tracking-tight text-fg md:text-5xl">
           {site.greeting}{" "}
           <span className="block text-fg-muted">{site.heroTitle}</span>
         </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-fg-secondary">
+        <p className="enter-rise mt-6 max-w-2xl text-lg leading-relaxed text-fg-secondary [--enter-delay:80ms]">
           {site.heroBody}
         </p>
 
-        <div className="mt-8 flex flex-wrap items-center gap-3">
+        <div className="enter mt-8 flex flex-wrap items-center gap-3 [--enter-delay:350ms]">
           <a href="#work" className="btn btn-primary">
             See my work
             <ArrowRightIcon className="h-4 w-4" />
@@ -79,7 +84,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="tile flex flex-col p-6 md:p-8 lg:col-span-4">
+      <div className="tile enter flex flex-col p-6 [--enter-delay:450ms] md:p-8 lg:col-span-4">
         <p className="label flex items-center gap-2">
           <span
             aria-hidden="true"

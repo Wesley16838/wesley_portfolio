@@ -13,20 +13,37 @@ import { avatar } from "@/content/site";
 export default function Avatar({ className }: { className?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  // true once the visitor pauses it themselves - never auto-resume after that
+  const userPaused = useRef(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    // autoplay can be refused (e.g. low-power mode); the poster stays up
-    video.play().catch(() => {});
+
+    // play only while on screen: no decoding work for a video nobody can see
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        // autoplay can be refused (e.g. low-power mode); the poster stays up
+        if (!userPaused.current) video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+    observer.observe(video);
+    return () => observer.disconnect();
   }, []);
 
   const toggle = () => {
     const video = videoRef.current;
     if (!video) return;
-    if (video.paused) video.play().catch(() => {});
-    else video.pause();
+    if (video.paused) {
+      userPaused.current = false;
+      video.play().catch(() => {});
+    } else {
+      userPaused.current = true;
+      video.pause();
+    }
   };
 
   return (

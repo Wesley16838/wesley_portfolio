@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { WorkImage } from "@/content/case-studies";
+import FadeImage from "@/components/FadeImage";
 
 /** a WorkImage that actually has a file behind it */
 export type Shot = WorkImage & { src: string };
@@ -74,31 +74,31 @@ export default function ImageFrame({
   return (
     <div
       className={`relative overflow-hidden border border-border ${
-        borderRadius ? "" : "rounded-2xl"
-      } ${aspectRatio ? "" : aspectClass[image.aspect ?? "wide"]} ${
+        background ? "" : "img-skeleton"
+      } ${borderRadius ? "" : "rounded-2xl"} ${aspectRatio ? "" : aspectClass[image.aspect ?? "wide"]} ${
         className ?? ""
       }`}
       style={{ aspectRatio, background, borderRadius }}
     >
       {peek ? (
-        <Image
+        <FadeImage
           src={image.src}
           alt={image.alt}
           width={image.width ?? 1290}
           height={image.height ?? 2796}
           sizes="220px"
           priority={priority}
-          className="absolute left-1/2 top-[10%] h-auto w-[40%] max-w-none -translate-x-1/2 shadow-2xl"
+          className="frame-img absolute left-1/2 top-[10%] h-auto w-[40%] max-w-none -translate-x-1/2 shadow-2xl"
           style={{ borderRadius: phoneRadius }}
         />
       ) : (
-        <Image
+        <FadeImage
           src={image.src}
           alt={image.alt}
           fill
           sizes={sizes ?? "(min-width: 768px) 50vw, 100vw"}
           priority={priority}
-          className={image.backdrop ? "object-contain p-[6%]" : "object-cover"}
+          className={`frame-img ${image.backdrop ? "object-contain p-[6%]" : "object-cover"}`}
         />
       )}
     </div>
