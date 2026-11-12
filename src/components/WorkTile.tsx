@@ -45,7 +45,7 @@ export default function WorkTile({
             sizes={
               feature
                 ? "(min-width: 1024px) 720px, 100vw"
-                : "(min-width: 1024px) 280px, (min-width: 640px) 50vw, 100vw"
+                : "(min-width: 1024px) 560px, (min-width: 640px) 50vw, 100vw"
             }
             priority={feature}
           />

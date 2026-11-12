@@ -9,6 +9,7 @@ import ImageFrame, { backdropFor, hasSrc } from "@/components/ImageFrame";
 import Lang from "@/components/Lang";
 import { LightboxProvider, ZoomButton } from "@/components/Lightbox";
 import NewTab from "@/components/NewTab";
+import PhotoMasonry from "@/components/PhotoMasonry";
 import PipelineDiagram from "@/components/PipelineDiagram";
 import SectionNav from "@/components/SectionNav";
 import Tag from "@/components/Tag";
@@ -106,6 +107,10 @@ export default async function CaseStudyPage({
   const phones = shots.length > 0 && shots.every((s) => s.aspect === "phone");
   // desktop shots: the first is the hero, the rest fill the Screens grid
   const gridShots = phones ? [] : shots.slice(1);
+  // photo-led studies tag images with an event; those render as one masonry
+  // per event instead of a flat grid
+  const groups = [...new Set(gridShots.flatMap((s) => (s.group ? [s.group] : [])))];
+  const galleryTitle = study.galleryTitle ?? "Screens";
   // the phone hero already shows up to three screens — only add the carousel
   // when there are more to see
   const showScreens = phones ? shots.length > 3 : gridShots.length > 0;
@@ -115,7 +120,7 @@ export default async function CaseStudyPage({
     { id: "overview", label: "Overview" },
     ...(study.pipeline ? [{ id: "architecture", label: "Architecture" }] : []),
     ...study.sections.map((s) => ({ id: toId(s.heading), label: s.heading })),
-    ...(showScreens ? [{ id: "screens", label: "Screens" }] : []),
+    ...(showScreens ? [{ id: "screens", label: galleryTitle }] : []),
   ];
 
   return (
@@ -182,7 +187,7 @@ export default async function CaseStudyPage({
                   rel="noopener noreferrer"
                   className="btn btn-secondary mt-6"
                 >
-                  Visit live site
+                  {study.externalLabel ?? "Visit live site"}
                   <ArrowUpRightIcon className="h-4 w-4" />
                   <NewTab />
                 </a>
@@ -294,7 +299,7 @@ export default async function CaseStudyPage({
                 {showScreens && (
                   <section id="screens" aria-labelledby="screens-heading">
                     <h2 id="screens-heading" className={sectionLabel}>
-                      Screens
+                      {galleryTitle}
                     </h2>
                     <p className="mt-2 text-sm text-fg-secondary">
                       Select any image to view it larger.
@@ -325,6 +330,35 @@ export default async function CaseStudyPage({
                           ))}
                         </Carousel>
                       </div>
+                    ) : groups.length > 0 ? (
+                      groups.map((group) => (
+                        <div key={group} className="mt-8">
+                          <h3 className="mb-4 text-lg font-semibold tracking-tight text-fg">
+                            {group}
+                          </h3>
+                          <PhotoMasonry
+                            columns="columns-2 lg:columns-3"
+                            sizes="(min-width: 1024px) 270px, 50vw"
+                            photos={shots.flatMap((shot, index) =>
+                              index > 0 &&
+                              shot.group === group &&
+                              shot.width &&
+                              shot.height
+                                ? [
+                                    {
+                                      src: shot.src,
+                                      alt: shot.alt,
+                                      caption: shot.caption,
+                                      width: shot.width,
+                                      height: shot.height,
+                                      index,
+                                    },
+                                  ]
+                                : [],
+                            )}
+                          />
+                        </div>
+                      ))
                     ) : (
                       <ul className="mt-6 grid gap-5 md:grid-cols-2">
                         {gridShots.map((shot, i) => (

@@ -78,8 +78,96 @@ export type CareerPhoto = {
   height: number;
 };
 
-/** snapshots for the About section's "Along the way" rail, in display order */
+/** the real-photo counterpart to the Memoji, shown in the About section */
+export const aboutPhoto = {
+  src: "/about/portrait-vpf26.jpg",
+  alt: "Wesley at the Tap to Everything booth at Visa Payments Forum 2026, holding demo cards",
+  caption: "At the Tap to Everything booth · Visa Payments Forum 2026",
+} as const;
+
+/** snapshots for the "Along the way" photo wall, newest first */
 export const careerPhotos: CareerPhoto[] = [
+  {
+    src: "/about/vpf26-badge.jpg",
+    alt: "A hand holding a Visa Payments Forum attendee badge",
+    caption: "Visa Payments Forum · 2026",
+    width: 1500,
+    height: 2000,
+  },
+  {
+    src: "/about/stripe26-badge.jpg",
+    alt: "A Stripe Sessions attendee badge reading Visa, Senior Design Engineer",
+    caption: "Stripe Sessions · 2026",
+    width: 2000,
+    height: 1500,
+  },
+  {
+    src: "/about/vpf25-portrait.jpg",
+    alt: "Wesley standing beside tall blue LED columns reading Hola",
+    caption: "Visa Payments Forum · 2025",
+    width: 1500,
+    height: 2000,
+  },
+  {
+    src: "/about/vpf25-pillows.jpg",
+    alt: "Two blue Visa cushions on a lounge chair",
+    caption: "Visa Payments Forum · 2025",
+    width: 1616,
+    height: 1080,
+  },
+  {
+    src: "/about/a11y-dinner-sushi.jpg",
+    alt: "Six people smiling around a restaurant table under paper lanterns",
+    caption: "Team dinner, research week · Dec 2023",
+    width: 1500,
+    height: 2000,
+  },
+  {
+    src: "/about/a11y-dinner-selfie.jpg",
+    alt: "A group selfie of seven people at an outdoor dinner table",
+    caption: "Team dinner, research week · Dec 2023",
+    width: 2000,
+    height: 1500,
+  },
+  {
+    src: "/about/halloween-group.jpg",
+    alt: "Four people in Halloween costumes in an office: a fairy, a wizard, an inflatable alien, and a barista",
+    caption: "Halloween at Visa · 2023",
+    width: 1500,
+    height: 2000,
+  },
+  {
+    src: "/about/halloween-wizard.jpg",
+    alt: "Wesley in a wizard robe holding a wand in the office",
+    caption: "Halloween at Visa · 2023",
+    width: 1500,
+    height: 2000,
+  },
+  {
+    src: "/about/07-team-lunch.png",
+    alt: "Team lunch around a long restaurant table",
+    width: 750,
+    height: 418,
+  },
+  {
+    src: "/about/05-group-photo.png",
+    alt: "Large group photo in a meeting room",
+    width: 750,
+    height: 564,
+  },
+  {
+    src: "/about/08-friends.png",
+    alt: "Three people smiling in a shop",
+    width: 750,
+    height: 1163,
+  },
+  {
+    src: "/about/04-asus-badge.png",
+    alt: "ASUS employee badge on a wooden desk",
+    caption: "ASUS · 2020",
+    width: 729,
+    height: 426,
+  },
   {
     src: "/about/01-advantech-booth.png",
     alt: "Seven people posing in front of the Advantech exhibition booth and its dashboard wall",
@@ -100,37 +188,6 @@ export const careerPhotos: CareerPhoto[] = [
     caption: "Advantech · 2019",
     width: 750,
     height: 423,
-  },
-  {
-    src: "/about/04-asus-badge.png",
-    alt: "ASUS employee badge on a wooden desk",
-    caption: "ASUS · 2020",
-    width: 729,
-    height: 426,
-  },
-  {
-    src: "/about/05-group-photo.png",
-    alt: "Large group photo in a meeting room",
-    width: 750,
-    height: 564,
-  },
-  {
-    src: "/about/06-badge-lanyard.png",
-    alt: "Work badge on a blue and gold lanyard next to a purple character keychain",
-    width: 729,
-    height: 555,
-  },
-  {
-    src: "/about/07-team-lunch.png",
-    alt: "Team lunch around a long restaurant table",
-    width: 750,
-    height: 418,
-  },
-  {
-    src: "/about/08-friends.png",
-    alt: "Three people smiling in a shop",
-    width: 750,
-    height: 1163,
   },
 ];
 

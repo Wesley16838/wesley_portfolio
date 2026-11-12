@@ -30,6 +30,8 @@ export type WorkImage = {
    * differs from the default 1290×2796 export (e.g. "12.6% / 5.8%").
    */
   cornerRadius?: string;
+  /** gallery sub-section this image belongs to, e.g. an event name */
+  group?: string;
 };
 
 export type CaseStudy = {
@@ -37,6 +39,7 @@ export type CaseStudy = {
     | "visa-blitz-code"
     | "visa-tap-nfc"
     | "avori"
+    | "tap-to-phone-accessibility"
     | "youmi-travel"
     | "visa-vpds"
     | "asus-armoury-crate"
@@ -55,6 +58,10 @@ export type CaseStudy = {
   brand: CaseStudyBrand;
   note?: string;
   externalLink?: string;
+  /** button text for externalLink — defaults to "Visit live site" */
+  externalLabel?: string;
+  /** heading for the image section — defaults to "Screens" */
+  galleryTitle?: string;
   images?: WorkImage[];
 };
 
@@ -199,26 +206,169 @@ export const caseStudies: CaseStudy[] = [
         "linear-gradient(135deg, rgba(247, 182, 0, 0.28) 0%, rgba(247, 182, 0, 0.08) 55%, rgba(20, 52, 203, 0.18) 100%)",
     },
     note: "Details are limited to publicly shared information.",
+    galleryTitle: "In the field",
     images: [
       {
-        alt: "Tap to Pay demo at Visa Payments Forum",
-        caption: "Live at Visa Payments Forum",
+        src: "/work/visa-tap-nfc/vpf25-01-tap-to-send.jpg",
+        alt: "Hands tapping a Visa card to the back of a phone showing Tap to send $5.00",
+        caption: "Tap to send — a contactless card tapped to the back of the phone",
         aspect: "wide",
+        width: 1616,
+        height: 1080,
+        group: "Visa Payments Forum 2025",
       },
       {
-        alt: "Tap to P2P Send flow",
-        caption: "Tap to P2P Send",
-        aspect: "portrait",
-      },
-      {
-        alt: "Demo card interaction",
-        caption: "NFC demo card interaction",
-        aspect: "square",
-      },
-      {
-        alt: "Event stage setup",
-        caption: "Global stage setups",
+        src: "/work/visa-tap-nfc/vpf25-02-send-card.jpg",
+        alt: "Phone showing Tap to send $5.00 beside a Visa Payments Forum 2025 demo card",
+        caption: "Tap to send, with the event's demo card",
         aspect: "wide",
+        width: 1616,
+        height: 1080,
+        group: "Visa Payments Forum 2025",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf25-03-check-balance.jpg",
+        alt: "A card tapped to a phone on a stand showing Check card balance",
+        caption: "Check card balance with a tap",
+        aspect: "wide",
+        width: 1616,
+        height: 1080,
+        group: "Visa Payments Forum 2025",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf25-04-card-balance.jpg",
+        alt: "Phone showing a $30.00 card balance, a checklist of booths, and a Swag Store button",
+        caption: "Card balance, booth check-ins, and the swag store",
+        aspect: "wide",
+        width: 1616,
+        height: 1080,
+        group: "Visa Payments Forum 2025",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf25-05-wallet.jpg",
+        alt: "Phone showing a mobile wallet card with a Send button and recent activity",
+        caption: "Mobile wallet with recent tap-to-send activity",
+        aspect: "wide",
+        width: 1616,
+        height: 1080,
+        group: "Visa Payments Forum 2025",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf25-06-add-card-station.jpg",
+        alt: "Tap to Add Card sign beside a demo phone and a Visa card",
+        caption: "Tap to Add Card station",
+        aspect: "wide",
+        width: 1616,
+        height: 1080,
+        group: "Visa Payments Forum 2025",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf25-07-activate-station.jpg",
+        alt: "Tap to Activate sign beside a demo phone and a Visa card",
+        caption: "Tap to Activate station",
+        aspect: "wide",
+        width: 1616,
+        height: 1080,
+        group: "Visa Payments Forum 2025",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf25-08-booth.jpg",
+        alt: "The Tap to Everything booth with attendees at the demo stations",
+        caption: "The Tap to Everything booth",
+        aspect: "wide",
+        width: 1500,
+        height: 2000,
+        group: "Visa Payments Forum 2025",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf25-09-team.jpg",
+        alt: "Five people standing at the Tap to Everything booth",
+        caption: "The team at the Tap to Everything booth",
+        aspect: "wide",
+        width: 1500,
+        height: 2000,
+        group: "Visa Payments Forum 2025",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf25-10-welcome-wall.jpg",
+        alt: "Five people beside an LED wall reading Begin at the Tap to Everything Welcome Desk to receive your card",
+        caption: "Step one: pick up a card at the Tap to Everything welcome desk",
+        aspect: "wide",
+        width: 1290,
+        height: 1717,
+        group: "Visa Payments Forum 2025",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf26-01-add-card.jpg",
+        alt: "A Visa card held against a phone showing Tap card to add card",
+        caption: "Tap to Add Card",
+        aspect: "wide",
+        width: 2000,
+        height: 1500,
+        group: "Visa Payments Forum 2026",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf26-02-demo.jpg",
+        alt: "A presenter holding a phone showing Tap to add card while attendees look on",
+        caption: "Walking attendees through Tap to Add Card",
+        aspect: "wide",
+        width: 2000,
+        height: 1500,
+        group: "Visa Payments Forum 2026",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf26-03-team.jpg",
+        alt: "Five people at the Tap to Everything booth under blue stage lighting",
+        caption: "The team at the Tap to Everything booth",
+        aspect: "wide",
+        width: 2000,
+        height: 1500,
+        group: "Visa Payments Forum 2026",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf26-04-group.jpg",
+        alt: "A large group photo in a conference hall behind screens showing the Visa Payments Forum logo",
+        caption: "Visa Payments Forum group photo",
+        aspect: "wide",
+        width: 2000,
+        height: 1334,
+        group: "Visa Payments Forum 2026",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf26-05-venue.jpg",
+        alt: "Building-sized Visa Payments Forum banners with the hashtag VPF2026",
+        caption: "#VPF2026 on the venue",
+        aspect: "wide",
+        width: 2000,
+        height: 1500,
+        group: "Visa Payments Forum 2026",
+      },
+      {
+        src: "/work/visa-tap-nfc/vpf26-06-banner.jpg",
+        alt: "Visa Payments Forum banners on a street lamp post",
+        caption: "Street banners for the forum",
+        aspect: "wide",
+        width: 2000,
+        height: 1500,
+        group: "Visa Payments Forum 2026",
+      },
+      {
+        src: "/work/visa-tap-nfc/stripe26-01-booth.jpg",
+        alt: "Visa's booth at Stripe Sessions with Tap to Add Card and Tap to Confirm signs",
+        caption: "Visa's booth — Tap to Add Card and Tap to Confirm",
+        aspect: "wide",
+        width: 2000,
+        height: 1500,
+        group: "Stripe Sessions 2026",
+      },
+      {
+        src: "/work/visa-tap-nfc/stripe26-02-sponsors.jpg",
+        alt: "A sponsor banner listing Visa among the Platinum sponsors",
+        caption: "Visa among the Stripe Sessions sponsors",
+        aspect: "wide",
+        width: 2000,
+        height: 1500,
+        group: "Stripe Sessions 2026",
       },
     ],
   },
@@ -309,6 +459,179 @@ export const caseStudies: CaseStudy[] = [
         width: 1206,
         height: 2622,
         cornerRadius: "12.6% / 5.8%",
+      },
+    ],
+  },
+  {
+    slug: "tap-to-phone-accessibility",
+    title: "Tap to Phone Accessibility",
+    tagline:
+      "Making tap-to-phone payments work without sight — shaped by a week of testing with people with disabilities.",
+    cardCopy:
+      "A week of hands-on testing with people with disabilities, turned into product changes and a patent.",
+    company: "Visa",
+    role: "Design Engineer",
+    timeline: "2023",
+    tags: ["Accessibility", "User Research", "WCAG", "Haptics"],
+    metrics: [
+      { value: "+60%", label: "increase in user satisfaction" },
+      { value: "1 week", label: "of testing with people with disabilities" },
+      { value: "1", label: "patent co-invented" },
+    ],
+    overview:
+      "I led engineering on Tap to Phone accessibility — voiceover, vibration, and gestures that let visually impaired users transact independently — then took it through a week-long user-testing session with people with disabilities, translating what we observed into WCAG-compliant product changes.",
+    sections: [
+      {
+        heading: "Challenge",
+        body: [
+          "A touchscreen has no physical keys to feel for. For someone who can't see the screen, paying on a phone has to work through sound, vibration, and gesture alone — and stay secure while it does.",
+        ],
+      },
+      {
+        heading: "Approach",
+        body: [
+          "I led the engineering for the accessible flow: voiceover, vibration, and gestures designed so visually impaired users could complete a transaction on their own.",
+          "Then we tested it for a week with people with disabilities. Each day the team captured observations, sorted them into problems and ideas, and ranked the fixes by effort and priority to decide what to change first.",
+        ],
+      },
+      {
+        heading: "Outcome",
+        body: [
+          "The gaps we observed that week became WCAG-compliant product changes, and user satisfaction rose 60%.",
+          "The work also led to a patent I co-invented: using haptic feedback to make mobile payments more usable and secure for people with visual impairments.",
+        ],
+      },
+    ],
+    brand: {
+      accent: "#4d6bff",
+      accentDim: "rgba(77, 107, 255, 0.12)",
+      secondary: "#f7b600",
+      gradient:
+        "linear-gradient(135deg, rgba(20, 52, 203, 0.35) 0%, rgba(77, 107, 255, 0.12) 55%, rgba(247, 182, 0, 0.10) 100%)",
+    },
+    externalLink:
+      "https://patentscope.wipo.int/search/en/detail.jsf?docId=WO2025038664",
+    externalLabel: "View patent",
+    galleryTitle: "From the research week",
+    images: [
+      {
+        src: "/work/tap-to-phone-accessibility/01-team.jpg",
+        alt: "Eight people standing in front of whiteboards covered in notes and sticky notes",
+        caption: "The research team, with the week's findings on the walls",
+        aspect: "wide",
+        width: 2000,
+        height: 1500,
+      },
+      {
+        src: "/work/tap-to-phone-accessibility/02-huddle.jpg",
+        alt: "The team in a circle with hands stacked in the middle, whiteboards behind them",
+        caption: "Team huddle during the testing week",
+        aspect: "wide",
+        width: 2000,
+        height: 1500,
+      },
+      {
+        src: "/work/tap-to-phone-accessibility/03-prioritize.jpg",
+        alt: "Wesley beside a whiteboard chart with axes for effort to fix and priority",
+        caption: "Ranking fixes by effort and priority",
+        aspect: "wide",
+        width: 1500,
+        height: 2000,
+      },
+    ],
+  },
+  {
+    slug: "visa-vpds",
+    title: "Visa Product Design System",
+    tagline:
+      "The component infrastructure behind design.visa.com — unified across four frameworks.",
+    cardCopy:
+      "Unified code integration across React, Angular, Flutter, and CSS — powering every component page on design.visa.com.",
+    company: "Visa",
+    role: "Design Engineer",
+    timeline: "2021 – 2025",
+    tags: ["Design Systems", "React · Angular · Flutter", "Astro", "Accessibility"],
+    metrics: [
+      { value: "4", label: "framework libraries unified" },
+      { value: "100%", label: "of component pages powered" },
+      { value: "1", label: "public design-system launch" },
+    ],
+    overview:
+      "VPDS is Visa's product design system — the components, patterns, and guidelines behind Visa product interfaces, published publicly at design.visa.com. I worked across the system for over three years: helping take the libraries public, building the code-integration infrastructure that powers every component page on the site, and hardening the component libraries themselves.",
+    sections: [
+      {
+        heading: "Challenge",
+        body: [
+          "A design-system site that documents four parallel libraries — React, Angular, Flutter, and CSS — needs every component page to show live, framework-specific code examples that stay deep-linkable and shareable. State (selected framework, variant, code panel) lives in three places at once: the URL, the session, and the client.",
+        ],
+      },
+      {
+        heading: "Approach",
+        body: [
+          "I led a unified code-integration system across the four libraries with a priority-based multi-layer state sync — URL over session over client — so deep links, persistence, and shareability never conflict. It powers every component page on design.visa.com.",
+          "Beyond the site: built the icons page with Astro, React, and Nano Stores for fast icon search and usage; designed a shared interaction service layer for the Angular library, replacing per-component logic with a single source of truth; and extended the Flutter library with enterprise interaction patterns like nested and indeterminate states.",
+        ],
+      },
+      {
+        heading: "Outcome",
+        body: [
+          "VPDS launched publicly with its component documentation fully powered by the integration system. The work carried accessibility and performance improvements across the libraries — and the design-system foundation became the base for my later platform work, from Blitz Code to event demo systems.",
+        ],
+      },
+    ],
+    brand: {
+      accent: "#4d6bff",
+      accentDim: "rgba(77, 107, 255, 0.12)",
+      secondary: "#f7b600",
+      gradient:
+        "linear-gradient(135deg, rgba(20, 52, 203, 0.55) 0%, rgba(77, 107, 255, 0.15) 45%, rgba(247, 182, 0, 0.18) 100%)",
+    },
+    externalLink: "https://design.visa.com/",
+    images: [
+      {
+        src: "/work/visa-vpds/01-home.png",
+        alt: "Visa Product Design System home page",
+        caption: "design.visa.com — Powering progress, from first step to final product",
+        aspect: "wide",
+        width: 2400,
+        height: 1809,
+        backdrop: "light",
+      },
+      {
+        src: "/work/visa-vpds/02-code-library-switcher.png",
+        alt: "Code tab with code library and version selectors",
+        caption: "Code tab — switch code library and version per page",
+        aspect: "wide",
+        width: 2400,
+        height: 1821,
+        backdrop: "light",
+      },
+      {
+        src: "/work/visa-vpds/03-icons-library.png",
+        alt: "Icons library with search and size filters",
+        caption: "Icons library — search, size filters, and per-library code",
+        aspect: "wide",
+        width: 2400,
+        height: 1810,
+        backdrop: "light",
+      },
+      {
+        src: "/work/visa-vpds/04-base-elements.png",
+        alt: "Base elements overview page",
+        caption: "Base elements — color, tokens, and foundations",
+        aspect: "wide",
+        width: 2400,
+        height: 1810,
+        backdrop: "light",
+      },
+      {
+        src: "/work/visa-vpds/05-home-hero.png",
+        alt: "Visa Product Design System home hero",
+        caption: "Home hero",
+        aspect: "wide",
+        width: 2400,
+        height: 1810,
+        backdrop: "light",
       },
     ],
   },
@@ -416,101 +739,6 @@ export const caseStudies: CaseStudy[] = [
         alt: "Youmi Tokyo trip route with AI-suggested stops",
         caption: "Routed day plan with AI-added stops",
         aspect: "phone",
-      },
-    ],
-  },
-  {
-    slug: "visa-vpds",
-    title: "Visa Product Design System",
-    tagline:
-      "The component infrastructure behind design.visa.com — unified across four frameworks.",
-    cardCopy:
-      "Unified code integration across React, Angular, Flutter, and CSS — powering every component page on design.visa.com.",
-    company: "Visa",
-    role: "Design Engineer",
-    timeline: "2021 – 2025",
-    tags: ["Design Systems", "React · Angular · Flutter", "Astro", "Accessibility"],
-    metrics: [
-      { value: "4", label: "framework libraries unified" },
-      { value: "100%", label: "of component pages powered" },
-      { value: "1", label: "public design-system launch" },
-    ],
-    overview:
-      "VPDS is Visa's product design system — the components, patterns, and guidelines behind Visa product interfaces, published publicly at design.visa.com. I worked across the system for over three years: helping take the libraries public, building the code-integration infrastructure that powers every component page on the site, and hardening the component libraries themselves.",
-    sections: [
-      {
-        heading: "Challenge",
-        body: [
-          "A design-system site that documents four parallel libraries — React, Angular, Flutter, and CSS — needs every component page to show live, framework-specific code examples that stay deep-linkable and shareable. State (selected framework, variant, code panel) lives in three places at once: the URL, the session, and the client.",
-        ],
-      },
-      {
-        heading: "Approach",
-        body: [
-          "I led a unified code-integration system across the four libraries with a priority-based multi-layer state sync — URL over session over client — so deep links, persistence, and shareability never conflict. It powers every component page on design.visa.com.",
-          "Beyond the site: built the icons page with Astro, React, and Nano Stores for fast icon search and usage; designed a shared interaction service layer for the Angular library, replacing per-component logic with a single source of truth; and extended the Flutter library with enterprise interaction patterns like nested and indeterminate states.",
-        ],
-      },
-      {
-        heading: "Outcome",
-        body: [
-          "VPDS launched publicly with its component documentation fully powered by the integration system. The work carried accessibility and performance improvements across the libraries — and the design-system foundation became the base for my later platform work, from Blitz Code to event demo systems.",
-        ],
-      },
-    ],
-    brand: {
-      accent: "#4d6bff",
-      accentDim: "rgba(77, 107, 255, 0.12)",
-      secondary: "#f7b600",
-      gradient:
-        "linear-gradient(135deg, rgba(20, 52, 203, 0.55) 0%, rgba(77, 107, 255, 0.15) 45%, rgba(247, 182, 0, 0.18) 100%)",
-    },
-    externalLink: "https://design.visa.com/",
-    images: [
-      {
-        src: "/work/visa-vpds/01-home.png",
-        alt: "Visa Product Design System home page",
-        caption: "design.visa.com — Powering progress, from first step to final product",
-        aspect: "wide",
-        width: 2400,
-        height: 1809,
-        backdrop: "light",
-      },
-      {
-        src: "/work/visa-vpds/02-code-library-switcher.png",
-        alt: "Code tab with code library and version selectors",
-        caption: "Code tab — switch code library and version per page",
-        aspect: "wide",
-        width: 2400,
-        height: 1821,
-        backdrop: "light",
-      },
-      {
-        src: "/work/visa-vpds/03-icons-library.png",
-        alt: "Icons library with search and size filters",
-        caption: "Icons library — search, size filters, and per-library code",
-        aspect: "wide",
-        width: 2400,
-        height: 1810,
-        backdrop: "light",
-      },
-      {
-        src: "/work/visa-vpds/04-base-elements.png",
-        alt: "Base elements overview page",
-        caption: "Base elements — color, tokens, and foundations",
-        aspect: "wide",
-        width: 2400,
-        height: 1810,
-        backdrop: "light",
-      },
-      {
-        src: "/work/visa-vpds/05-home-hero.png",
-        alt: "Visa Product Design System home hero",
-        caption: "Home hero",
-        aspect: "wide",
-        width: 2400,
-        height: 1810,
-        backdrop: "light",
       },
     ],
   },

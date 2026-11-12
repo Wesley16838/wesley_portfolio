@@ -7,6 +7,14 @@ const [lead, ...rest] = caseStudies;
 const featured = rest.slice(0, 2);
 const more = rest.slice(2);
 
+/** five tiles read best as two wide + three regular; otherwise four across */
+const moreSpan = (index: number) =>
+  more.length === 5
+    ? index < 2
+      ? "lg:col-span-6"
+      : "lg:col-span-4"
+    : "lg:col-span-3";
+
 export default function SelectedWork() {
   return (
     <Section id="work" eyebrow="Work" title="Selected work">
@@ -39,9 +47,15 @@ export default function SelectedWork() {
       </dl>
 
       <h3 className="label mt-14">More work</h3>
-      <ul className="mt-5 grid gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4">
-        {more.map((study) => (
-          <li key={study.slug}>
+      <ul className="mt-5 grid gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-12">
+        {more.map((study, i) => (
+          <li
+            key={study.slug}
+            // an odd count would orphan the last tile at two columns
+            className={`${moreSpan(i)} ${
+              more.length % 2 === 1 && i === 0 ? "sm:col-span-2" : ""
+            }`}
+          >
             <WorkTile study={study} as="h4" />
           </li>
         ))}
