@@ -112,13 +112,14 @@ export const experiences: Experience[] = [
   {
     kind: "work",
     company: "Advantech",
-    location: "Taipei, Taiwan",
+    location: "Neihu, Taipei, Taiwan",
     roles: [
       {
         title: "Front-End Intern",
         period: "Jul 2019 – Aug 2019",
         bullets: [
-          "Built a water-treatment management dashboard with Grafana, AngularJS, and SVG.js for real-time industrial data visualization; presented at Taipei International Industrial Automation Exhibition 2019. Summer Intern Excellence Award.",
+          "Built a wastewater-management monitoring dashboard with Grafana, AngularJS, and SVG.js for real-time industrial data visualization, as part of a summer intern team.",
+          "Presented it at the Taipei International Industrial Automation Exhibition 2019; our team won the summer internship best-team award.",
         ],
       },
     ],

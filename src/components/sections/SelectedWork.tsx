@@ -7,13 +7,15 @@ const [lead, ...rest] = caseStudies;
 const featured = rest.slice(0, 2);
 const more = rest.slice(2);
 
-/** five tiles read best as two wide + three regular; otherwise four across */
-const moreSpan = (index: number) =>
-  more.length === 5
-    ? index < 2
-      ? "lg:col-span-6"
-      : "lg:col-span-4"
-    : "lg:col-span-3";
+/**
+ * Keep rows full on the 12-column grid: five tiles are two wide + three
+ * regular, a multiple of three goes three across, anything else four across.
+ */
+const moreSpan = (index: number) => {
+  if (more.length === 5) return index < 2 ? "lg:col-span-6" : "lg:col-span-4";
+  if (more.length % 3 === 0) return "lg:col-span-4";
+  return "lg:col-span-3";
+};
 
 export default function SelectedWork() {
   return (
