@@ -43,6 +43,7 @@ export type CaseStudy = {
     | "youmi-travel"
     | "visa-vpds"
     | "asus-armoury-crate"
+    | "advantech-water-dashboard"
     | "creatop-hsuanfu";
   title: string;
   tagline: string;
@@ -815,6 +816,95 @@ export const caseStudies: CaseStudy[] = [
         width: 1194,
         height: 894,
         backdrop: "light",
+      },
+    ],
+  },
+  {
+    slug: "advantech-water-dashboard",
+    title: "Advantech Water Treatment Dashboard",
+    tagline:
+      "A real-time wastewater monitoring dashboard, built over a summer and shown at Taipei's industrial automation exhibition.",
+    cardCopy:
+      "Real-time wastewater monitoring built during a summer internship, exhibited at Taipei's automation show, and winner of the best-team award.",
+    company: "Advantech",
+    role: "Front-End Intern",
+    timeline: "2019",
+    tags: ["Industrial IoT", "Data Visualization", "Grafana", "AngularJS"],
+    metrics: [
+      { value: "2019", label: "summer internship in Neihu, Taipei" },
+      { value: "Expo", label: "shown at Taipei's industrial automation exhibition" },
+      { value: "Award", label: "best summer intern team" },
+    ],
+    overview:
+      "During a summer internship at Advantech in Neihu, Taipei, our team built a wastewater-management monitoring dashboard with Grafana, AngularJS, and SVG.js - real-time industrial data, laid out so a treatment plant can be read at a glance. We showed it at the Taipei International Industrial Automation Exhibition 2019, and the team won the summer's best-team award.",
+    sections: [
+      {
+        heading: "Challenge",
+        body: [
+          "A treatment plant produces a constant stream of readings: treatment volume, power consumption, water levels, pump availability. Operators need to see them as they change, across the whole site and for each stage of the process, without digging for them.",
+        ],
+      },
+      {
+        heading: "Approach",
+        body: [
+          "We built the dashboard on Grafana and AngularJS, with SVG.js for the custom graphics, to visualize industrial data in real time.",
+          "The screens follow the plant itself: an overview of the organization and of a single factory, then a view for each step of the workflow - the inflow pumping station, the biology system, the membrane bioreactor, disinfection, sludge treatment, and water quality - and an alarm summary.",
+        ],
+      },
+      {
+        heading: "Outcome",
+        body: [
+          "We presented the dashboard at the Taipei International Industrial Automation Exhibition 2019.",
+          "Our team received Advantech's summer internship team award, recognized for leadership and process improvements.",
+        ],
+      },
+    ],
+    brand: {
+      accent: "#1565c0",
+      accentDim: "rgba(21, 101, 192, 0.12)",
+      secondary: "#f08300",
+      gradient:
+        "linear-gradient(135deg, rgba(21, 101, 192, 0.30) 0%, rgba(21, 101, 192, 0.10) 55%, rgba(240, 131, 0, 0.10) 100%)",
+    },
+    externalLink: "https://www.youtube.com/watch?v=VONe5v2fHkQ",
+    externalLabel: "Watch the demo",
+    galleryTitle: "Behind the scenes",
+    images: [
+      {
+        src: "/work/advantech-water-dashboard/01-dashboard.png",
+        alt: "Three screens of the Water Treatment Management dashboard: a factory overview, an inflow pumping station, and a membrane bioreactor system",
+        caption: "Factory overview, inflow pumping station, and membrane bioreactor views",
+        aspect: "wide",
+        width: 1102,
+        height: 694,
+        backdrop: true,
+      },
+      {
+        src: "/about/01-advantech-booth.png",
+        alt: "Seven people posing in front of the Advantech exhibition booth and its dashboard wall",
+        caption: "The Advantech booth at the automation exhibition",
+        aspect: "portrait",
+        width: 750,
+        height: 1163,
+        group: "Summer 2019",
+      },
+      {
+        src: "/about/02-advantech-award.png",
+        alt: "Advantech name badge resting on an internship team award certificate",
+        caption: "The summer internship team award",
+        aspect: "wide",
+        width: 750,
+        height: 426,
+        group: "Summer 2019",
+      },
+      {
+        src: "/about/03-advantech-group.png",
+        alt: "Group photo outside the Advantech building",
+        caption: "The intern cohort outside Advantech",
+        aspect: "wide",
+        width: 750,
+        height: 423,
+        group: "Summer 2019",
       },
     ],
   },
